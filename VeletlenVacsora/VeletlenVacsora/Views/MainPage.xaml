@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:VMs="clr-namespace:VeletlenVacsora.ViewModels"
+             xmlns:Views="clr-namespace:VeletlenVacsora.Views"
+             x:Class="VeletlenVacsora.Views.MainPage">
+    <ContentPage.BindingContext>
+        <VMs:MainPage_VM x:Name="VModel"/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Views:ReserveBoolConverter x:Key="ReverseBool"/>
+    </ContentPage.Resources>
+    <AbsoluteLayout>
+        <StackLayout IsVisible="{Binding IsDownLoading}"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                     HorizontalOptions="Center" VerticalOptions="Center">
+            <ActivityIndicator IsRunning="True" HorizontalOptions="Center"/>
+            <Label Text="Adatok Letöltése..." FontSize="Large" HorizontalOptions="Center"/>
+        </StackLayout>
+        <StackLayout IsVisible="{Binding IsDownLoading, Converter={StaticResource ReverseBool}}"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All">
+            <ListView ItemsSource="{Binding Foods}"
+                      HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand"/>
+                                <Label Text="{Binding Price, StringFormat='{0} Ft'}" HorizontalOptions="End"/>
+                                <Button Text="Like" Command="{Binding Source={Reference VModel},Path=cmdLike}" CommandParameter="{Binding .}" HorizontalOptions="End"/>
+                                <Button Text="DisLike" Command="{Binding Source={Reference VModel},Path=cmdRandomize}" CommandParameter="{Binding .}" HorizontalOptions="End"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Randomize"
+                        Command="{Binding cmdRandomizeAll}"
+                        VerticalOptions="StartAndExpand"/>
+                <Button Text="Like All"
+                        Command="{Binding cmdLikeAll}"
+                        VerticalOptions="EndAndExpand"/>
+            </StackLayout>
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>
