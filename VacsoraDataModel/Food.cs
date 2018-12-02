@@ -32,21 +32,30 @@ namespace VacsoraDataModel {
 		private int _Price;
 		public int Price {
 			get { return _Price; }
-			private set{ _Price = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Price"));}}
+			private set { _Price = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Price")); }
+		}
 
 		private void ReCalcPrice() {
-			int newPrice=0;
+			int newPrice = 0;
 			foreach (var i in Ingredients) {
 				newPrice += i.Price;
 			}
 			Price = newPrice;
 		}
 
-		public Food(string name,int weight=50) {
+		public Food(string name = null, int weight = 90) {
 			Name = name;
 			Weight = weight;
 			Price = 0;
 			Ingredients = new ObservableCollection<Ingredient>();
+		}
+
+		public void CalcPrice() {
+			int newPrice = 0;
+			foreach (Ingredient i in Ingredients) {
+				newPrice += i.Price;
+			}
+			Price = newPrice;
 		}
 	}//clss
 }//ns

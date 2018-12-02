@@ -3,21 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:VMs="clr-namespace:VeletlenVacsora.ViewModels"
              xmlns:Views="clr-namespace:VeletlenVacsora.Views"
-             x:Class="VeletlenVacsora.Views.MainPage">
+             x:Class="VeletlenVacsora.Views.MenuPage"
+			 Title="Heti Menü">
     <ContentPage.BindingContext>
-        <VMs:MainPage_VM x:Name="VModel"/>
+        <VMs:Menu_VM x:Name="VModel"/>
     </ContentPage.BindingContext>
     <ContentPage.Resources>
         <Views:ReserveBoolConverter x:Key="ReverseBool"/>
     </ContentPage.Resources>
     <AbsoluteLayout>
-        <StackLayout IsVisible="{Binding IsDownLoading}"
+        <StackLayout IsVisible="{Binding IsLoading}"
                      AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
                      HorizontalOptions="Center" VerticalOptions="Center">
             <ActivityIndicator IsRunning="True" HorizontalOptions="Center"/>
             <Label Text="Adatok Letöltése..." FontSize="Large" HorizontalOptions="Center"/>
         </StackLayout>
-        <StackLayout IsVisible="{Binding IsDownLoading, Converter={StaticResource ReverseBool}}"
+        <StackLayout IsVisible="{Binding IsLoading, Converter={StaticResource ReverseBool}}"
                      AbsoluteLayout.LayoutBounds="0,0,1,1"
                      AbsoluteLayout.LayoutFlags="All">
             <ListView ItemsSource="{Binding Foods}"
@@ -26,8 +27,8 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand"/>
-                                <Label Text="{Binding Price, StringFormat='{0} Ft'}" HorizontalOptions="End"/>
+                                <Label FontSize="Large" Text="{Binding Name}" HorizontalOptions="StartAndExpand"/>
+                                <Label FontSize="Large" Text="{Binding Price, StringFormat='{0} Ft'}" HorizontalOptions="End"/>
                                 <Button Text="Like" Command="{Binding Source={Reference VModel},Path=cmdLike}" CommandParameter="{Binding .}" HorizontalOptions="End"/>
                                 <Button Text="DisLike" Command="{Binding Source={Reference VModel},Path=cmdRandomize}" CommandParameter="{Binding .}" HorizontalOptions="End"/>
                             </StackLayout>

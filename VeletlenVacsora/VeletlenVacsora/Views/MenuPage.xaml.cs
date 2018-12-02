@@ -2,8 +2,8 @@
 using Xamarin.Forms;
 
 namespace VeletlenVacsora.Views{
-	public partial class MainPage : ContentPage	{
-		public MainPage(){
+	public partial class MenuPage : ContentPage	{
+		public MenuPage(){
 			InitializeComponent();
 		}
 	}

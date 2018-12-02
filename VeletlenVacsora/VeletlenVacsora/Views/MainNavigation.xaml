@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VeletlenVacsora.Views.MainNavigation"
+             xmlns:Views="clr-namespace:VeletlenVacsora.Views"
+			 xmlns:ViewModels="clr-namespace:VeletlenVacsora.ViewModels"
+			 x:Name="ThisPage"
+			 BindingContext="{x:Reference ThisPage}">
+	<MasterDetailPage.Master>
+        <ContentPage Title="Véletlen Vacsora" >
+			<ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding MenuItems}"
+					  ItemSelected="OnListView_ItemSelected"
+					  >
+				<ListView.ItemTemplate>
+						<DataTemplate>
+							<ViewCell>
+								<StackLayout Orientation="Horizontal" BackgroundColor="{Binding BGColor}">
+									<Image Source="{Binding Icon}" Margin="0,10,0,10"/>
+									<Label Text="{Binding Title}" FontSize="Large" 
+												HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+								</StackLayout>
+							</ViewCell>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+        </ContentPage>
+	</MasterDetailPage.Master>
+	<MasterDetailPage.Detail>
+		<NavigationPage x:Name="Navigation">
+			<x:Arguments>
+				<Views:MenuPage/>
+			</x:Arguments>
+		</NavigationPage>
+	</MasterDetailPage.Detail>
+</MasterDetailPage>

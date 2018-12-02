@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:VMs ="clr-namespace:VeletlenVacsora.ViewModels"
+             xmlns:Views="clr-namespace:VeletlenVacsora.Views"
+             x:Class="VeletlenVacsora.Views.RecepieManagerPage"
+			 Title="receptek">
+    <ContentPage.BindingContext>
+        <VMs:RecepieManager_VM x:Name="VModel"/>
+    </ContentPage.BindingContext>
+	<ContentPage.Resources>
+		<Views:ReserveBoolConverter x:Key="ReserveBool"/>
+	</ContentPage.Resources>
+		<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
+			<StackLayout  IsVisible="{Binding IsLoading}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+				<ActivityIndicator IsRunning="True" HorizontalOptions="CenterAndExpand"/>
+				<Label Text="{Binding LoadingMessage}" FontSize="Large" HorizontalOptions="CenterAndExpand"/>
+			</StackLayout>
+			<ListView x:Name="lstView" ItemsSource="{Binding Foods}" VerticalOptions="FillAndExpand" HasUnevenRows="True" IsVisible="{Binding IsLoading,Converter={StaticResource Key=ReserveBool}}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Name}" FontSize="Large" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
+                                <Label Text="{Binding Price, StringFormat='{0}Ft'}" FontSize="Large" VerticalTextAlignment="Center" HorizontalOptions="End"/>
+                                <Button Text="Edit" Command="{Binding Source={x:Reference VModel},Path=cmdEdit}" CommandParameter="{Binding .}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="CenterAndExpand">
+                <Button Text="Add new" HorizontalOptions="StartAndExpand" Command="{Binding cmdEdit}"/>
+                <Button Text="Remove Selected" HorizontalOptions="CenterAndExpand" Command="{Binding cmdRemove}" CommandParameter="{Binding Source={Reference lstView},Path=SelectedItem}"/>
+            </StackLayout>
+        </StackLayout>
+</ContentPage>

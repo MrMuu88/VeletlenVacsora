@@ -10,15 +10,15 @@ using VacsoraDataModel;
 using Xamarin.Forms;
 
 namespace VeletlenVacsora.ViewModels {
-	class MainPage_VM:INotifyPropertyChanged{
+	class Menu_VM:INotifyPropertyChanged{
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private VacsoraDBContext DB;
 
-		private bool _IsDownLoading;
-		public bool IsDownLoading {
-			get { return _IsDownLoading; }
-			set { _IsDownLoading = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsDownLoading")); }
+		private bool _IsLoading;
+		public bool IsLoading {
+			get { return _IsLoading; }
+			set { _IsLoading = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsLoading")); }
 		}
 
 		public ICommand cmdRandomizeAll { get; set; }
@@ -32,9 +32,9 @@ namespace VeletlenVacsora.ViewModels {
 			set { _Foods = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Foods")); }
 		}
 
-		public MainPage_VM() {
+		public Menu_VM() {
 			Foods = new ObservableCollection<Food>();
-			DB = new VacsoraDBContext("Server = simbir.asuscomm.com; UID = Szakacs; PWD = MitFozzunk; database = VacsoraDB; Port = 3306", DBType.MySql);
+			DB = new VacsoraDBContext(App.ConnString,App.DBType);
 			cmdRandomizeAll = new Command(RandomizeAllAsync);
 			cmdRandomize = new Command(RandomizeAsync);
 			cmdLike = new Command(Like);
@@ -65,11 +65,11 @@ namespace VeletlenVacsora.ViewModels {
 
 		private async void RandomizeAllAsync(object obj) {
 			await Task.Run(() => {
-				IsDownLoading = true;
+				IsLoading = true;
 				Debug.WriteLine("Randomize Menu started");
 				var query = DB.Foods.FromSql("SELECT ID, Name, Weight, Price, Weight*Rand() as Chance FROM VacsoraDB.Foods order by chance DESC LIMIT 7").Include("Ingredients").ToList();
 				Foods = new ObservableCollection<Food>(query);
-				IsDownLoading = false;
+				IsLoading = false;
 			});
 			return;
 		}
