@@ -9,8 +9,8 @@ namespace VeletlenVacsora.ViewModels {
 	class NewFood_VM:INotifyPropertyChanged {
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private Food _WorkingFood;
-		public Food WorkingFood {
+		private Recepie _WorkingFood;
+		public Recepie WorkingFood {
 			get { return _WorkingFood; }
 			set { _WorkingFood = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WorkingFood")); }
 		}
@@ -21,7 +21,7 @@ namespace VeletlenVacsora.ViewModels {
 		public ICommand cmdCancel { get; set; }
 
 		public NewFood_VM() {
-			WorkingFood = new Food();
+			WorkingFood = new Recepie();
 			cmdAddIngredient = new Command(AddIngredient);
 			cmdRemoveIngredient = new Command(RemoveIngredient);
 			cmdSave = new Command(Save);

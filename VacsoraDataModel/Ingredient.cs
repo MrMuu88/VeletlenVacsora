@@ -1,15 +1,15 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Veletlenvacsora.Data;
 
-namespace VacsoraDataModel {
-	public class Ingredient:INotifyPropertyChanged{
+namespace VeletlenVacsora.Data {
+	public class Ingredient:INotifyPropertyChanged,ICloneable{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private int _ID;
 		[Key]
-		public int ID {
-			get { return _ID; }
-			set { _ID = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ID")); }}
+        public int IngredientID { get; set; }
 
 		private string _Name;
 		[MaxLength(50)]
@@ -17,25 +17,49 @@ namespace VacsoraDataModel {
 			get { return _Name; }
 			set { _Name = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name")); }}
 
-		private PackageType _Package;
-		public  PackageType Package {
-			get { return _Package; }
-			set { _Package = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Package")); }}
 
-		//Per Package
+        private string _IngredientType;
+        public string IngredientType {
+            get { return _IngredientType; }
+            set { _IngredientType = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IngredientType))); }
+        }
+
+        private string _PackageType;
+		public  string PackageType {
+			get { return _PackageType; }
+			set { _PackageType = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PackageType))); }}
+
 		private int _Price;
 		public  int Price {
 			get { return _Price; }
 			set { _Price = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Price")); }
 		}
 
-		//navigation property for EF
-		private Food _Food;
-		public Food Food {
-			get { return _Food; }
-			set { _Food = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Food")); }}
 
-	}//clss
+        private ObservableCollection<RecepieIngredient> _Recepies;
+        public ObservableCollection<RecepieIngredient> Recepies {
+            get { return _Recepies; }
+            set { _Recepies = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Recepies))); }
+        }
+
+
+        public Ingredient() {
+            Name = "Tej";
+            IngredientType = "Tejtermék";
+            PackageType = "Liter";
+            Price = 350;
+        }
+
+        public object Clone() {
+            return new Ingredient() {
+                Name = this.Name,
+                IngredientType = this.IngredientType,
+                PackageType = this.PackageType,
+                Price = this.Price
+
+            };
+        }
+    }//clss
 
 	public enum PackageType {db,Doboz,Kg,üveg,Pohár,L}
 }//ns

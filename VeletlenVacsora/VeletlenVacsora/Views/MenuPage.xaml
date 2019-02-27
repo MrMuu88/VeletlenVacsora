@@ -10,7 +10,8 @@
     </ContentPage.BindingContext>
     <ContentPage.Resources>
         <Views:ReserveBoolConverter x:Key="ReverseBool"/>
-    </ContentPage.Resources>
+		<Views:BoolToImageSourceConverter x:Key="BoolToImage"/>
+	</ContentPage.Resources>
     <AbsoluteLayout>
         <StackLayout IsVisible="{Binding IsLoading}"
                      AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
@@ -21,7 +22,7 @@
         <StackLayout IsVisible="{Binding IsLoading, Converter={StaticResource ReverseBool}}"
                      AbsoluteLayout.LayoutBounds="0,0,1,1"
                      AbsoluteLayout.LayoutFlags="All">
-            <ListView ItemsSource="{Binding Foods}"
+            <ListView ItemsSource="{Binding Foods}" SeparatorVisibility="None"
                       HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -29,21 +30,21 @@
                             <StackLayout Orientation="Horizontal">
                                 <Label FontSize="Large" Text="{Binding Name}" HorizontalOptions="StartAndExpand"/>
                                 <Label FontSize="Large" Text="{Binding Price, StringFormat='{0} Ft'}" HorizontalOptions="End"/>
-                                <Button Text="Like" Command="{Binding Source={Reference VModel},Path=cmdLike}" CommandParameter="{Binding .}" HorizontalOptions="End"/>
-                                <Button Text="DisLike" Command="{Binding Source={Reference VModel},Path=cmdRandomize}" CommandParameter="{Binding .}" HorizontalOptions="End"/>
+								<Image Source="{Binding OnMenu, Converter={StaticResource BoolToImage}}" Margin="10">
+									<Image.GestureRecognizers>
+										<TapGestureRecognizer Command="{Binding Source={Reference VModel},Path=cmdLike}" CommandParameter="{Binding .}"/>
+									</Image.GestureRecognizers>
+								</Image>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Text="Randomize"
-                        Command="{Binding cmdRandomizeAll}"
-                        VerticalOptions="StartAndExpand"/>
-                <Button Text="Like All"
-                        Command="{Binding cmdLikeAll}"
-                        VerticalOptions="EndAndExpand"/>
-            </StackLayout>
+			<Image Source="Dice.png" VerticalOptions="End" HorizontalOptions="Center">
+				<Image.GestureRecognizers>
+					<TapGestureRecognizer Command="{Binding cmdRandomizeAll}"/>
+				</Image.GestureRecognizers>
+			</Image>
         </StackLayout>
     </AbsoluteLayout>
 </ContentPage>

@@ -2,15 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.EntityFrameworkCore.Extensions;
 using MySql.Data.MySqlClient;
+using Veletlenvacsora.Data;
 
-namespace VacsoraDataModel {
+namespace VeletlenVacsora.Data {
 
 	
 	public class VacsoraDBContext : DbContext {
 		private static string cnstr;
 		private static DBType DBType;
 
-		public DbSet<Food> Foods { get; set; }
+		public DbSet<Recepie> Recepies { get; set; }
 		public DbSet<Ingredient> Ingredients { get; set; }
 
 		public VacsoraDBContext(string ConnectionString, DBType dbt = DBType.SqLite) {
@@ -31,6 +32,10 @@ namespace VacsoraDataModel {
 			}
 		}
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<RecepieIngredient>()
+                .HasKey(t => new { t.RecepieID, t.IngredientID });
+        }
 		
 	}//clss
 
