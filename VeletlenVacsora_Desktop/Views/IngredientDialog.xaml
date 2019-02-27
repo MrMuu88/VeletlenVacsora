@@ -1,0 +1,42 @@
+﻿<Window x:Class="VeletlenVacsora.Desktop.Views.IngredientDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VeletlenVacsora.Desktop.Views"
+        mc:Ignorable="d"
+        Title="IngredientDialog" SizeToContent="WidthAndHeight" ResizeMode="NoResize"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Label Margin="5" VerticalAlignment="Center" Content="Megnevezés"/>
+        <TextBox Text="{Binding Ingredient.Name}" Margin="5" VerticalAlignment="Center" Grid.Column="1"/>
+
+        <Label Margin="5" VerticalAlignment="Center" Content="Élelmiszer tipusa" Grid.Row="1"/>
+        <ComboBox Text="{Binding Ingredient.IngredientType}" IsEditable="True" Margin="5" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+        
+        <Label Margin="5" VerticalAlignment="Center" Content="Csomagolás tipusa" Grid.Row="2"/>
+        <ComboBox Text="{Binding Ingredient.PackageType}" IsEditable="True" Margin="5" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
+
+        <Label Margin="5" VerticalAlignment="Center" Content="Ár (1 egységre)" Grid.Row="3"/>
+        <TextBox Text="{Binding Ingredient.Price}" PreviewTextInput="txtPrice_TextEnter" Margin="5" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                    Grid.Row="4" Grid.ColumnSpan="2">
+            <Button Margin="5" Width="50" Content="Mégse" Click="btnCancel_Click"/>
+            <Button Margin="5" Width="50" Content="Ok" Click="btnOk_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

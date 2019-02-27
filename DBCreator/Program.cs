@@ -1,6 +1,5 @@
 ﻿using System;
-using VacsoraDataModel;
-
+using VeletlenVacsora.Data;
 namespace DBCreator {
 	class Program {
 		static void Main(string[] args) {
@@ -12,20 +11,20 @@ namespace DBCreator {
 			DBctx.Database.EnsureDeleted();
 			Console.WriteLine("Done... recreating content");
 			DBctx.Database.EnsureCreated();
-			DBctx.Foods.Add(new Food("Paprikás krumpli", 90));
-			DBctx.Foods.Add(new Food("Palacsinta", 90));
-			DBctx.Foods.Add(new Food("Rizottó", 90));
-			DBctx.Foods.Add(new Food("Tojásos lecsó", 90));
-			DBctx.Foods.Add(new Food("Gombóc", 90));
-			DBctx.Foods.Add(new Food("Gulyás leves", 90));
-			DBctx.Foods.Add(new Food("Csirkepörkölt", 90));
-			DBctx.Foods.Add(new Food("Sült csirke", 90));
-			DBctx.Foods.Add(new Food("Borsó főzelék", 90));
-			DBctx.Foods.Add(new Food("Borsó leves", 90));
-			DBctx.Foods.Add(new Food("Brokkoli krémleves", 90));
-			DBctx.Foods.Add(new Food("Fokhagyma krémleves", 90));
-			DBctx.Foods.Add(new Food("rakott karfiol", 90));
-			DBctx.Foods.Add(new Food("Paradicsomos Húsgombóc", 90));
+			DBctx.Recepies.Add(new Recepie("Paprikás krumpli", 90));
+			DBctx.Recepies.Add(new Recepie("Palacsinta", 90));
+			DBctx.Recepies.Add(new Recepie("Rizottó", 90));
+			DBctx.Recepies.Add(new Recepie("Tojásos lecsó", 90));
+			DBctx.Recepies.Add(new Recepie("Gombóc", 90));
+			DBctx.Recepies.Add(new Recepie("Gulyás leves", 90));
+			DBctx.Recepies.Add(new Recepie("Csirkepörkölt", 90));
+			DBctx.Recepies.Add(new Recepie("Sült csirke", 90));
+			DBctx.Recepies.Add(new Recepie("Borsó főzelék", 90));
+			DBctx.Recepies.Add(new Recepie("Borsó leves", 90));
+			DBctx.Recepies.Add(new Recepie("Brokkoli krémleves", 90));
+			DBctx.Recepies.Add(new Recepie("Fokhagyma krémleves", 90));
+			DBctx.Recepies.Add(new Recepie("rakott karfiol", 90));
+			DBctx.Recepies.Add(new Recepie("Paradicsomos Húsgombóc", 90));
 			DBctx.SaveChanges();
 			Console.WriteLine("Done... Press any key to continue...");
 			Console.ReadKey();

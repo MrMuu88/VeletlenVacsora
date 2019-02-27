@@ -16,4 +16,23 @@ namespace VeletlenVacsora.Views{
 		}
 	}
 
+	public class BoolToImageSourceConverter : IValueConverter {
+
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+			if ((bool)value) { 
+				return "Pin_On.png";
+			} else {
+				return "Pin_Off.png";
+			}
+		}
+		
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+			if (((string)value)=="Pin_On.png") {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
 }

@@ -86,11 +86,11 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=8.0.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.8.0.12\lib\net452\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.15\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data.EntityFrameworkCore, Version=8.0.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.EntityFrameworkCore.8.0.12\lib\net452\MySql.Data.EntityFrameworkCore.dll</HintPath>
+    <Reference Include="MySql.Data.EntityFrameworkCore, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.EntityFrameworkCore.8.0.15\lib\net461\MySql.Data.EntityFrameworkCore.dll</HintPath>
     </Reference>
     <Reference Include="MySqlConnector, Version=0.46.1.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
       <HintPath>..\packages\MySqlConnector.0.46.1\lib\net461\MySqlConnector.dll</HintPath>
@@ -174,9 +174,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VacsoraDataModel\VacsoraDataModel.csproj">
-      <Project>{CB53584E-C776-407A-81C0-F73C4957B64C}</Project>
-      <Name>VacsoraDataModel</Name>
+    <ProjectReference Include="..\VacsoraDataModel\Veletlenvacsora.Data.csproj">
+      <Project>{cb53584e-c776-407a-81c0-f73c4957b64c}</Project>
+      <Name>Veletlenvacsora.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

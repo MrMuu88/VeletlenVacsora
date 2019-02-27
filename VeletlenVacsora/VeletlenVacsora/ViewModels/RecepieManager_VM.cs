@@ -31,8 +31,8 @@ namespace VeletlenVacsora.ViewModels {
 		public ICommand cmdEdit { get; set; }
 		public ICommand cmdRemove { get; set; }
 
-		private ObservableCollection<Food> _Foods;
-		public ObservableCollection<Food> Foods {
+		private ObservableCollection<Recepie> _Foods;
+		public ObservableCollection<Recepie> Foods {
 			get { return _Foods; }
 			set { _Foods = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Foods")); }
 		}
@@ -43,7 +43,7 @@ namespace VeletlenVacsora.ViewModels {
 		}
 
 		private void Remove(object obj) {
-			var Selected = (Food)obj;
+			var Selected = (Recepie)obj;
 			if (Selected != null) {
 				try {
 					using (var DB = new VacsoraDBContext(App.ConnString, App.DBType)) {
@@ -58,13 +58,13 @@ namespace VeletlenVacsora.ViewModels {
 		}
 
 		public async Task Refresh() {
-			Foods = new ObservableCollection<Food>();
+			Foods = new ObservableCollection<Recepie>();
 			IsLoading = true;
 			LoadingMessage = "Adatok Letöltése";
 			await Task.Run(() => {
 				try{
 					using (var DB = new VacsoraDBContext(App.ConnString, App.DBType)) {
-						Foods = new ObservableCollection<Food>(DB.Foods.Include("Ingredients").ToList());
+						Foods = new ObservableCollection<Recepie>(DB.Foods.Include("Ingredients").ToList());
 					}
 				} catch (Exception Ex) {
 					App.LogException(Ex);
@@ -77,7 +77,7 @@ namespace VeletlenVacsora.ViewModels {
 		private async void Edit(object obj) {
 			var fPage = new NewFoodPage();
 			if (obj != null) {
-				var Selected = (Food)obj;
+				var Selected = (Recepie)obj;
 				App.Logger.MakeLog($"Loading {Selected.Name}");
 				((NewFood_VM)fPage.BindingContext).WorkingFood = Selected;
 			}

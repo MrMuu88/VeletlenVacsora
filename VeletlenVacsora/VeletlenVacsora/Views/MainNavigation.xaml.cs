@@ -19,10 +19,10 @@ namespace VeletlenVacsora.Views {
 		public MainNavigation(){
 			InitializeComponent();
 			MenuItems = new ObservableCollection<MenuItem>();
-			MenuItems.Add(new MenuItem("Heti Menü",typeof(MenuPage)));
-			MenuItems.Add(new MenuItem("Receptek",typeof(RecepieManagerPage)));
-			MenuItems.Add(new MenuItem("Hozzávalók",typeof(IngredientManagerPage)));
-			MenuItems.Add(new MenuItem("Bevásárló lista",typeof(ShoppingListPage)));
+			MenuItems.Add(new MenuItem("Heti Menü",typeof(MenuPage),"Menu.png"));
+			MenuItems.Add(new MenuItem("Receptek",typeof(RecepieManagerPage),"RecipeBook.png"));
+			MenuItems.Add(new MenuItem("Hozzávalók",typeof(IngredientManagerPage),"Ingredients.png"));
+			MenuItems.Add(new MenuItem("Bevásárló lista",typeof(ShoppingListPage),"ShoppingList.png"));
 		}
 
 		private async void OnListView_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
