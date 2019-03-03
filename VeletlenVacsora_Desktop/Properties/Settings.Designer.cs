@@ -25,23 +25,19 @@ namespace VeletlenVacsora.Desktop.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server = simbir.asuscomm.com; UID = Szakacs; PWD = MitFozzunk; database = Vacsora" +
-            "DB; Port = 3306")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=Localhost;Database=VacsoraDB;Trusted_Connection=True;")]
         public string constr {
             get {
                 return ((string)(this["constr"]));
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string dbtype {
+        [global::System.Configuration.DefaultSettingValueAttribute("MSSql")]
+        public global::VeletlenVacsora.Data.DBType dbtype {
             get {
-                return ((string)(this["dbtype"]));
-            }
-            set {
-                this["dbtype"] = value;
+                return ((global::VeletlenVacsora.Data.DBType)(this["dbtype"]));
             }
         }
     }

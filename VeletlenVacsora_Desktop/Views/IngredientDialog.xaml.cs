@@ -1,20 +1,14 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using VeletlenVacsora.Data;
 
 namespace VeletlenVacsora.Desktop.Views {
-    public partial class IngredientDialog : Window, INotifyPropertyChanged {
-        public event PropertyChangedEventHandler PropertyChanged;
+    public partial class IngredientDialog : Window {
 
-
-        private Ingredient _Ingredient;
-        public Ingredient Ingredient {
-            get { return _Ingredient; }
-            set { _Ingredient = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Ingredient))); }
-        }
-        public IngredientDialog() {
+		public IngredientDialog() {
             InitializeComponent();
         }
 

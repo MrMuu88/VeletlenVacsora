@@ -1,12 +1,38 @@
 ﻿using System;
 using VeletlenVacsora.Data;
+
 namespace DBCreator {
 	class Program {
 		static void Main(string[] args) {
-			Console.WriteLine("Building MSSql Database");
-			//"Server = simbir.asuscomm.com; UID = Szakacs; PWD = MitFozzunk; database = VacsoraDB; Port = 3306", DBType.MySql
-			//@"Data source=.\test.sqlite",DBType.SqLite
-			VacsoraDBContext DB = new VacsoraDBContext("Server=Localhost;Database=VacsoraDB;Trusted_Connection=True;", DBType.MSSql);
+			string Constr = "";
+			DBType dBType = DBType.MSSql;
+			Console.WriteLine("please select witch DB to build:\n");
+			Console.WriteLine("1\t MSSql");
+			Console.WriteLine("2\t MySql");
+			Console.WriteLine("3\t SqLite");
+			Console.WriteLine("Anithing else will Cancel");
+
+			var ans = Console.ReadKey();
+			switch (ans.Key) {
+				case ConsoleKey.D1:
+					Constr = "Server=Localhost;Database=VacsoraDB;Trusted_Connection=True;";
+					dBType = DBType.MSSql;
+					break;
+				case ConsoleKey.D2:
+					Constr = "Server = simbir.asuscomm.com; UID = Szakacs; PWD = MitFozzunk; database = VacsoraDB; Port = 3306";
+					dBType = DBType.MySql;
+					break;
+				case ConsoleKey.D3:
+					Constr = @"Data source=.\test.sqlite";
+					dBType = DBType.SqLite;
+					break;
+				default:
+					Environment.Exit(0);
+					break;
+			}
+			Console.WriteLine($"Building {dBType.ToString()} Database");
+			
+			VacsoraDBContext DB = new VacsoraDBContext(Constr, dBType);
 
 			DB.Database.EnsureDeleted();
 			DB.Database.EnsureCreated();
@@ -15,7 +41,7 @@ namespace DBCreator {
 
 			Recepie Palacsinta = new Recepie("Palacsinta");
 			Recepie PaprikasKrumpli = new Recepie("PaprikásKrumpli");
-			Recepie Lecso = new Recepie("Lecso");
+			Recepie Lecso = new Recepie("Lecsó");
 
 			Console.WriteLine("defining Ingredient Tipes objects");
 

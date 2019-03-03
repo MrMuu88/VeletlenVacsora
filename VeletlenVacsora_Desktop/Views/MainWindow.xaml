@@ -7,158 +7,165 @@
         xmlns:ViewModels="clr-namespace:VeletlenVacsora.Desktop.ViewModels"
         xmlns:ie="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="300">
-    <Window.DataContext>
-        <ViewModels:MainWindow_VM x:Name="VModel"/>
-    </Window.DataContext>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Menu Grid.Row="0">
-            <MenuItem Header="Mentés" Command="{Binding cmdsave}"/>
-        </Menu>
-        <TabControl Grid.Row="1">
-        <TabItem Header="Menü">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+        Title="MainWindow" Height="450" SizeToContent="Width">
+	<Window.DataContext>
+		<ViewModels:MainWindow_VM x:Name="VModel"/>
+	</Window.DataContext>
+	<Grid>
+		<TabControl Grid.Row="1">
+			<TabItem Header="Hozzávalók">
+				
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+					<ListView x:Name="lstIngredients" ItemsSource="{Binding Ingredients}">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Header="Név" DisplayMemberBinding="{Binding Name}"/>
+								<GridViewColumn Header="Categória" DisplayMemberBinding="{Binding IngredientType.TypeName}"/>
+								<GridViewColumn Header="Csomagolás" DisplayMemberBinding="{Binding PackageType.TypeName}"/>
+								<GridViewColumn Header="Ár" DisplayMemberBinding="{Binding Price}"/>
+							</GridView>
+						</ListView.View>
+						<ie:Interaction.Triggers>
+							<ie:EventTrigger EventName="MouseDoubleClick">
+								<ie:InvokeCommandAction Command="{Binding cmdEditIngredient}"
+                                                CommandParameter="{Binding ElementName=lstIngredients,Path=SelectedItem}"/>
+							</ie:EventTrigger>
+						</ie:Interaction.Triggers>
+					</ListView>
+					
+					<StackPanel Orientation="Horizontal" Grid.Row="1">
+						<Button Margin="5" Width="50" Content="Delete"
+                            Command="{Binding cmdRemoveIngredient}"
+                            CommandParameter="{Binding ElementName=lstIngredients,Path=SelectedItem}"/>
+						<Button Margin="5" Width="50" Content="New"
+                            Command="{Binding cmdEditIngredient}"/>
+					</StackPanel>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Receptek">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+					<ListView x:Name="lstRecepies" ItemsSource="{Binding Recepies}">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Header="Recept" DisplayMemberBinding="{Binding Name}"/>
+								<GridViewColumn Header="Ár" DisplayMemberBinding="{Binding Price}"/>
+							</GridView>
+						</ListView.View>
+						<ie:Interaction.Triggers>
+							<ie:EventTrigger EventName="MouseDoubleClick">
+								<ie:InvokeCommandAction Command="{Binding cmdEditRecepie}"
+                                                    CommandParameter="{Binding ElementName=lstRecepies,Path=SelectedItem}"/>
+							</ie:EventTrigger>
+						</ie:Interaction.Triggers>
+					</ListView>
+					<StackPanel Orientation="Horizontal" Grid.Row="1">
+						<Button Margin="5" Width="50" Content="Delete"
+                            Command="{Binding cmdRemoveRecepie}"
+                            CommandParameter="{Binding ElementName=lstRecepies,Path=SelectedItem}"/>
+						<Button Margin="5" Width="50" Content="New"
+                            Command="{Binding cmdEditRecepie}"/>
+					</StackPanel>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Bevásárló lista">
+				<ListBox x:Name="lstShoping"/>
 
-                <!-- Col 1-->
-                <Label Content="Hétfő" Margin="5"
+			</TabItem>
+			<TabItem Header="Menü">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+						<RowDefinition/>
+						<RowDefinition/>
+						<RowDefinition/>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+					<!-- Col 1-->
+					<Label Content="Hétfő" Margin="5"
                        Grid.Column="0" Grid.Row="0"
                        VerticalAlignment="Center"/>
-                <Label Content="Kedd" Margin="5"
+					<Label Content="Kedd" Margin="5"
                        Grid.Column="0" Grid.Row="1"
                        VerticalAlignment="Center"/>
-                <Label Content="Szerda" Margin="5"
+					<Label Content="Szerda" Margin="5"
                        Grid.Column="0" Grid.Row="2"
                        VerticalAlignment="Center"/>
-                <Label Content="Csütörtök" Margin="5"
+					<Label Content="Csütörtök" Margin="5"
                        Grid.Column="0" Grid.Row="3"
                        VerticalAlignment="Center"/>
-                <Label Content="Péntek" Margin="5"
+					<Label Content="Péntek" Margin="5"
                        Grid.Column="0" Grid.Row="4"
                        VerticalAlignment="Center"/>
-                <Label Content="Szombat" Margin="5"
+					<Label Content="Szombat" Margin="5"
                        Grid.Column="0" Grid.Row="5"
                        VerticalAlignment="Center"/>
-                <Label Content="Vasárnap" Margin="5"
+					<Label Content="Vasárnap" Margin="5"
                        Grid.Column="0" Grid.Row="6"
                        VerticalAlignment="Center"/>
 
-                <!-- Col 2-->
-                <Label Content="Hétfő" Margin="5"
+					<!-- Col 2-->
+					<Label Content="Hétfő" Margin="5"
                        Grid.Column="1" Grid.Row="0"
                        VerticalAlignment="Center"/>
-                <Label Content="Kedd" Margin="5"
+					<Label Content="Kedd" Margin="5"
                        Grid.Column="1" Grid.Row="1"
                        VerticalAlignment="Center"/>
-                <Label Content="Szerda" Margin="5"
+					<Label Content="Szerda" Margin="5"
                        Grid.Column="1" Grid.Row="2"
                        VerticalAlignment="Center"/>
-                <Label Content="Csütörtök" Margin="5"
+					<Label Content="Csütörtök" Margin="5"
                        Grid.Column="1" Grid.Row="3"
                        VerticalAlignment="Center"/>
-                <Label Content="Péntek" Margin="5"
+					<Label Content="Péntek" Margin="5"
                        Grid.Column="1" Grid.Row="4"
                        VerticalAlignment="Center"/>
-                <Label Content="Szombat" Margin="5"
+					<Label Content="Szombat" Margin="5"
                        Grid.Column="1" Grid.Row="5"
                        VerticalAlignment="Center"/>
-                <Label Content="Vasárnap" Margin="5"
+					<Label Content="Vasárnap" Margin="5"
                        Grid.Column="1" Grid.Row="6"
                        VerticalAlignment="Center"/>
 
-                <!-- Col 3-->
-                <Label Content="Hétfő" Margin="5"
+					<!-- Col 3-->
+					<Label Content="Hétfő" Margin="5"
                        Grid.Column="2" Grid.Row="0"
                        VerticalAlignment="Center"/>
-                <Label Content="Kedd" Margin="5"
+					<Label Content="Kedd" Margin="5"
                        Grid.Column="2" Grid.Row="1"
                        VerticalAlignment="Center"/>
-                <Label Content="Szerda" Margin="5"
+					<Label Content="Szerda" Margin="5"
                        Grid.Column="2" Grid.Row="2"
                        VerticalAlignment="Center"/>
-                <Label Content="Csütörtök" Margin="5"
+					<Label Content="Csütörtök" Margin="5"
                        Grid.Column="2" Grid.Row="3"
                        VerticalAlignment="Center"/>
-                <Label Content="Péntek" Margin="5"
+					<Label Content="Péntek" Margin="5"
                        Grid.Column="2" Grid.Row="4"
                        VerticalAlignment="Center"/>
-                <Label Content="Szombat" Margin="5"
+					<Label Content="Szombat" Margin="5"
                        Grid.Column="2" Grid.Row="5"
                        VerticalAlignment="Center"/>
-                <Label Content="Vasárnap" Margin="5"
+					<Label Content="Vasárnap" Margin="5"
                        Grid.Column="2" Grid.Row="6"
                        VerticalAlignment="Center"/>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Bevásárló lista">
-            <ListBox x:Name="lstShoping"/>
-
-        </TabItem>
-        <TabItem Header="Receptek">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <ListBox x:Name="lstRecepies" DisplayMemberPath="Name" ItemsSource="{Binding Recepies}">
-                    <ie:Interaction.Triggers>
-                        <ie:EventTrigger EventName="MouseDoubleClick">
-                            <ie:InvokeCommandAction Command="{Binding cmdEditRecepie}"
-                                                    CommandParameter="{Binding ElementName=lstRecepies,Path=SelectedItem}"/>
-                        </ie:EventTrigger>
-                    </ie:Interaction.Triggers>
-                </ListBox>
-                <StackPanel Orientation="Horizontal" Grid.Row="1">
-                    <Button Margin="5" Width="50" Content="Delete"
-                            Command="{Binding cmdRemoveRecepie}"
-                            CommandParameter="{Binding ElementName=lstRecepies,Path=SelectedItem}"/>
-                    <Button Margin="5" Width="50" Content="New"
-                            Command="{Binding cmdNewRecepie}"/>
-                </StackPanel>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Hozzávalók">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <ListBox x:Name="lstIngredients" DisplayMemberPath="Name" ItemsSource="{Binding Ingredients}">
-                    <ie:Interaction.Triggers>
-
-                        <ie:EventTrigger EventName="MouseDoubleClick">
-                            <ie:InvokeCommandAction Command="{Binding cmdEditIngredient}"
-                                                CommandParameter="{Binding ElementName=lstIngredients,Path=SelectedItem}"/>
-                        </ie:EventTrigger>
-                    </ie:Interaction.Triggers>
-                </ListBox>
-                <StackPanel Orientation="Horizontal" Grid.Row="1">
-                    <Button Margin="5" Width="50" Content="Delete"
-                            Command="{Binding cmdRemoveIngredient}"
-                            CommandParameter="{Binding ElementName=lstIngredients,Path=SelectedItem}"/>
-                    <Button Margin="5" Width="50" Content="New"
-                            Command="{Binding cmdNewIngredient}"/>
-                </StackPanel>
-            </Grid>
-        </TabItem>
-
-    </TabControl>
-    </Grid>
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</Grid>
 </Window>

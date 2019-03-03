@@ -281,6 +281,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\IngredientDialogVM.cs" />
+    <Compile Include="ViewModels\RecepieDialogVM.cs" />
     <Compile Include="Views\RecepieDialog.xaml.cs">
       <DependentUpon>RecepieDialog.xaml</DependentUpon>
     </Compile>
@@ -338,9 +340,9 @@
     <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VacsoraDataModel\Veletlenvacsora.Data.csproj">
+    <ProjectReference Include="..\VacsoraDataModel\VeletlenVacsora.Data.csproj">
       <Project>{cb53584e-c776-407a-81c0-f73c4957b64c}</Project>
-      <Name>Veletlenvacsora.Data</Name>
+      <Name>VeletlenVacsora.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

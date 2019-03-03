@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.EntityFrameworkCore.Extensions;
 using MySql.Data.MySqlClient;
-using Veletlenvacsora.Data;
+using VeletlenVacsora.Data;
 
 namespace VeletlenVacsora.Data {
 
@@ -13,6 +13,8 @@ namespace VeletlenVacsora.Data {
 
 		public DbSet<Recepie> Recepies { get; set; }
 		public DbSet<Ingredient> Ingredients { get; set; }
+		public DbSet<PackageType> PackageTypes{ get; set; }
+		public DbSet<IngredientType> IngredientTypes{ get; set; }
 
 		public VacsoraDBContext(string ConnectionString, DBType dbt = DBType.SqLite) {
 			cnstr = ConnectionString;
@@ -21,8 +23,11 @@ namespace VeletlenVacsora.Data {
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
 			switch (DBType) {
+				case DBType.MSSql:
+					optionsBuilder.UseSqlServer(cnstr);
+					break;
 				case DBType.MySql:
-					optionsBuilder.UseMySql(cnstr);
+					optionsBuilder.UseMySQL(cnstr);
 					break;
 				case DBType.SqLite:
 					optionsBuilder.UseSqlite(cnstr);
@@ -39,5 +44,5 @@ namespace VeletlenVacsora.Data {
 		
 	}//clss
 
-	public enum DBType {SqLite,MySql}
+	public enum DBType {MSSql,SqLite,MySql}
 }//ns

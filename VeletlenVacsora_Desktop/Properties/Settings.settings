@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="constr" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Server = simbir.asuscomm.com; UID = Szakacs; PWD = MitFozzunk; database = VacsoraDB; Port = 3306</Value>
+      <Value Profile="(Default)">Server=Localhost;Database=VacsoraDB;Trusted_Connection=True;</Value>
     </Setting>
-    <Setting Name="dbtype" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="dbtype" Type="VeletlenVacsora.Data.DBType" Scope="Application">
+      <Value Profile="(Default)">MSSql</Value>
     </Setting>
   </Settings>
 </SettingsFile>
