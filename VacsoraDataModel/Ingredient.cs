@@ -19,14 +19,14 @@ namespace VeletlenVacsora.Data {
 			set { _Name = value; RaisePropertyChanged(nameof(Name)); }}
 
 
-        private IngredientType _IngredientType;
-        public IngredientType IngredientType {
+        private Category _IngredientType;
+        public  Category IngredientType {
             get { return _IngredientType; }
             set { _IngredientType = value; RaisePropertyChanged(nameof(IngredientType)); }
         }
 
-        private PackageType _PackageType;
-		public  PackageType PackageType {
+        private Category _PackageType;
+		public  Category PackageType {
 			get { return _PackageType; }
 			set { _PackageType = value; RaisePropertyChanged(nameof(PackageType)); }}
 
@@ -49,7 +49,7 @@ namespace VeletlenVacsora.Data {
             Price = 350;
         }
 
-		public Ingredient(string name,IngredientType ingType,PackageType packType,int price) {
+		public Ingredient(string name,Category ingType,Category packType,int price) {
 			Name = name;
 			IngredientType = ingType;
 			PackageType = packType;

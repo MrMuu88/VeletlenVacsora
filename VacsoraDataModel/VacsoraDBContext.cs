@@ -13,8 +13,7 @@ namespace VeletlenVacsora.Data {
 
 		public DbSet<Recepie> Recepies { get; set; }
 		public DbSet<Ingredient> Ingredients { get; set; }
-		public DbSet<PackageType> PackageTypes{ get; set; }
-		public DbSet<IngredientType> IngredientTypes{ get; set; }
+		public DbSet<Category> Categories{ get; set; }
 
 		public VacsoraDBContext(string ConnectionString, DBType dbt = DBType.SqLite) {
 			cnstr = ConnectionString;

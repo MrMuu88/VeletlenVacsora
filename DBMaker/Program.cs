@@ -45,19 +45,19 @@ namespace DBCreator {
 
 			Console.WriteLine("defining Ingredient Tipes objects");
 
-			IngredientType Tejtermek = new IngredientType("Tejtermékek");
-			IngredientType AlapVeto = new IngredientType("Alapvető élelmiszerek");
-			IngredientType Zoldseg = new IngredientType("Zöldségek");
-			IngredientType FeldHus = new IngredientType("Feldolgozott húsok");
-			IngredientType Tartos = new IngredientType("Tartós élelmiszerek");
+			Category Tejtermek = new Category("Tejtermékek",CategoryType.Ingredient);
+			Category AlapVeto = new Category("Alapvető élelmiszerek", CategoryType.Ingredient);
+			Category Zoldseg = new Category("Zöldségek", CategoryType.Ingredient);
+			Category FeldHus = new Category("Feldolgozott húsok", CategoryType.Ingredient);
+			Category Tartos = new Category("Tartós élelmiszerek", CategoryType.Ingredient);
 
 			Console.WriteLine("defining Package tipes objects");
 
-			PackageType Liter = new PackageType("Liter");
-			PackageType Doboz = new PackageType("Doboz");
-			PackageType Kilogram = new PackageType("Kg");
-			PackageType Csomag = new PackageType("Csomag");
-			PackageType Uveg = new PackageType("Üveg");
+			Category Liter = new Category("Liter", CategoryType.Package);
+			Category Doboz = new Category("Doboz", CategoryType.Package);
+			Category Kilogram = new Category("Kg", CategoryType.Package);
+			Category Csomag = new Category("Csomag", CategoryType.Package);
+			Category Uveg = new Category("Üveg", CategoryType.Package);
 
 
 			Console.WriteLine("defining Ingredients objects");

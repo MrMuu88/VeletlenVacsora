@@ -283,9 +283,15 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\IngredientDialogVM.cs" />
     <Compile Include="ViewModels\RecepieDialogVM.cs" />
+    <Compile Include="Views\CategoryDialog.xaml.cs">
+      <DependentUpon>CategoryDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RecepieDialog.xaml.cs">
       <DependentUpon>RecepieDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\CategoryDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\IngredientDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

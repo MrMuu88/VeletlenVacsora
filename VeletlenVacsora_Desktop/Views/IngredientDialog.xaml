@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeletlenVacsora.Desktop.Views"
 		xmlns:VM ="clr-namespace:VeletlenVacsora.Desktop.ViewModels"
+		xmlns:ie="http://schemas.microsoft.com/expression/2010/interactivity"
+		xmlns:Data="clr-namespace:Veletlenvacsora.Data;assembly=VeletlenVacsora.Data"
         mc:Ignorable="d"
         Title="IngredientDialog" SizeToContent="WidthAndHeight" ResizeMode="NoResize"
         >
@@ -28,10 +30,23 @@
 		<TextBox Text="{Binding Ingredient.Name}" Margin="5" VerticalAlignment="Center" Grid.Column="1"/>
 
 		<Label Margin="5" VerticalAlignment="Center" Content="Élelmiszer tipusa" Grid.Row="1"/>
-		<ComboBox SelectedItem="{Binding Ingredient.IngredientType}" ItemsSource="{Binding IngredientTypes}" DisplayMemberPath="TypeName" Margin="6,7,4,7" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+		<ComboBox x:Name="cmbIngredient" SelectedItem="{Binding Ingredient.IngredientType}" ItemsSource="{Binding IngredientTypes}" DisplayMemberPath="Name" Margin="6,7,4,7" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
+			<ComboBox.ContextMenu>
+				<ContextMenu>
+					<MenuItem Header="Új" Command="{Binding cmdNewCategory}" CommandParameter="Ingredient"/>
+				</ContextMenu>
+			</ComboBox.ContextMenu>
+
+		</ComboBox>
 
 		<Label Margin="5" VerticalAlignment="Center" Content="Csomagolás tipusa" Grid.Row="2"/>
-		<ComboBox SelectedItem="{Binding Ingredient.PackageType}" ItemsSource="{Binding PackageTypes}" DisplayMemberPath="TypeName" Margin="5" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
+		<ComboBox x:Name="cmbPackage"  SelectedItem="{Binding Ingredient.PackageType}" ItemsSource="{Binding PackageTypes}" DisplayMemberPath="Name" Margin="5" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1">
+			<ComboBox.ContextMenu>
+				<ContextMenu>
+					<MenuItem Header="Új" Command="{Binding cmdNewCategory}" CommandParameter="Package"/>
+				</ContextMenu>
+			</ComboBox.ContextMenu>
+		</ComboBox>
 
 		<Label Margin="5" VerticalAlignment="Center" Content="Ár (1 egységre)" Grid.Row="3"/>
 		<TextBox Text="{Binding Ingredient.Price}" PreviewTextInput="txtPrice_TextEnter" Margin="5" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>

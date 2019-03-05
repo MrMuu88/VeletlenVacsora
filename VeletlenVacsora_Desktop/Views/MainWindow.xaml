@@ -13,6 +13,58 @@
 	</Window.DataContext>
 	<Grid>
 		<TabControl Grid.Row="1">
+			<TabItem Header="Menü">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+
+					<!-- Col 1-->
+					<Label FontWeight="Bold" Content="Hétfő"	 Margin="5" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+					<Label FontWeight="Bold" Content="Kedd"		 Margin="5" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
+					<Label FontWeight="Bold" Content="Szerda"	 Margin="5" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+					<Label FontWeight="Bold" Content="Csütörtök" Margin="5" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
+					<Label FontWeight="Bold" Content="Péntek"	 Margin="5" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
+					<Label FontWeight="Bold" Content="Szombat"	 Margin="5" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center"/>
+					<Label FontWeight="Bold" Content="Vasárnap"	 Margin="5" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center"/>
+
+					<!-- Col 2-->
+					<Label Content="{Binding Menu[0].Name}" Margin="5" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[1].Name}" Margin="5" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[2].Name}" Margin="5" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[3].Name}" Margin="5" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[4].Name}" Margin="5" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[5].Name}" Margin="5" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[6].Name}" Margin="5" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center"/>
+
+					<!-- Col 3-->
+					<Label Content="{Binding Menu[0].Price}" Margin="5" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[1].Price}" Margin="5" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[2].Price}" Margin="5" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[3].Price}" Margin="5" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[4].Price}" Margin="5" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[5].Price}" Margin="5" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center"/>
+					<Label Content="{Binding Menu[6].Price}" Margin="5" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center"/>
+
+					<Button Grid.Row="8" Content="Roll" Margin="5" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding cmdRollMenu}"/>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Bevásárló lista">
+				<ListBox x:Name="lstShoping"/>
+
+			</TabItem>
 			<TabItem Header="Hozzávalók">
 				
 				<Grid>
@@ -24,8 +76,8 @@
 						<ListView.View>
 							<GridView>
 								<GridViewColumn Header="Név" DisplayMemberBinding="{Binding Name}"/>
-								<GridViewColumn Header="Categória" DisplayMemberBinding="{Binding IngredientType.TypeName}"/>
-								<GridViewColumn Header="Csomagolás" DisplayMemberBinding="{Binding PackageType.TypeName}"/>
+								<GridViewColumn Header="Categória" DisplayMemberBinding="{Binding IngredientType.Name}"/>
+								<GridViewColumn Header="Csomagolás" DisplayMemberBinding="{Binding PackageType.Name}"/>
 								<GridViewColumn Header="Ár" DisplayMemberBinding="{Binding Price}"/>
 							</GridView>
 						</ListView.View>
@@ -73,97 +125,6 @@
 						<Button Margin="5" Width="50" Content="New"
                             Command="{Binding cmdEditRecepie}"/>
 					</StackPanel>
-				</Grid>
-			</TabItem>
-			<TabItem Header="Bevásárló lista">
-				<ListBox x:Name="lstShoping"/>
-
-			</TabItem>
-			<TabItem Header="Menü">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition/>
-						<RowDefinition/>
-						<RowDefinition/>
-						<RowDefinition/>
-						<RowDefinition/>
-						<RowDefinition/>
-						<RowDefinition/>
-					</Grid.RowDefinitions>
-
-					<!-- Col 1-->
-					<Label Content="Hétfő" Margin="5"
-                       Grid.Column="0" Grid.Row="0"
-                       VerticalAlignment="Center"/>
-					<Label Content="Kedd" Margin="5"
-                       Grid.Column="0" Grid.Row="1"
-                       VerticalAlignment="Center"/>
-					<Label Content="Szerda" Margin="5"
-                       Grid.Column="0" Grid.Row="2"
-                       VerticalAlignment="Center"/>
-					<Label Content="Csütörtök" Margin="5"
-                       Grid.Column="0" Grid.Row="3"
-                       VerticalAlignment="Center"/>
-					<Label Content="Péntek" Margin="5"
-                       Grid.Column="0" Grid.Row="4"
-                       VerticalAlignment="Center"/>
-					<Label Content="Szombat" Margin="5"
-                       Grid.Column="0" Grid.Row="5"
-                       VerticalAlignment="Center"/>
-					<Label Content="Vasárnap" Margin="5"
-                       Grid.Column="0" Grid.Row="6"
-                       VerticalAlignment="Center"/>
-
-					<!-- Col 2-->
-					<Label Content="Hétfő" Margin="5"
-                       Grid.Column="1" Grid.Row="0"
-                       VerticalAlignment="Center"/>
-					<Label Content="Kedd" Margin="5"
-                       Grid.Column="1" Grid.Row="1"
-                       VerticalAlignment="Center"/>
-					<Label Content="Szerda" Margin="5"
-                       Grid.Column="1" Grid.Row="2"
-                       VerticalAlignment="Center"/>
-					<Label Content="Csütörtök" Margin="5"
-                       Grid.Column="1" Grid.Row="3"
-                       VerticalAlignment="Center"/>
-					<Label Content="Péntek" Margin="5"
-                       Grid.Column="1" Grid.Row="4"
-                       VerticalAlignment="Center"/>
-					<Label Content="Szombat" Margin="5"
-                       Grid.Column="1" Grid.Row="5"
-                       VerticalAlignment="Center"/>
-					<Label Content="Vasárnap" Margin="5"
-                       Grid.Column="1" Grid.Row="6"
-                       VerticalAlignment="Center"/>
-
-					<!-- Col 3-->
-					<Label Content="Hétfő" Margin="5"
-                       Grid.Column="2" Grid.Row="0"
-                       VerticalAlignment="Center"/>
-					<Label Content="Kedd" Margin="5"
-                       Grid.Column="2" Grid.Row="1"
-                       VerticalAlignment="Center"/>
-					<Label Content="Szerda" Margin="5"
-                       Grid.Column="2" Grid.Row="2"
-                       VerticalAlignment="Center"/>
-					<Label Content="Csütörtök" Margin="5"
-                       Grid.Column="2" Grid.Row="3"
-                       VerticalAlignment="Center"/>
-					<Label Content="Péntek" Margin="5"
-                       Grid.Column="2" Grid.Row="4"
-                       VerticalAlignment="Center"/>
-					<Label Content="Szombat" Margin="5"
-                       Grid.Column="2" Grid.Row="5"
-                       VerticalAlignment="Center"/>
-					<Label Content="Vasárnap" Margin="5"
-                       Grid.Column="2" Grid.Row="6"
-                       VerticalAlignment="Center"/>
 				</Grid>
 			</TabItem>
 		</TabControl>

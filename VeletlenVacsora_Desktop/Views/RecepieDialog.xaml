@@ -54,8 +54,8 @@
 		<ListBox x:Name="lstIngredients" Margin ="5" Grid.Row="2" Grid.Column="1" DisplayMemberPath="Name" ItemsSource="{Binding Ingredients}">
 			<ListBox.ContextMenu>
 				<ContextMenu>
-					<MenuItem Header="Új"/>
-					<MenuItem Header="Módosít"/>
+					<MenuItem Header="Új" Command="{Binding cmdEditIngredient}"/>
+					<MenuItem Header="Módosít" Command="{Binding cmdEditIngredient}" CommandParameter="{Binding ElementName=lstIngredients,Path=SelectedItem}"/>
 				</ContextMenu>
 			</ListBox.ContextMenu>
 			<ie:Interaction.Triggers>
