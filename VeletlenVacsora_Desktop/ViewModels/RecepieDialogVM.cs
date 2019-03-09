@@ -45,7 +45,7 @@ namespace VeletlenVacsora.Desktop.ViewModels {
 		}
 
 		private void EditIngredient(Ingredient selected) {
-
+			
 			if (selected == null) { selected = new Ingredient(); }
 			Debug.WriteLine($"Editing Ingredient '{selected.Name}'");
 			var unmodified = selected.Clone();

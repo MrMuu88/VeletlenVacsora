@@ -37,7 +37,8 @@
 							<DataTemplate>
 								<StackPanel Orientation="Horizontal">
 									<TextBox Text="{Binding Amount}" Width="25"/>
-									<Label Content="{Binding Ingredient.PackageType.TypeName}"/>
+									
+									<Label Content="{Binding Ingredient.PackageType.Name}"/>
 								</StackPanel>
 							</DataTemplate>
 						</GridViewColumn.CellTemplate>
@@ -55,7 +56,7 @@
 			<ListBox.ContextMenu>
 				<ContextMenu>
 					<MenuItem Header="Új" Command="{Binding cmdEditIngredient}"/>
-					<MenuItem Header="Módosít" Command="{Binding cmdEditIngredient}" CommandParameter="{Binding ElementName=lstIngredients,Path=SelectedItem}"/>
+					<MenuItem Header="Módosít" Command="{Binding cmdEditIngredient}" CommandParameter="{Binding Path=PlacementTarget.SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>
 				</ContextMenu>
 			</ListBox.ContextMenu>
 			<ie:Interaction.Triggers>
