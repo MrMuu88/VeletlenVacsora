@@ -4,20 +4,23 @@ using System.Diagnostics;
 
 namespace VeletlenVacsora.Data {
 	public class RecepieIngredient:INotifyPropertyChanged {
+		public event PropertyChangedEventHandler PropertyChanged;
 
-
-		public int RecepieID { get; set; }
-		public int IngredientID { get; set; }
+		#region Fields and properties ###################################################################
 
 		private Recepie _Recepie;
+		private Ingredient _Ingredient;
+		private double _Amount;
 
+		public int RecepieID { get; set; }
+		
+		public int IngredientID { get; set; }
+		
 		public Recepie Recepie {
 			get { return _Recepie; }
 			set { _Recepie = value;
 			RaisePropertyChanged(nameof(Recepie)); }
 		}
-
-		private Ingredient _Ingredient;
 
 		public Ingredient Ingredient {
 			get { return _Ingredient; }
@@ -25,9 +28,7 @@ namespace VeletlenVacsora.Data {
 				RaisePropertyChanged(nameof(Ingredient));
 			}
 		}
-
-		private double _Amount;
-
+		
 		public double Amount {
 			get { return _Amount; }
 			set { _Amount = value;
@@ -39,7 +40,13 @@ namespace VeletlenVacsora.Data {
 		public int Price {
 			get {
 				return (int)Math.Ceiling( Amount * Ingredient.Price); }
-			private set { } }
+			private set { }
+		}
+
+		#endregion
+
+		#region Ctors ###################################################################################
+
 
 		public RecepieIngredient() {
 			Amount = 0;
@@ -55,11 +62,15 @@ namespace VeletlenVacsora.Data {
 			Ingredient.PriceChanged += (s, e) => { RaisePropertyChanged(nameof(Price)); };
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		#endregion
+
+		#region Methods #################################################################################
 
 		private void RaisePropertyChanged(string PropertyName) {
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
 			
 		}
+
+		#endregion
 	}
 }
