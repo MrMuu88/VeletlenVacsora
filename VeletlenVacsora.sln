@@ -3,11 +3,46 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeletlenVacsora.Data", "VacsoraDataModel\VeletlenVacsora.Data.csproj", "{CB53584E-C776-407A-81C0-F73C4957B64C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{CB53584E-C776-407A-81C0-F73C4957B64C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeletlenVacsora.Desktop", "VeletlenVacsora_Desktop\VeletlenVacsora.Desktop.csproj", "{7EC6B3C0-EDBE-41F0-9CD0-0975D3FB5672}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop", "Desktop\Desktop.csproj", "{7EC6B3C0-EDBE-41F0-9CD0-0975D3FB5672}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBMaker", "DBMaker\DBMaker.csproj", "{C85E7554-B076-4F99-A577-CA16D45AA333}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBMaker", "DBMaker\DBMaker.csproj", "{C85E7554-B076-4F99-A577-CA16D45AA333}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "Test\UnitTests.csproj", "{324096A4-E943-48B6-874C-E0E5C5126168}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphics", "Graphics", "{8B960AB8-945D-4A17-B872-FD324B726F8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PNG", "PNG", "{BE6E72AF-EE7F-4825-9C70-F59F4AF98B9F}"
+	ProjectSection(SolutionItems) = preProject
+		Graphics\PNG\AddRecepie.png = Graphics\PNG\AddRecepie.png
+		Graphics\PNG\Dice.png = Graphics\PNG\Dice.png
+		Graphics\PNG\Ingredients.png = Graphics\PNG\Ingredients.png
+		Graphics\PNG\Menu.png = Graphics\PNG\Menu.png
+		Graphics\PNG\Pin_Off.png = Graphics\PNG\Pin_Off.png
+		Graphics\PNG\Pin_On.png = Graphics\PNG\Pin_On.png
+		Graphics\PNG\RecipeBook.png = Graphics\PNG\RecipeBook.png
+		Graphics\PNG\RemoveRecepie.png = Graphics\PNG\RemoveRecepie.png
+		Graphics\PNG\ShoppingList.png = Graphics\PNG\ShoppingList.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SVG", "SVG", "{D4B38863-A6C8-468A-B007-493F9BBF796A}"
+	ProjectSection(SolutionItems) = preProject
+		Graphics\SVG\001-recipe-book.svg = Graphics\SVG\001-recipe-book.svg
+		Graphics\SVG\002-menu.svg = Graphics\SVG\002-menu.svg
+		Graphics\SVG\003-checklist.svg = Graphics\SVG\003-checklist.svg
+		Graphics\SVG\004-dice.svg = Graphics\SVG\004-dice.svg
+		Graphics\SVG\005-like.svg = Graphics\SVG\005-like.svg
+		Graphics\SVG\006-harvest.svg = Graphics\SVG\006-harvest.svg
+		Graphics\SVG\007-fork.svg = Graphics\SVG\007-fork.svg
+		Graphics\SVG\008-pizza-slice.svg = Graphics\SVG\008-pizza-slice.svg
+		Graphics\SVG\009-spaghetti.svg = Graphics\SVG\009-spaghetti.svg
+		Graphics\SVG\010-soup.svg = Graphics\SVG\010-soup.svg
+		Graphics\SVG\011-push-pin.svg = Graphics\SVG\011-push-pin.svg
+		Graphics\SVG\AddRecepie.svg = Graphics\SVG\AddRecepie.svg
+		Graphics\SVG\Logo.svg = Graphics\SVG\Logo.svg
+		Graphics\SVG\veletlen-vacsora.zip = Graphics\SVG\veletlen-vacsora.zip
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +62,17 @@ Global
 		{C85E7554-B076-4F99-A577-CA16D45AA333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C85E7554-B076-4F99-A577-CA16D45AA333}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C85E7554-B076-4F99-A577-CA16D45AA333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{324096A4-E943-48B6-874C-E0E5C5126168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{324096A4-E943-48B6-874C-E0E5C5126168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{324096A4-E943-48B6-874C-E0E5C5126168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{324096A4-E943-48B6-874C-E0E5C5126168}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BE6E72AF-EE7F-4825-9C70-F59F4AF98B9F} = {8B960AB8-945D-4A17-B872-FD324B726F8D}
+		{D4B38863-A6C8-468A-B007-493F9BBF796A} = {8B960AB8-945D-4A17-B872-FD324B726F8D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {332E1BC0-4009-44DF-B939-EE67157C00BF}

@@ -346,9 +346,9 @@
     <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VacsoraDataModel\VeletlenVacsora.Data.csproj">
+    <ProjectReference Include="..\Data\Data.csproj">
       <Project>{cb53584e-c776-407a-81c0-f73c4957b64c}</Project>
-      <Name>VeletlenVacsora.Data</Name>
+      <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
