@@ -2,31 +2,40 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using VeletlenVacsora.Data;
 
 namespace VeletlenVacsora.Data {
-	public class Recepie : INotifyPropertyChanged,ICloneable {
+	public class Recepie : INotifyPropertyChanged,ICloneable{
+		private static Random Dice = new Random();
+
 		public event PropertyChangedEventHandler PropertyChanged;
-		
+
+		private string _Name;
+		private int _Chance;
+		private ObservableCollection<RecepieIngredient> _Ingredients;
+		//DELETEABLE ?
+		private bool _OnMenu;
 
 		[Key]
 		public int RecepieID { get; set; }
 
-		private string _Name;
 		[MaxLength(50)]
 		public string Name {
 			get { return _Name; }
 			set { _Name = value; RaisePropertyChanged(nameof(Name)); }
 		}
 
-		private int _Weight;
-		public int Weight {
-			get { return _Weight; }
-			set { _Weight = value; RaisePropertyChanged(nameof(Weight)); }
+		public int Chance {
+			get { return _Chance; }
+			set { _Chance = value; RaisePropertyChanged(nameof(Chance)); }
 		}
 
 
-		private ObservableCollection<RecepieIngredient> _Ingredients;
+		public double Weight {
+			get { return (double)Chance * Dice.NextDouble(); }
+		}
+
+
+
 		public ObservableCollection<RecepieIngredient> Ingredients {
 			get { return _Ingredients; }
 			set { _Ingredients = value; RaisePropertyChanged(nameof(Ingredients)); }
@@ -38,19 +47,21 @@ namespace VeletlenVacsora.Data {
 		}
 
 
-		private bool _OnMenu;
 		public bool OnMenu {
 			get { return _OnMenu; }
 			set { _OnMenu = value; RaisePropertyChanged(nameof(OnMenu)); }
 		}
 
 		public Recepie() {
+			Name = "";
+			Chance = 90;
+			Price = 0;
 			Ingredients = new ObservableCollection<RecepieIngredient>();
 		}
 
-		public Recepie(string name = null, int weight = 90) {
+		public Recepie(string name = null, int chance = 90) {
 			Name = name;
-			Weight = weight;
+			Chance = chance;
 			Price = 0;
 			Ingredients = new ObservableCollection<RecepieIngredient>();
 		}
@@ -60,7 +71,7 @@ namespace VeletlenVacsora.Data {
         public object Clone() {
             return new Recepie() {
                 Name = this.Name,
-                Weight = this.Weight,
+                Chance = this.Chance,
                 Price = this.Price,
                 OnMenu = this.OnMenu,
                 Ingredients = this.Ingredients
@@ -79,7 +90,5 @@ namespace VeletlenVacsora.Data {
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
 			
 		}
-
-
-    }//clss
+	}//clss
 }//ns

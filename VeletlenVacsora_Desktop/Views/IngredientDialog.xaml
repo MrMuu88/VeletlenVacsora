@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VeletlenVacsora.Desktop.Views"
 		xmlns:VM ="clr-namespace:VeletlenVacsora.Desktop.ViewModels"
 		xmlns:ie="http://schemas.microsoft.com/expression/2010/interactivity"
-		xmlns:Data="clr-namespace:Veletlenvacsora.Data;assembly=VeletlenVacsora.Data"
+		xmlns:Data="clr-namespace:VeletlenVacsora.Data;assembly=VeletlenVacsora.Data"
         mc:Ignorable="d"
         Title="IngredientDialog" SizeToContent="WidthAndHeight" ResizeMode="NoResize"
         >

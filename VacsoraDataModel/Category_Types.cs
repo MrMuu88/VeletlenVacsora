@@ -1,6 +1,4 @@
-﻿
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace VeletlenVacsora.Data {
 	public class Category:INotifyPropertyChanged {

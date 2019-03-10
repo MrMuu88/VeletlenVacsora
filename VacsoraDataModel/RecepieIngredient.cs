@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 
 namespace VeletlenVacsora.Data {
-	public class RecepieIngredient:INotifyPropertyChanged {
+	public class RecepieIngredient:INotifyPropertyChanged{
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		#region Fields and properties ###################################################################
@@ -33,8 +32,13 @@ namespace VeletlenVacsora.Data {
 			get { return _Amount; }
 			set { _Amount = value;
 				RaisePropertyChanged(nameof(Amount));
+				RaisePropertyChanged(nameof(AmountString));
 				RaisePropertyChanged(nameof(Price));
 			}
+		}
+
+		public string AmountString{
+			get { return $"{Amount} {Ingredient.PackageType.Name}"; }
 		}
 
 		public int Price {
@@ -70,6 +74,7 @@ namespace VeletlenVacsora.Data {
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
 			
 		}
+
 
 		#endregion
 	}

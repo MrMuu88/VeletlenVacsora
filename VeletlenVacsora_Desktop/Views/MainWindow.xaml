@@ -62,7 +62,22 @@
 				</Grid>
 			</TabItem>
 			<TabItem Header="Bevásárló lista">
-				<ListBox x:Name="lstShoping"/>
+				<ListView x:Name="lstShoping" Margin="5" ItemsSource="{Binding ShopingList}">
+					<ListView.View>
+						<GridView>
+							<GridViewColumn Header="Van?">
+								<GridViewColumn.CellTemplate>
+									<DataTemplate>
+										<CheckBox/>
+									</DataTemplate>
+								</GridViewColumn.CellTemplate>
+							</GridViewColumn>
+							<GridViewColumn Header="Recept" DisplayMemberBinding="{Binding Recepie.Name}"/>
+							<GridViewColumn Header="Hozzávaló" DisplayMemberBinding="{Binding Ingredient.Name}"/>
+							<GridViewColumn Header="Menyiség" DisplayMemberBinding="{Binding AmountString}"/>
+						</GridView>
+					</ListView.View>
+				</ListView>
 
 			</TabItem>
 			<TabItem Header="Hozzávalók">

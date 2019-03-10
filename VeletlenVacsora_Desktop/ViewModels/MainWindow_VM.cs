@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -13,13 +14,11 @@ using VeletlenVacsora.Desktop.Views;
 namespace VeletlenVacsora.Desktop.ViewModels {
 	class MainWindow_VM : INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
-
-
-
+			   
 		#region Fields and Propertties ############################################################
 		private Random Dice;
 		private Recepie[] _Menu;
-        private ObservableCollection<Ingredient> _ShopingList;
+        private ObservableCollection<RecepieIngredient> _ShopingList;
         private ObservableCollection<Recepie> _Recepies;
         private ObservableCollection<Ingredient> _Ingredients;
 
@@ -46,7 +45,7 @@ namespace VeletlenVacsora.Desktop.ViewModels {
         }
 		
 
-        public ObservableCollection<Ingredient> ShopingList {
+        public ObservableCollection<RecepieIngredient> ShopingList {
             get { return _ShopingList; }
             set { _ShopingList = value;
 				  RaisePropertyChanged(nameof(ShopingList)); }
@@ -70,7 +69,7 @@ namespace VeletlenVacsora.Desktop.ViewModels {
 			Dice = new Random();
 			App.DB = new VacsoraDBContext(Properties.Settings.Default.constr, Properties.Settings.Default.dbtype);
 			
-            ShopingList = new ObservableCollection<Ingredient>();
+            ShopingList = new ObservableCollection<RecepieIngredient>();
             Recepies = new ObservableCollection<Recepie>();
 			
             cmdRemoveRecepie = new RelayCommand<Recepie>(RemoveRecepie);
@@ -81,8 +80,6 @@ namespace VeletlenVacsora.Desktop.ViewModels {
             cmdEditIngredient = new RelayCommand<Ingredient>(EditIngredient);
 
 			cmdRollMenu = new RelayCommand(RollMenu);
-
-            //cmdsave = new RelayCommand(SaveToDB);
 
             App.DB.Recepies.Include(r => r.Ingredients).Load();
 
@@ -126,8 +123,7 @@ namespace VeletlenVacsora.Desktop.ViewModels {
 			}
 		}
 
-
-
+		
 		private void EditIngredient(Ingredient selected) {
 			
             if (selected == null) { selected = new Ingredient();}
@@ -159,14 +155,35 @@ namespace VeletlenVacsora.Desktop.ViewModels {
 		
 		private void RollMenu() {
 			Debug.WriteLine("Rolling New Menu");
-			try {
-				App.DB.Database.OpenConnection();
-				Menu = App.DB.Recepies.OrderBy(r => r.Weight * Dice.NextDouble()).ToArray();
-			} catch (Exception ex) {
-				MessageBox.Show($"an error occured while Gathering data from DB:\n{ex.Message}", $"ERROR: {ex.GetType().Name}", MessageBoxButton.OK, MessageBoxImage.Error);
-			} finally {
-				App.DB.Database.CloseConnection();
+			
+
+			Menu = App.DB.Recepies.Local.OrderByDescending(r => r.Weight).Take(7).ToArray();
+
+			//TODO Ingreds list propbably can be replaced by a linq query
+			List<RecepieIngredient> Ingreds = new List<RecepieIngredient>();
+			
+			foreach (Recepie r in Menu) {
+				Ingreds.AddRange(r.Ingredients);
 			}
+
+			//TODO filtering a unique list of ingredients with accumulated amounts has to be implemented
+
+			//ERROR Not working because of the equality checks are off
+
+			var Unique = new List<RecepieIngredient>();
+			foreach (var ri in Ingreds) {
+				var item = new RecepieIngredient(new Recepie(), ri.Ingredient,ri.Amount);
+				if (!Unique.Contains(item)) {
+					Unique.Add(item);
+				} else {
+					var i = Unique.IndexOf(item);
+					Unique[i].Amount += item.Amount;
+				}
+			}
+			
+			//TODO Group Shopping List by Ingredient type
+
+			ShopingList = new ObservableCollection<RecepieIngredient>(Unique);
 
 		}
 
