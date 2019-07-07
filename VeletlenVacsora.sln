@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{CB53584E-C776-407A-81C0-F73C4957B64C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeletlenVacsora.Data", "Data\VeletlenVacsora.Data.csproj", "{CB53584E-C776-407A-81C0-F73C4957B64C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphics", "Graphics", "{8B960AB8-945D-4A17-B872-FD324B726F8D}"
 EndProject

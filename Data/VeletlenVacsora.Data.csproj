@@ -4,6 +4,9 @@
     <TargetFrameworks>netstandard2.0;netcoreapp2.2</TargetFrameworks>
     <RootNamespace>VeletlenVacsora.Data</RootNamespace>
     <AssemblyName>VeletlenVacsora.Data</AssemblyName>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
