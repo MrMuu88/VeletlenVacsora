@@ -12,7 +12,12 @@ namespace VeletlenVacsora.Data {
 		public DbSet<Ingredient> Ingredients { get; set; }
 		public DbSet<Category> Categories { get; set; }
 
-		public VacsoraDBContext(string ConnectionString, DBType dbt = DBType.SqLite) {
+		public VacsoraDBContext() {
+			cnstr = "Data Source=..\\Vacsora.db;";
+			DBType = DBType.SqLite;
+		}
+
+		public VacsoraDBContext(string ConnectionString, DBType dbt) {
 			cnstr = ConnectionString;
 			DBType = dbt;
 		}
@@ -34,6 +39,13 @@ namespace VeletlenVacsora.Data {
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
+			modelBuilder.Entity<Recepie>().Property(r => r.Name).IsRequired().HasMaxLength(50);
+
+			modelBuilder.Entity<Ingredient>().Property(i => i.Name).IsRequired().HasMaxLength(50);
+
+			modelBuilder.Entity<Category>().Property(c => c.Name).IsRequired().HasMaxLength(25);
+
 			modelBuilder.Entity<RecepieIngredient>()
 				.HasKey(t => new { t.RecepieID, t.IngredientID });
 		}
