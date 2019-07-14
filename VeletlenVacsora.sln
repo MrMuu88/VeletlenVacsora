@@ -38,7 +38,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SVG", "SVG", "{D4B38863-A6C
 		Graphics\SVG\veletlen-vacsora.zip = Graphics\SVG\veletlen-vacsora.zip
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VeletlenVacsora.DBCreator", "DBCreator\VeletlenVacsora.DBCreator.csproj", "{1B0615BF-74D9-4EDE-B894-6DB354D3C9A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeletlenVacsora.DBCreator", "DBCreator\VeletlenVacsora.DBCreator.csproj", "{1B0615BF-74D9-4EDE-B894-6DB354D3C9A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeletlenVacsora.Web", "VeletlenVacsora.Web\VeletlenVacsora.Web.csproj", "{29C5E662-9CCD-4644-A7CD-75680203B37B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBF41CB3-A393-4F97-B9C0-3DD247536FDA}"
+	ProjectSection(SolutionItems) = preProject
+		VacsoraWeb.Service = VacsoraWeb.Service
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,11 +61,16 @@ Global
 		{1B0615BF-74D9-4EDE-B894-6DB354D3C9A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B0615BF-74D9-4EDE-B894-6DB354D3C9A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B0615BF-74D9-4EDE-B894-6DB354D3C9A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29C5E662-9CCD-4644-A7CD-75680203B37B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29C5E662-9CCD-4644-A7CD-75680203B37B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29C5E662-9CCD-4644-A7CD-75680203B37B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29C5E662-9CCD-4644-A7CD-75680203B37B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{8B960AB8-945D-4A17-B872-FD324B726F8D} = {FBF41CB3-A393-4F97-B9C0-3DD247536FDA}
 		{BE6E72AF-EE7F-4825-9C70-F59F4AF98B9F} = {8B960AB8-945D-4A17-B872-FD324B726F8D}
 		{D4B38863-A6C8-468A-B007-493F9BBF796A} = {8B960AB8-945D-4A17-B872-FD324B726F8D}
 	EndGlobalSection

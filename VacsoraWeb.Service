@@ -1,0 +1,14 @@
+[Unit]
+Description=The VeletlenVacsora Web server
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/dotnet /Projects/VeletlenVacsora/VeletlenVacsora.Web.dll 2>&1>>/Projects/VeletlenVacsora/server.log
+WorkingDirectory=/Projects/VeletlenVacsora
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

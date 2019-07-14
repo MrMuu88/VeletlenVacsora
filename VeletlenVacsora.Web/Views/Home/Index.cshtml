@@ -1,0 +1,9 @@
+﻿@model IEnumerable<VeletlenVacsora.Data.Recepie>
+
+<h1>Véletlen vacsora!</h1>
+@foreach (var recepie in Model) {
+    <div>
+        <h2>@recepie.Name</h2>
+        <p>the Price</p>
+    </div>
+}
