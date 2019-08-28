@@ -2,7 +2,7 @@
 using System.Linq;
 using VeletlenVacsora.Data;
 
-namespace VeletlenVacsora.Web.Services {
+namespace VeletlenVacsora.Services {
 	public class MockVacsoraRepository : IVacsoraRepository {
 		private List<Category> _categories;
 		private List<Recepie> _recepies;

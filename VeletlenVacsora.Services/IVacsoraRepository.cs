@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using VeletlenVacsora.Data;
 
-namespace VeletlenVacsora.Web.Services {
+namespace VeletlenVacsora.Services {
 	public interface IVacsoraRepository {
 
 		IEnumerable<Recepie> GetAllRecepies();

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using VeletlenVacsora.Data;
-using VeletlenVacsora.Web.Services;
+using VeletlenVacsora.Services;
 
 namespace VeletlenVacsora.Web.Controllers {
 	[Route("api/[controller]")]

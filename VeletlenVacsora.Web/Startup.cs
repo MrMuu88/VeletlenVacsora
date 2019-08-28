@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using VeletlenVacsora.Web.Services;
+using VeletlenVacsora.Services;
 
 namespace VeletlenVacsora.Web {
 	public class Startup {
