@@ -9,8 +9,8 @@ using VeletlenVacsora.Data;
 namespace VeletlenVacsora.Data.Migrations
 {
     [DbContext(typeof(VacsoraDBContext))]
-    [Migration("20190708060957_Initial")]
-    partial class Initial
+    [Migration("20190828125741_initia")]
+    partial class initia
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

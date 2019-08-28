@@ -2,7 +2,7 @@
 
 namespace VeletlenVacsora.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initia : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
