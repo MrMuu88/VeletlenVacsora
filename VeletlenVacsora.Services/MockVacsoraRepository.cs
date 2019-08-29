@@ -6,6 +6,7 @@ namespace VeletlenVacsora.Services {
 	public class MockVacsoraRepository : IVacsoraRepository {
 		private List<Category> _categories;
 		private List<Recepie> _recepies;
+		private List<Ingredient> _ingredients;
 		public MockVacsoraRepository() {
 
 			_categories = new List<Category> {

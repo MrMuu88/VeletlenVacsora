@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using VeletlenVacsora.Data;
 using VeletlenVacsora.Services;
+using VeletlenVacsora.Web.Models;
 
 namespace VeletlenVacsora.Web.Controllers {
 	[Route("api/[controller]")]
@@ -14,16 +14,21 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		[HttpGet]
-		public IEnumerable<Recepie> GetAllRecepies() {
-			var results = _repository.GetAllRecepies();
+		public IEnumerable<RecepieModel> GetAllRecepies() {
+			var results = new List<RecepieModel>();
+
+			foreach (var recepie in _repository.GetAllRecepies()) {
+				results.Add(new RecepieModel(recepie));
+			}
+
 			return results;
 		}
 
 
 		[HttpGet("{ID}")]
-		public Recepie GetRecepieByID(int ID) {
+		public RecepieModel GetRecepieByID(int ID) {
 			var result = _repository.GetRecepieByID(ID);
-			return result;
+			return new RecepieModel(result);
 		}
 	}
 }
