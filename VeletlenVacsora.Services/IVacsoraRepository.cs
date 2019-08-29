@@ -4,7 +4,17 @@ using VeletlenVacsora.Data;
 namespace VeletlenVacsora.Services {
 	public interface IVacsoraRepository {
 
-		IEnumerable<Recepie> GetAllRecepies();
+		ICollection<Recepie> GetAllRecepies();
 		Recepie GetRecepieByID(int id);
+
+		ICollection<Category> GetAllCategories();
+		ICollection<Category> GetCategoryByType(CategoryType type);
+		Category GetCategoryByID(int ID);
+
+
+		ICollection<Ingredient> GetAllIngredients();
+		ICollection<Ingredient> GetIngredientsByType();
+		ICollection<Ingredient> GetIngredientsByRecepie();
+
 	}
 }
