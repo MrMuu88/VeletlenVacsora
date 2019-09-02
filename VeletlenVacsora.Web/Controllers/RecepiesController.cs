@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using VeletlenVacsora.Services;
 using VeletlenVacsora.Web.Models;
@@ -14,21 +16,32 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		[HttpGet]
-		public IEnumerable<RecepieModel> GetAllRecepies() {
-			var results = new List<RecepieModel>();
+		public ActionResult<ICollection<RecepieModel>> GetAllRecepies() {
+			try {
+				var results = new List<RecepieModel>();
 
-			foreach (var recepie in _repository.GetAllRecepies()) {
-				results.Add(new RecepieModel(recepie));
+				foreach (var recepie in _repository.GetAllRecepies()) {
+					results.Add(new RecepieModel(recepie));
+				}
+
+				return Ok(results);
+
+			} catch (Exception) {
+				return StatusCode(StatusCodes.Status500InternalServerError, "DataBase Failure");
 			}
-
-			return results;
 		}
 
 
 		[HttpGet("{ID}")]
-		public RecepieModel GetRecepieByID(int ID) {
-			var result = _repository.GetRecepieByID(ID);
-			return new RecepieModel(result);
+		public ActionResult<RecepieModel> GetRecepieByID(int ID) {
+			try {
+				var result = _repository.GetRecepieByID(ID);
+
+				return Ok(new RecepieModel(result));
+
+			} catch (Exception) {
+				return StatusCode(StatusCodes.Status500InternalServerError, "DataBase Failure");
+			}
 		}
 	}
 }

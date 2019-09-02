@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using VeletlenVacsora.Data;
 using VeletlenVacsora.Services;
@@ -15,28 +17,40 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		[HttpGet]
-		public ICollection<CategoryModel> GetAll(CategoryType? type = null) {
-			var results = new List<CategoryModel>();
-			List<Category> raw;
-			if (type != null) {
-				raw = (List<Category>)_repository.GetCategoryByType((CategoryType)type);
-			} else {
-				raw = (List<Category>)_repository.GetAllCategories();
-			}
-			foreach (var c in raw) {
-				results.Add(new CategoryModel(c));
+		public ActionResult<ICollection<CategoryModel>> GetAll(CategoryType? type = null) {
+			try {
+				var results = new List<CategoryModel>();
+				List<Category> raw;
+				if (type != null) {
+					raw = (List<Category>)_repository.GetCategoryByType((CategoryType)type);
+				} else {
+					raw = (List<Category>)_repository.GetAllCategories();
+				}
+				foreach (var c in raw) {
+					results.Add(new CategoryModel(c));
+				}
+
+				return Ok(results);
+			} catch (Exception) {
+				return StatusCode(StatusCodes.Status500InternalServerError, "DataBase Failure");
 			}
 
-			return results;
+
+
 		}
 
 		[HttpGet("{ID}")]
-		public CategoryModel GetCategoryByID(int ID) {
-			var c = _repository.GetCategoryByID(ID);
-			if (c != null) {
-				return new CategoryModel(c);
-			} else {
-				return null;
+		public ActionResult<CategoryModel> GetCategoryByID(int ID) {
+			try {
+				var c = _repository.GetCategoryByID(ID);
+				if (c != null) {
+					return new CategoryModel(c);
+				} else {
+					return NotFound();
+				}
+
+			} catch (Exception) {
+				return StatusCode(StatusCodes.Status500InternalServerError, "DataBase Failure");
 			}
 		}
 

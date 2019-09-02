@@ -9,7 +9,7 @@ namespace VeletlenVacsora.Web.Models {
 		public string Category { get; set; }
 		public int Price { get { return CalculatePrice(); } }
 
-		public ICollection<IngredientModel> Ingredients { get; set; } = new List<IngredientModel>();
+		public ICollection<RecepieIngredientModel> Ingredients { get; set; } = new List<RecepieIngredientModel>();
 
 		public RecepieModel(Recepie rec) {
 			ID = rec.ID;
@@ -18,7 +18,7 @@ namespace VeletlenVacsora.Web.Models {
 
 			if (rec.Ingredients != null) {
 				foreach (RecepieIngredient ri in rec.Ingredients) {
-					Ingredients.Add(new IngredientModel(ri));
+					Ingredients.Add(new RecepieIngredientModel(ri));
 				}
 			}
 		}

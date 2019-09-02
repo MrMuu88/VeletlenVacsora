@@ -13,8 +13,8 @@ namespace VeletlenVacsora.Services {
 
 
 		ICollection<Ingredient> GetAllIngredients();
-		ICollection<Ingredient> GetIngredientsByType();
-		ICollection<Ingredient> GetIngredientsByRecepie();
+		ICollection<Ingredient> GetIngredientsByRecepie(int recepieID);
+		ICollection<Ingredient> GetIngredientsByType(string type, string package);
 
 	}
 }

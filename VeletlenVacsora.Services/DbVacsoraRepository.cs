@@ -41,18 +41,31 @@ namespace VeletlenVacsora.Services {
 			return _dbContext.Categories.Where(c => c.ID == ID).FirstOrDefault();
 		}
 
-
+		//not nececarry
 		public ICollection<Ingredient> GetAllIngredients() {
-			throw new System.NotImplementedException();
+			return _dbContext.Ingredients.Include(i => i.IngredientType).Include(i => i.PackageType).ToList();
 		}
 
 
-		public ICollection<Ingredient> GetIngredientsByRecepie() {
+		public ICollection<Ingredient> GetIngredientsByRecepie(int RecepieID) {
 			throw new System.NotImplementedException();
 		}
 
-		public ICollection<Ingredient> GetIngredientsByType() {
-			throw new System.NotImplementedException();
+		public ICollection<Ingredient> GetIngredientsByType(string type = "", string package = "") {
+			IQueryable<Ingredient> query = _dbContext.Ingredients.Include(i => i.IngredientType).Include(i => i.PackageType);
+			if (!string.IsNullOrWhiteSpace(type)) {
+				var QueryType = _dbContext.Categories.Where(c => c.Name == type).FirstOrDefault();
+				if (QueryType != null) {
+					query = query.Where(i => i.IngredientType == QueryType);
+				}
+			}
+			if (!string.IsNullOrWhiteSpace(package)) {
+				var QueryPackage = _dbContext.Categories.Where(c => c.Name == package).FirstOrDefault();
+				if (QueryPackage != null) {
+					query = query.Where(i => i.PackageType == QueryPackage);
+				}
+			}
+			return query.ToList();
 		}
 
 

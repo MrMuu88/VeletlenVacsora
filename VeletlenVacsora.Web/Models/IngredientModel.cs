@@ -2,18 +2,21 @@
 
 namespace VeletlenVacsora.Web.Models {
 	public class IngredientModel {
+		public int ID { get; set; }
 		public string Name { get; set; }
-		public string IngredientType { get; set; }
-		public string PackageType { get; set; }
-		public double Amount { get; set; }
+
+		public string Type { get; set; }
+
+		public string Package { get; set; }
+
 		public int Price { get; set; }
 
-		public IngredientModel(RecepieIngredient ri) {
-			Name = ri.Ingredient.Name;
-			IngredientType = ri.Ingredient.IngredientType.Name;
-			PackageType = ri.Ingredient.PackageType.Name;
-			Amount = ri.Amount;
-			Price = (int)(ri.Ingredient.Price * Amount);
+		public IngredientModel(Ingredient i) {
+			ID = i.ID;
+			Name = i.Name;
+			Type = i.IngredientType.Name;
+			Package = i.PackageType.Name;
+			Price = i.Price;
 		}
 	}
 }
