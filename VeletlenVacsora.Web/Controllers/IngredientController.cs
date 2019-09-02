@@ -19,12 +19,13 @@ namespace VeletlenVacsora.Web.Controllers {
 		public ActionResult<ICollection<IngredientModel>> GetIngredients(string type = "", string package = "") {
 			try {
 				var results = new List<IngredientModel>();
-				foreach (var i in _repository.GetIngredientsByType(type, package)) {
+				var raw = _repository.GetIngredientsByType(type, package);
+				foreach (var i in raw) {
 					results.Add(new IngredientModel(i));
 				}
 				return Ok(results);
 
-			} catch (Exception) {
+			} catch (Exception ex) {
 				return StatusCode(StatusCodes.Status500InternalServerError, "DataBase Failure");
 			}
 		}

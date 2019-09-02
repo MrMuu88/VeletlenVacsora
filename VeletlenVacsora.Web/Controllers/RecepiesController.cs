@@ -26,7 +26,7 @@ namespace VeletlenVacsora.Web.Controllers {
 
 				return Ok(results);
 
-			} catch (Exception) {
+			} catch (Exception ex) {
 				return StatusCode(StatusCodes.Status500InternalServerError, "DataBase Failure");
 			}
 		}
@@ -39,7 +39,7 @@ namespace VeletlenVacsora.Web.Controllers {
 
 				return Ok(new RecepieModel(result));
 
-			} catch (Exception) {
+			} catch (Exception ex) {
 				return StatusCode(StatusCodes.Status500InternalServerError, "DataBase Failure");
 			}
 		}

@@ -68,23 +68,34 @@ namespace VeletlenVacsora.Services {
 			return _dbContext.Ingredients.Include(i => i.IngredientType).Include(i => i.PackageType).ToList();
 		}
 
-		//TODO use regexed match in the WHERE clauses
+
 		public ICollection<Ingredient> GetIngredientsByType(string type = "", string package = "") {
 			IQueryable<Ingredient> query = _dbContext.Ingredients.Include(i => i.IngredientType).Include(i => i.PackageType);
+			Category QueryType;
+			Category QueryPackage;
 
 			if (!string.IsNullOrWhiteSpace(type)) {
-				var QueryType = _dbContext.Categories.Where(c => c.Name == type).FirstOrDefault();
+
+				QueryType = _dbContext.Categories.Where(c => c.Name.ToUpperInvariant() == type.ToUpperInvariant()).FirstOrDefault();
 				if (QueryType != null) {
 					query = query.Where(i => i.IngredientType == QueryType);
+				} else {
+					return new List<Ingredient>();
 				}
+
 			}
 			if (!string.IsNullOrWhiteSpace(package)) {
-				var QueryPackage = _dbContext.Categories.Where(c => c.Name == package).FirstOrDefault();
+				QueryPackage = _dbContext.Categories.Where(c => c.Name.ToUpperInvariant() == package.ToUpperInvariant()).FirstOrDefault();
 				if (QueryPackage != null) {
 					query = query.Where(i => i.PackageType == QueryPackage);
+				} else {
+					return new List<Ingredient>();
 				}
+
 			}
+
 			return query.ToList();
+
 		}
 
 		public Ingredient GetIngredientByID(int ID) {
