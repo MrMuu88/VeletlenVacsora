@@ -17,12 +17,12 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		[HttpGet]
-		public ActionResult<ICollection<CategoryModel>> GetAll(CategoryType? type = null) {
+		public ActionResult<ICollection<CategoryModel>> GetAll(string type = "") {
 			try {
 				var results = new List<CategoryModel>();
 				List<Category> raw;
-				if (type != null) {
-					raw = (List<Category>)_repository.GetCategoryByType((CategoryType)type);
+				if (!string.IsNullOrWhiteSpace(type)) {
+					raw = (List<Category>)_repository.GetCategoryByType(type);
 				} else {
 					raw = (List<Category>)_repository.GetAllCategories();
 				}
