@@ -32,7 +32,7 @@ namespace VeletlenVacsora.Web.Controllers {
 
 				return Ok(results);
 			} catch (Exception ex) {
-				return StatusCode(StatusCodes.Status500InternalServerError, "DataBase Failure");
+				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}
 
 
@@ -50,7 +50,7 @@ namespace VeletlenVacsora.Web.Controllers {
 				}
 
 			} catch (Exception ex) {
-				return StatusCode(StatusCodes.Status500InternalServerError, "DataBase Failure");
+				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}
 		}
 

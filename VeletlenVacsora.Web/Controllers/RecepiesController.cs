@@ -20,16 +20,20 @@ namespace VeletlenVacsora.Web.Controllers {
 			try {
 				var results = new List<RecepieModel>();
 
+
 				foreach (var recepie in _repository.GetAllRecepies()) {
 					results.Add(new RecepieModel(recepie));
 				}
 
+
 				return Ok(results);
 
 			} catch (Exception ex) {
-				return StatusCode(StatusCodes.Status500InternalServerError, "DataBase Failure");
+				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}
 		}
+
+
 
 
 		[HttpGet("{ID}")]
@@ -40,7 +44,7 @@ namespace VeletlenVacsora.Web.Controllers {
 				return Ok(new RecepieModel(result));
 
 			} catch (Exception ex) {
-				return StatusCode(StatusCodes.Status500InternalServerError, "DataBase Failure");
+				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}
 		}
 	}
