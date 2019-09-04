@@ -15,9 +15,9 @@ namespace VeletlenVacsora.Web.Controllers {
 			_repository = repository;
 		}
 
-		
+
 		[HttpGet]
-		public ActionResult<ICollection<RecepieModel>> GetRecepiesByType(string type = "") {
+		public ActionResult<ICollection<RecepieModel>> GetRecepies(string type = "") {
 			try {
 				var results = new List<RecepieModel>();
 				if (!string.IsNullOrWhiteSpace(type)) {

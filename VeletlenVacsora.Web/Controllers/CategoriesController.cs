@@ -17,7 +17,7 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		[HttpGet]
-		public ActionResult<ICollection<CategoryModel>> GetAll(string type = "") {
+		public ActionResult<ICollection<CategoryModel>> GetCategories(string type = "") {
 			try {
 				var results = new List<CategoryModel>();
 				List<Category> raw;
