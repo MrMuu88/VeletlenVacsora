@@ -29,5 +29,20 @@ namespace VeletlenVacsora.Web.Controllers {
 				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}
 		}
+
+		[HttpGet("{ID}")]
+		public ActionResult<IngredientModel> GetIngredientByID(int ID) {
+			try {
+				var raw = _repository.GetIngredientByID(ID);
+				if (raw != null) {
+					return Ok(new IngredientModel(raw));
+				} else {
+					return NotFound();
+				}
+
+			} catch (Exception ex) {
+				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
+			}
+		}
 	}
 }

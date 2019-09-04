@@ -105,7 +105,7 @@ namespace VeletlenVacsora.Services {
 
 		//TODO implement
 		public Ingredient GetIngredientByID(int ID) {
-			return _dbContext.Ingredients.Where(i => i.ID == ID).FirstOrDefault();
+			return _dbContext.Ingredients.Where(i => i.ID == ID).Include(i => i.IngredientType).Include(i => i.PackageType).FirstOrDefault();
 		}
 
 		#endregion

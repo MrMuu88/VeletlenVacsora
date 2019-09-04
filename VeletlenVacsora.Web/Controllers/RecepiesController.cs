@@ -15,18 +15,24 @@ namespace VeletlenVacsora.Web.Controllers {
 			_repository = repository;
 		}
 
+		
 		[HttpGet]
-		public ActionResult<ICollection<RecepieModel>> GetAllRecepies() {
+		public ActionResult<ICollection<RecepieModel>> GetRecepiesByType(string type = "") {
 			try {
 				var results = new List<RecepieModel>();
+				if (!string.IsNullOrWhiteSpace(type)) {
+					var raw = _repository.GetRecepiesByType(type);
 
-
-				foreach (var recepie in _repository.GetAllRecepies()) {
-					results.Add(new RecepieModel(recepie));
+					foreach (var r in raw) {
+						results.Add(new RecepieModel(r));
+					}
+					return Ok(results);
+				} else {
+					foreach (var recepie in _repository.GetAllRecepies()) {
+						results.Add(new RecepieModel(recepie));
+					}
+					return Ok(results);
 				}
-
-
-				return Ok(results);
 
 			} catch (Exception ex) {
 				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
