@@ -30,7 +30,12 @@ namespace VeletlenVacsora.Services {
 
 		//TODO implement
 		public ICollection<Recepie> GetRecepiesByType(string type) {
-			throw new System.NotImplementedException();
+			var QueryType = _dbContext.Categories.Where(c => EF.Functions.Like(c.Name, type)).FirstOrDefault();
+			if (QueryType != null) {
+				return _dbContext.Recepies.Where(r => r.Category == QueryType).ToList();
+			} else {
+				return new List<Recepie>();
+			}
 		}
 
 		public Recepie GetRecepieByID(int id) {
@@ -100,7 +105,7 @@ namespace VeletlenVacsora.Services {
 
 		//TODO implement
 		public Ingredient GetIngredientByID(int ID) {
-			throw new System.NotImplementedException();
+			return _dbContext.Ingredients.Where(i => i.ID == ID).FirstOrDefault();
 		}
 
 		#endregion
