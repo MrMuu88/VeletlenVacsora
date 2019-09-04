@@ -5,7 +5,7 @@ namespace VeletlenVacsora.Services {
 	public interface IVacsoraRepository {
 
 		ICollection<Recepie> GetAllRecepies();
-		ICollection<Recepie> GetRecepiesByType();
+		ICollection<Recepie> GetRecepiesByType(string type);
 		Recepie GetRecepieByID(int id);
 
 

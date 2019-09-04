@@ -28,7 +28,8 @@ namespace VeletlenVacsora.Services {
 
 		}
 
-		public ICollection<Recepie> GetRecepiesByType() {
+		//TODO implement
+		public ICollection<Recepie> GetRecepiesByType(string type) {
 			throw new System.NotImplementedException();
 		}
 
@@ -46,8 +47,7 @@ namespace VeletlenVacsora.Services {
 			return _dbContext.Categories.OrderBy(c => c.Type).ToList();
 		}
 
-		//TODO Throw an exception when category not found
-		public ICollection<Category> GetCategoryByType(string type = "") {
+		public ICollection<Category> GetCategoryByType(string type) {
 			CategoryType QueryType;
 			if (Enum.TryParse<CategoryType>(type, true, out QueryType)) {
 				return _dbContext.Categories.Where(c => c.Type == QueryType).ToList();
@@ -69,7 +69,7 @@ namespace VeletlenVacsora.Services {
 		}
 
 
-		public ICollection<Ingredient> GetIngredientsByType(string type = "", string package = "") {
+		public ICollection<Ingredient> GetIngredientsByType(string type, string package) {
 			IQueryable<Ingredient> query = _dbContext.Ingredients.Include(i => i.IngredientType).Include(i => i.PackageType);
 			Category QueryType;
 			Category QueryPackage;
@@ -98,6 +98,7 @@ namespace VeletlenVacsora.Services {
 
 		}
 
+		//TODO implement
 		public Ingredient GetIngredientByID(int ID) {
 			throw new System.NotImplementedException();
 		}
