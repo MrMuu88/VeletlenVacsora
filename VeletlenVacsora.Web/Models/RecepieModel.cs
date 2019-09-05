@@ -3,13 +3,15 @@ using VeletlenVacsora.Data;
 
 namespace VeletlenVacsora.Web.Models {
 	public class RecepieModel {
-		public int ID { get; set; }
-		public string Name { get; set; }
+		public int ID { get; set; } = 0;
+		public string Name { get; set; } = "";
 
-		public string Category { get; set; }
+		public string Category { get; set; } = "";
 		public int Price { get { return CalculatePrice(); } }
 
 		public ICollection<RecepieIngredientModel> Ingredients { get; set; } = new List<RecepieIngredientModel>();
+
+		public RecepieModel() { }
 
 		public RecepieModel(Recepie rec) {
 			ID = rec.ID;

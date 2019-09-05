@@ -54,7 +54,13 @@ namespace VeletlenVacsora.Web.Controllers {
 			}
 		}
 
-
-
+		[HttpPost]
+		public ActionResult<CategoryModel> PostNew(CategoryModel model) {
+			try {
+				return Ok();
+			} catch (Exception ex) {
+				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
+			}
+		}
 	}
 }
