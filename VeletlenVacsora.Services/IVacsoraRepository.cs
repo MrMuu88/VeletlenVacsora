@@ -18,5 +18,9 @@ namespace VeletlenVacsora.Services {
 		ICollection<Ingredient> GetIngredientsByType(string type, string package);
 		Ingredient GetIngredientByID(int ID);
 
+
+		void Add<T>(T obj) where T : class;
+		void Delete<T>(T obj) where T : class;
+		bool SaveChanges();
 	}
 }

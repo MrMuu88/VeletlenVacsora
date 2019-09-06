@@ -44,7 +44,7 @@ namespace VeletlenVacsora.Web.Controllers {
 			try {
 				var c = _repository.GetCategoryByID(ID);
 				if (c != null) {
-					return new CategoryModel(c);
+					return Ok(new CategoryModel(c));
 				} else {
 					return NotFound();
 				}
@@ -57,7 +57,17 @@ namespace VeletlenVacsora.Web.Controllers {
 		[HttpPost]
 		public ActionResult<CategoryModel> PostNew(CategoryModel model) {
 			try {
-				return Ok();
+				CategoryType catType;
+
+				if (Enum.TryParse(model.Type, true, out catType)) {
+					var newcat = new Category { Name = model.Name, Type = catType };
+					_repository.Add(newcat);
+					_repository.SaveChanges();
+					return Created("", new CategoryModel(newcat));
+				} else {
+					return BadRequest();
+				}
+
 			} catch (Exception ex) {
 				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}

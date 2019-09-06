@@ -22,6 +22,7 @@ namespace VeletlenVacsora.Services {
 
 		#region Methods, Tasks ####################################################################
 
+
 		#region Recepies ------------------------------------------------------
 		public ICollection<Recepie> GetAllRecepies() {
 			return _dbContext.Recepies.Include(r => r.Category).ToList();
@@ -106,6 +107,22 @@ namespace VeletlenVacsora.Services {
 		//TODO implement
 		public Ingredient GetIngredientByID(int ID) {
 			return _dbContext.Ingredients.Where(i => i.ID == ID).Include(i => i.IngredientType).Include(i => i.PackageType).FirstOrDefault();
+		}
+
+
+		#endregion
+
+		#region Common methods ------------------------------------------------
+
+		public void Add<T>(T obj) where T : class {
+			_dbContext.Add(obj);
+		}
+		public void Delete<T>(T obj) where T : class {
+			throw new NotImplementedException();
+		}
+		public bool SaveChanges() {
+			_dbContext.SaveChanges();
+			return true;
 		}
 
 		#endregion
