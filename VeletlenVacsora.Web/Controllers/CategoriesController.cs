@@ -57,16 +57,20 @@ namespace VeletlenVacsora.Web.Controllers {
 		[HttpPost]
 		public ActionResult<CategoryModel> PostNew(CategoryModel model) {
 			try {
-				CategoryType catType;
 
-				if (Enum.TryParse(model.Type, true, out catType)) {
-					var newcat = new Category { Name = model.Name, Type = catType };
-					_repository.Add(newcat);
-					_repository.SaveChanges();
-					return Created("", new CategoryModel(newcat));
-				} else {
-					return BadRequest();
+				if (ModelState.IsValid) {
+
+					CategoryType catType;
+					if (Enum.TryParse(model.Type, true, out catType)) {
+						var newcat = new Category { Name = model.Name, Type = catType };
+						_repository.Add(newcat);
+						_repository.SaveChanges();
+						return Created("", new CategoryModel(newcat));
+					}
+
 				}
+
+				return BadRequest();
 
 			} catch (Exception ex) {
 				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");

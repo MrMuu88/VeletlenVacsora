@@ -1,10 +1,13 @@
-﻿using VeletlenVacsora.Data;
+﻿using System.ComponentModel.DataAnnotations;
+using VeletlenVacsora.Data;
 
 namespace VeletlenVacsora.Web.Models {
 	public class CategoryModel {
 
-		public virtual int ID { get; set; } = 0;
+		public int ID { get; set; } = 0;
+		[Required]
 		public string Name { get; set; } = "";
+		[Required]
 		public string Type { get; set; } = "";
 
 		public CategoryModel() { }
