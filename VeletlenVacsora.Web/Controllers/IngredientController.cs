@@ -11,6 +11,12 @@ namespace VeletlenVacsora.Web.Controllers {
 	public class IngredientController : ControllerBase {
 		private readonly IVacsoraRepository _repository;
 
+		//TODO Implement Post Method
+		//TODO Implement Put Method
+		//TODO Implement Delete Method
+		//TODO Impelement Async calls on Repository
+
+
 		public IngredientController(IVacsoraRepository repository) {
 			_repository = repository;
 		}

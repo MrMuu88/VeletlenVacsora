@@ -10,6 +10,11 @@ namespace VeletlenVacsora.Web.Controllers {
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CategoriesController : ControllerBase {
+
+		//TODO Implement Put Method
+		//TODO Implement Delete Method
+		//TODO Impelement Async calls on Repository
+
 		private IVacsoraRepository _repository;
 
 		public CategoriesController(IVacsoraRepository repository) {

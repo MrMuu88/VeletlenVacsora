@@ -8,6 +8,8 @@ using VeletlenVacsora.Data;
 namespace VeletlenVacsora.Services {
 	public class DbVacsoraRepository : IVacsoraRepository {
 
+		//TODO Implement Async Tasks
+
 		#region fileds, Properties, events ########################################################
 
 		private VacsoraDBContext _dbContext;
@@ -29,7 +31,7 @@ namespace VeletlenVacsora.Services {
 
 		}
 
-		//TODO implement
+
 		public ICollection<Recepie> GetRecepiesByType(string type) {
 			var QueryType = _dbContext.Categories.Where(c => EF.Functions.Like(c.Name, type)).FirstOrDefault();
 			if (QueryType != null) {
@@ -104,7 +106,6 @@ namespace VeletlenVacsora.Services {
 
 		}
 
-		//TODO implement
 		public Ingredient GetIngredientByID(int ID) {
 			return _dbContext.Ingredients.Where(i => i.ID == ID).Include(i => i.IngredientType).Include(i => i.PackageType).FirstOrDefault();
 		}
@@ -117,6 +118,8 @@ namespace VeletlenVacsora.Services {
 		public void Add<T>(T obj) where T : class {
 			_dbContext.Add(obj);
 		}
+
+		//TODO Implement Delete<T>(obj)
 		public void Delete<T>(T obj) where T : class {
 			throw new NotImplementedException();
 		}

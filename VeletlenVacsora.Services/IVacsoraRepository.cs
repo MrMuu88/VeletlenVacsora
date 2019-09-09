@@ -4,6 +4,8 @@ using VeletlenVacsora.Data;
 namespace VeletlenVacsora.Services {
 	public interface IVacsoraRepository {
 
+		//TODO Modify Repository Interface Sygnatures to be async tasks
+
 		ICollection<Recepie> GetAllRecepies();
 		ICollection<Recepie> GetRecepiesByType(string type);
 		Recepie GetRecepieByID(int id);
