@@ -9,8 +9,6 @@ using VeletlenVacsora.Data;
 namespace VeletlenVacsora.Services {
 	public class DbVacsoraRepository : IVacsoraRepository {
 
-		//TODO Implement Async Tasks
-
 		#region fileds, Properties, events ########################################################
 
 		private VacsoraDBContext _dbContext;
@@ -72,19 +70,19 @@ namespace VeletlenVacsora.Services {
 
 		#region Ingredients ---------------------------------------------------
 
-		public ICollection<Ingredient> GetAllIngredients() {
-			return _dbContext.Ingredients.Include(i => i.IngredientType).Include(i => i.PackageType).ToList();
+		public async Task<ICollection<Ingredient>> GetAllIngredientsAsync() {
+			return await _dbContext.Ingredients.Include(i => i.IngredientType).Include(i => i.PackageType).ToListAsync();
 		}
 
 
-		public ICollection<Ingredient> GetIngredientsByType(string type, string package) {
+		public async Task<ICollection<Ingredient>> GetIngredientsByTypeAsync(string type, string package) {
 			IQueryable<Ingredient> query = _dbContext.Ingredients.Include(i => i.IngredientType).Include(i => i.PackageType);
 			Category QueryType;
 			Category QueryPackage;
 
 			if (!string.IsNullOrWhiteSpace(type)) {
 
-				QueryType = _dbContext.Categories.Where(c => c.Name.ToUpperInvariant() == type.ToUpperInvariant()).FirstOrDefault();
+				QueryType = await _dbContext.Categories.Where(c => c.Name.ToUpperInvariant() == type.ToUpperInvariant()).FirstOrDefaultAsync();
 				if (QueryType != null) {
 					query = query.Where(i => i.IngredientType == QueryType);
 				} else {
@@ -93,7 +91,7 @@ namespace VeletlenVacsora.Services {
 
 			}
 			if (!string.IsNullOrWhiteSpace(package)) {
-				QueryPackage = _dbContext.Categories.Where(c => c.Name.ToUpperInvariant() == package.ToUpperInvariant()).FirstOrDefault();
+				QueryPackage = await _dbContext.Categories.Where(c => c.Name.ToUpperInvariant() == package.ToUpperInvariant()).FirstOrDefaultAsync();
 				if (QueryPackage != null) {
 					query = query.Where(i => i.PackageType == QueryPackage);
 				} else {
@@ -102,12 +100,12 @@ namespace VeletlenVacsora.Services {
 
 			}
 
-			return query.ToList();
+			return await query.ToListAsync();
 
 		}
 
-		public Ingredient GetIngredientByID(int ID) {
-			return _dbContext.Ingredients.Where(i => i.ID == ID).Include(i => i.IngredientType).Include(i => i.PackageType).FirstOrDefault();
+		public async Task<Ingredient> GetIngredientByIDAsync(int ID) {
+			return await _dbContext.Ingredients.Where(i => i.ID == ID).Include(i => i.IngredientType).Include(i => i.PackageType).FirstOrDefaultAsync();
 		}
 
 

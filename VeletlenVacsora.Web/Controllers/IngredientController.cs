@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using VeletlenVacsora.Services;
 using VeletlenVacsora.Web.Models;
 
@@ -14,7 +15,6 @@ namespace VeletlenVacsora.Web.Controllers {
 		//TODO Implement Post Method
 		//TODO Implement Put Method
 		//TODO Implement Delete Method
-		//TODO Impelement Async calls on Repository
 
 
 		public IngredientController(IVacsoraRepository repository) {
@@ -22,10 +22,10 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		[HttpGet]
-		public ActionResult<ICollection<IngredientModel>> GetIngredients(string type = "", string package = "") {
+		public async Task<ActionResult<ICollection<IngredientModel>>> GetIngredientsAsync(string type = "", string package = "") {
 			try {
 				var results = new List<IngredientModel>();
-				var raw = _repository.GetIngredientsByType(type, package);
+				var raw = await _repository.GetIngredientsByTypeAsync(type, package);
 				foreach (var i in raw) {
 					results.Add(new IngredientModel(i));
 				}
@@ -37,9 +37,9 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		[HttpGet("{ID}")]
-		public ActionResult<IngredientModel> GetIngredientByID(int ID) {
+		public async Task<ActionResult<IngredientModel>> GetIngredientByIDAsync(int ID) {
 			try {
-				var raw = _repository.GetIngredientByID(ID);
+				var raw = await _repository.GetIngredientByIDAsync(ID);
 				if (raw != null) {
 					return Ok(new IngredientModel(raw));
 				} else {

@@ -5,8 +5,6 @@ using VeletlenVacsora.Data;
 namespace VeletlenVacsora.Services {
 	public interface IVacsoraRepository {
 
-		//TODO Modify Repository Interface Sygnatures to be async tasks
-
 		Task<ICollection<Recepie>> GetAllRecepiesAsync();
 		Task<ICollection<Recepie>> GetRecepiesByTypeAsync(string type);
 		Task<Recepie> GetRecepieByIDAsync(int id);
@@ -17,9 +15,9 @@ namespace VeletlenVacsora.Services {
 		Task<Category> GetCategoryByIDAsync(int ID);
 
 
-		ICollection<Ingredient> GetAllIngredients();
-		ICollection<Ingredient> GetIngredientsByType(string type, string package);
-		Ingredient GetIngredientByID(int ID);
+		Task<ICollection<Ingredient>> GetAllIngredientsAsync();
+		Task<ICollection<Ingredient>> GetIngredientsByTypeAsync(string type, string package);
+		Task<Ingredient> GetIngredientByIDAsync(int ID);
 
 
 		void Add<T>(T obj) where T : class;

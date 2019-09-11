@@ -14,7 +14,6 @@ namespace VeletlenVacsora.Web.Controllers {
 
 		//TODO Implement Put Method
 		//TODO Implement Delete Method
-		//TODO Impelement Async calls on Repository
 
 		private IVacsoraRepository _repository;
 
