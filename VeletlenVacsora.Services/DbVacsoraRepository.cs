@@ -116,10 +116,8 @@ namespace VeletlenVacsora.Services {
 		public void Add<T>(T obj) where T : class {
 			_dbContext.Add(obj);
 		}
-
-		//TODO Implement Delete<T>(obj)
 		public void Delete<T>(T obj) where T : class {
-			throw new NotImplementedException();
+			_dbContext.Remove(obj);
 		}
 
 		public async Task<bool> SaveChangesAsync() {
