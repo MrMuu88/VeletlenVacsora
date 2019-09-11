@@ -9,7 +9,7 @@ using VeletlenVacsora.Web.Models;
 namespace VeletlenVacsora.Web.Controllers {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class IngredientController : ControllerBase {
+	public class IngredientsController : ControllerBase {
 		private readonly IVacsoraRepository _repository;
 
 		//TODO Implement Post Method
@@ -17,7 +17,7 @@ namespace VeletlenVacsora.Web.Controllers {
 		//TODO Implement Delete Method
 
 
-		public IngredientController(IVacsoraRepository repository) {
+		public IngredientsController(IVacsoraRepository repository) {
 			_repository = repository;
 		}
 
