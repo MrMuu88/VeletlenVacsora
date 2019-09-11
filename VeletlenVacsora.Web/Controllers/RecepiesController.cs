@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using VeletlenVacsora.Services;
 using VeletlenVacsora.Web.Models;
 
@@ -22,18 +23,18 @@ namespace VeletlenVacsora.Web.Controllers {
 
 
 		[HttpGet]
-		public ActionResult<ICollection<RecepieModel>> GetRecepies(string type = "") {
+		public async Task<ActionResult<ICollection<RecepieModel>>> GetRecepies(string type = "") {
 			try {
 				var results = new List<RecepieModel>();
 				if (!string.IsNullOrWhiteSpace(type)) {
-					var raw = _repository.GetRecepiesByType(type);
+					var raw = await _repository.GetRecepiesByTypeAsync(type);
 
 					foreach (var r in raw) {
 						results.Add(new RecepieModel(r));
 					}
 					return Ok(results);
 				} else {
-					foreach (var recepie in _repository.GetAllRecepies()) {
+					foreach (var recepie in await _repository.GetAllRecepiesAsync()) {
 						results.Add(new RecepieModel(recepie));
 					}
 					return Ok(results);
@@ -48,9 +49,9 @@ namespace VeletlenVacsora.Web.Controllers {
 
 
 		[HttpGet("{ID}")]
-		public ActionResult<RecepieModel> GetRecepieByID(int ID) {
+		public async Task<ActionResult<RecepieModel>> GetRecepieByID(int ID) {
 			try {
-				var result = _repository.GetRecepieByID(ID);
+				var result = await _repository.GetRecepieByIDAsync(ID);
 
 				return Ok(new RecepieModel(result));
 

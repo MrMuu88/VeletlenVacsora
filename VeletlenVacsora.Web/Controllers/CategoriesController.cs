@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using VeletlenVacsora.Data;
 using VeletlenVacsora.Services;
 using VeletlenVacsora.Web.Models;
@@ -60,7 +61,7 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		[HttpPost]
-		public ActionResult<CategoryModel> PostNew(CategoryModel model) {
+		public async Task<ActionResult<CategoryModel>> PostNew(CategoryModel model) {
 			try {
 
 				if (ModelState.IsValid) {
@@ -69,7 +70,7 @@ namespace VeletlenVacsora.Web.Controllers {
 					if (Enum.TryParse(model.Type, true, out catType)) {
 						var newcat = new Category { Name = model.Name, Type = catType };
 						_repository.Add(newcat);
-						_repository.SaveChanges();
+						await _repository.SaveChangesAsync();
 						return Created("", new CategoryModel(newcat));
 					}
 

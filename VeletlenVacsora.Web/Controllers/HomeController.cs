@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using VeletlenVacsora.Services;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,8 +15,8 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		// GET: /<controller>/
-		public IActionResult Index() {
-			var Recepies = repository.GetAllRecepies();
+		public async Task<IActionResult> Index() {
+			var Recepies = await repository.GetAllRecepiesAsync();
 			return View(Recepies);
 		}
 	}

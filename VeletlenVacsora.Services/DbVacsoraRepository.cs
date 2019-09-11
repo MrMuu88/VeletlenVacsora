@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using VeletlenVacsora.Data;
 
 namespace VeletlenVacsora.Services {
@@ -26,24 +27,23 @@ namespace VeletlenVacsora.Services {
 
 
 		#region Recepies ------------------------------------------------------
-		public ICollection<Recepie> GetAllRecepies() {
-			return _dbContext.Recepies.Include(r => r.Category).ToList();
-
+		public async Task<ICollection<Recepie>> GetAllRecepiesAsync() {
+			return await _dbContext.Recepies.Include(r => r.Category).ToListAsync();
 		}
 
 
-		public ICollection<Recepie> GetRecepiesByType(string type) {
+		public async Task<ICollection<Recepie>> GetRecepiesByTypeAsync(string type) {
 			var QueryType = _dbContext.Categories.Where(c => EF.Functions.Like(c.Name, type)).FirstOrDefault();
 			if (QueryType != null) {
-				return _dbContext.Recepies.Where(r => r.Category == QueryType).ToList();
+				return await _dbContext.Recepies.Where(r => r.Category == QueryType).ToListAsync();
 			} else {
 				return new List<Recepie>();
 			}
 		}
 
-		public Recepie GetRecepieByID(int id) {
+		public async Task<Recepie> GetRecepieByIDAsync(int id) {
 			_dbContext.Categories.ToList();
-			return _dbContext.Recepies.Where(r => r.ID == id).Include(r => r.Ingredients).ThenInclude(ri => ri.Ingredient).FirstOrDefault();
+			return await _dbContext.Recepies.Where(r => r.ID == id).Include(r => r.Ingredients).ThenInclude(ri => ri.Ingredient).FirstOrDefaultAsync();
 		}
 
 		#endregion
@@ -123,9 +123,10 @@ namespace VeletlenVacsora.Services {
 		public void Delete<T>(T obj) where T : class {
 			throw new NotImplementedException();
 		}
-		public bool SaveChanges() {
-			_dbContext.SaveChanges();
-			return true;
+
+		public async Task<bool> SaveChangesAsync() {
+			return (await _dbContext.SaveChangesAsync()) > 0;
+
 		}
 
 		#endregion
