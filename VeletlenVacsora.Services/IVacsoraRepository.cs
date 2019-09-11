@@ -12,9 +12,9 @@ namespace VeletlenVacsora.Services {
 		Task<Recepie> GetRecepieByIDAsync(int id);
 
 
-		ICollection<Category> GetAllCategories();
-		ICollection<Category> GetCategoryByType(string type);
-		Category GetCategoryByID(int ID);
+		Task<ICollection<Category>> GetAllCategoriesAsync();
+		Task<ICollection<Category>> GetCategoryByTypeAsync(string type);
+		Task<Category> GetCategoryByIDAsync(int ID);
 
 
 		ICollection<Ingredient> GetAllIngredients();

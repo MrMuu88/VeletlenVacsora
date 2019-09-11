@@ -23,14 +23,14 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		[HttpGet]
-		public ActionResult<ICollection<CategoryModel>> GetCategories(string type = "") {
+		public async Task<ActionResult<ICollection<CategoryModel>>> GetCategories(string type = "") {
 			try {
 				var results = new List<CategoryModel>();
 				List<Category> raw;
 				if (!string.IsNullOrWhiteSpace(type)) {
-					raw = (List<Category>)_repository.GetCategoryByType(type);
+					raw = (List<Category>)await _repository.GetCategoryByTypeAsync(type);
 				} else {
-					raw = (List<Category>)_repository.GetAllCategories();
+					raw = (List<Category>)await _repository.GetAllCategoriesAsync();
 				}
 				foreach (var c in raw) {
 					results.Add(new CategoryModel(c));
@@ -46,9 +46,9 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		[HttpGet("{ID}")]
-		public ActionResult<CategoryModel> GetCategoryByID(int ID) {
+		public async Task<ActionResult<CategoryModel>> GetCategoryByID(int ID) {
 			try {
-				var c = _repository.GetCategoryByID(ID);
+				var c = await _repository.GetCategoryByIDAsync(ID);
 				if (c != null) {
 					return Ok(new CategoryModel(c));
 				} else {

@@ -51,21 +51,21 @@ namespace VeletlenVacsora.Services {
 		#region Categories ----------------------------------------------------
 
 
-		public ICollection<Category> GetAllCategories() {
-			return _dbContext.Categories.OrderBy(c => c.Type).ToList();
+		public async Task<ICollection<Category>> GetAllCategoriesAsync() {
+			return await _dbContext.Categories.OrderBy(c => c.Type).ToListAsync();
 		}
 
-		public ICollection<Category> GetCategoryByType(string type) {
+		public async Task<ICollection<Category>> GetCategoryByTypeAsync(string type) {
 			CategoryType QueryType;
 			if (Enum.TryParse<CategoryType>(type, true, out QueryType)) {
-				return _dbContext.Categories.Where(c => c.Type == QueryType).ToList();
+				return await _dbContext.Categories.Where(c => c.Type == QueryType).ToListAsync();
 			} else {
 				return new List<Category>();
 			}
 		}
 
-		public Category GetCategoryByID(int ID) {
-			return _dbContext.Categories.Where(c => c.ID == ID).FirstOrDefault();
+		public async Task<Category> GetCategoryByIDAsync(int ID) {
+			return await _dbContext.Categories.Where(c => c.ID == ID).FirstOrDefaultAsync();
 		}
 
 		#endregion
