@@ -65,6 +65,9 @@ namespace VeletlenVacsora.Services {
 		public async Task<Category> GetCategoryByIDAsync(int ID) {
 			return await _dbContext.Categories.Where(c => c.ID == ID).FirstOrDefaultAsync();
 		}
+		public async Task<Category> GetCategoryByNameAsync(string name) {
+			return await _dbContext.Categories.Where(c => EF.Functions.Like(name, c.Name)).FirstOrDefaultAsync();
+		}
 
 		#endregion
 
@@ -124,6 +127,7 @@ namespace VeletlenVacsora.Services {
 			return (await _dbContext.SaveChangesAsync()) > 0;
 
 		}
+
 
 		#endregion
 

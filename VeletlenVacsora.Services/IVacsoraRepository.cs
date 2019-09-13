@@ -13,6 +13,7 @@ namespace VeletlenVacsora.Services {
 		Task<ICollection<Category>> GetAllCategoriesAsync();
 		Task<ICollection<Category>> GetCategoryByTypeAsync(string type);
 		Task<Category> GetCategoryByIDAsync(int ID);
+		Task<Category> GetCategoryByNameAsync(string Name);
 
 
 		Task<ICollection<Ingredient>> GetAllIngredientsAsync();

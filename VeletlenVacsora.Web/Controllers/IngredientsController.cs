@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using VeletlenVacsora.Data;
 using VeletlenVacsora.Services;
 using VeletlenVacsora.Web.Models;
 
@@ -46,6 +47,44 @@ namespace VeletlenVacsora.Web.Controllers {
 					return NotFound();
 				}
 
+			} catch (Exception ex) {
+				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
+			}
+		}
+
+		[HttpPost]
+		public async Task<ActionResult<IngredientModel>> PostNewIngredient(IngredientModel model) {
+			//TODO Add model validation
+			if (!ModelState.IsValid) {
+				return BadRequest();
+			}
+			try {
+				//Check if Type category exist, create if not
+				//TODO Move category existence check to a method
+				var type = await _repository.GetCategoryByNameAsync(model.Type);
+				if (type == null) {
+					_repository.Add(new Category { Name = model.Type });
+				}
+
+				var package = await _repository.GetCategoryByNameAsync(model.Package);
+				if (package == null) {
+					_repository.Add(new Category { Name = model.Package });
+				}
+
+				var ingredient = new Ingredient() {
+					Name = model.Name,
+					Price = model.Price,
+					IngredientType = type,
+					PackageType = package,
+				};
+
+				_repository.Add(ingredient);
+
+				if (await _repository.SaveChangesAsync()) {
+					return Created("", model);
+				} else {
+					return BadRequest();
+				}
 			} catch (Exception ex) {
 				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}

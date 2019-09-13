@@ -1,14 +1,20 @@
-﻿using VeletlenVacsora.Data;
+﻿using System.ComponentModel.DataAnnotations;
+using VeletlenVacsora.Data;
 
 namespace VeletlenVacsora.Web.Models {
 	public class IngredientModel {
+
 		public int ID { get; set; } = 0;
+		[Required]
 		public string Name { get; set; } = "";
 
+		[Required]
 		public string Type { get; set; } = "";
 
+		[Required]
 		public string Package { get; set; } = "";
 
+		[Required]
 		public int Price { get; set; } = 0;
 
 		public IngredientModel() { }
