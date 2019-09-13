@@ -54,21 +54,20 @@ namespace VeletlenVacsora.Web.Controllers {
 
 		[HttpPost]
 		public async Task<ActionResult<IngredientModel>> PostNewIngredient(IngredientModel model) {
-			//TODO Add model validation
+
 			if (!ModelState.IsValid) {
 				return BadRequest();
 			}
 			try {
 				//Check if Type category exist, create if not
-				//TODO Move category existence check to a method
 				var type = await _repository.GetCategoryByNameAsync(model.Type);
 				if (type == null) {
-					_repository.Add(new Category { Name = model.Type });
+					_repository.Add(new Category { Name = model.Type, Type = CategoryType.Ingredient });
 				}
 
 				var package = await _repository.GetCategoryByNameAsync(model.Package);
 				if (package == null) {
-					_repository.Add(new Category { Name = model.Package });
+					_repository.Add(new Category { Name = model.Package, Type = CategoryType.Package });
 				}
 
 				var ingredient = new Ingredient() {
@@ -89,5 +88,7 @@ namespace VeletlenVacsora.Web.Controllers {
 				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}
 		}
+
+
 	}
 }
