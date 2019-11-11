@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VeletlenVacsora.Data {
+namespace VeletlenVacsora.Data.Models {
 	public class Recepie {
 
 		public int ID { get; set; }

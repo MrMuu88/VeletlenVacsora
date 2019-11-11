@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using VeletlenVacsora.Data;
+using VeletlenVacsora.Data.Models;
 
 namespace VeletlenVacsora.Web.Services {
 	public interface IVacsoraRepository {

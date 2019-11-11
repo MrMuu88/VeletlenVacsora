@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using VeletlenVacsora.Data.Models;
 
 namespace VeletlenVacsora.Data {
 

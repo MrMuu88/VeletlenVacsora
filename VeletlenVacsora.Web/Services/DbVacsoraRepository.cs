@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VeletlenVacsora.Data;
+using VeletlenVacsora.Data.Models;
 
 namespace VeletlenVacsora.Web.Services {
 	public class DbVacsoraRepository : IVacsoraRepository {

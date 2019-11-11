@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using VeletlenVacsora.Data;
+using VeletlenVacsora.Data.Models;
 
 namespace VeletlenVacsora.Web.Models {
 	public class IngredientModel {

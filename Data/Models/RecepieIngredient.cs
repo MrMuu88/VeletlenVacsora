@@ -1,4 +1,4 @@
-﻿namespace VeletlenVacsora.Data {
+﻿namespace VeletlenVacsora.Data.Models {
 	public class RecepieIngredient {
 
 		#region Fields and properties ###################################################################
