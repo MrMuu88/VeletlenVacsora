@@ -79,5 +79,10 @@ namespace VeletlenVacsora.Web.Controllers {
 				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}
 		}
+
+		[HttpDelete("Cleanunused")]
+		public async Task<ActionResult> CleanUpUnsued() {
+			return StatusCode(StatusCodes.Status501NotImplemented);
+		}
 	}
 }
