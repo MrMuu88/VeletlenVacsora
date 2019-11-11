@@ -116,22 +116,26 @@ namespace VeletlenVacsora.Services {
 
 		#region Common methods ------------------------------------------------
 
-		public void Add<T>(T obj) where T : class {
+		public async Task<bool> Add<T>(T obj) where T : class {
 			_dbContext.Add(obj);
-		}
-		public void Delete<T>(T obj) where T : class {
-			_dbContext.Remove(obj);
-		}
-		public void Update<T>(T obj) where T : class {
-			_dbContext.Update(obj);
-		}
-
-		public async Task<bool> SaveChangesAsync() {
 			return (await _dbContext.SaveChangesAsync()) > 0;
-
 		}
 
+		public async Task<bool> AddRange<T>(IEnumerable<T> objs) where T:class{
+			foreach (T obj in objs) {
+				_dbContext.Add(obj);
+			}
+			return (await _dbContext.SaveChangesAsync()) > 0;
+		}
+		public async Task<bool> Delete<T>(T obj) where T : class {
+			_dbContext.Remove(obj);
+			return (await _dbContext.SaveChangesAsync()) > 0;
+		}
 
+		public async Task<bool> Update<T>(T obj) where T : class {
+			_dbContext.Update(obj);
+			return (await _dbContext.SaveChangesAsync()) > 0;
+		}
 
 		#endregion
 

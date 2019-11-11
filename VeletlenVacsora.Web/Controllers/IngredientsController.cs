@@ -68,9 +68,7 @@ namespace VeletlenVacsora.Web.Controllers {
 					PackageType = package,
 				};
 
-				_repository.Add(ingredient);
-
-				if (await _repository.SaveChangesAsync()) {
+				if (await _repository.Add(ingredient)) {
 					return Created("", model);
 				} else {
 					return BadRequest();
@@ -85,10 +83,8 @@ namespace VeletlenVacsora.Web.Controllers {
 			try {
 				var toDelete = await _repository.GetIngredientByIDAsync(ID);
 				if (toDelete != null) {
-					_repository.Delete(toDelete);
-					await _repository.SaveChangesAsync();
-
-					return StatusCode(StatusCodes.Status200OK, $"Ingredient ID={ID} succesfully Deleted");
+					if(await _repository.Delete(toDelete))
+						return StatusCode(StatusCodes.Status200OK, $"Ingredient ID={ID} succesfully Deleted");
 
 				} else {
 					return StatusCode(StatusCodes.Status404NotFound, $"Ingredient with ID={ID} does Not Exists");
@@ -97,6 +93,7 @@ namespace VeletlenVacsora.Web.Controllers {
 
 				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}
+			return BadRequest();
 		}
 
 		[HttpPut("{ID}")]
@@ -116,8 +113,7 @@ namespace VeletlenVacsora.Web.Controllers {
 				ingredient.Name = model.Name;
 				ingredient.Price = model.Price;
 
-				_repository.Update(ingredient);
-				if (await _repository.SaveChangesAsync()) {
+				if (await _repository.Update(ingredient)) {
 					return StatusCode(StatusCodes.Status200OK, model);
 				}
 			} catch (Exception ex) {

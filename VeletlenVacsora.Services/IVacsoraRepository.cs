@@ -21,10 +21,11 @@ namespace VeletlenVacsora.Services {
 		Task<Ingredient> GetIngredientByIDAsync(int ID);
 
 
-		void Add<T>(T obj) where T : class;
-		void Delete<T>(T obj) where T : class;
-		void Update<T>(T obj) where T : class;
+		Task<bool> Add<T>(T obj) where T : class;
+		Task<bool> AddRange<T>(IEnumerable<T> objs) where T : class;
+		Task<bool> Delete<T>(T obj) where T : class;
+		Task<bool> Update<T>(T obj) where T : class;
 
-		Task<bool> SaveChangesAsync();
+		
 	}
 }

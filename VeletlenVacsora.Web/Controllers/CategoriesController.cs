@@ -66,8 +66,7 @@ namespace VeletlenVacsora.Web.Controllers {
 					CategoryType catType;
 					if (Enum.TryParse(model.Type, true, out catType)) {
 						var newcat = new Category { Name = model.Name, Type = catType };
-						_repository.Add(newcat);
-						await _repository.SaveChangesAsync();
+						await _repository.Add(newcat);
 						return Created("", new CategoryModel(newcat));
 					}
 
