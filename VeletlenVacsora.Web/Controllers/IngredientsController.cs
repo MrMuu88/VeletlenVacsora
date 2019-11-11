@@ -14,7 +14,6 @@ namespace VeletlenVacsora.Web.Controllers {
 		private readonly IVacsoraRepository _repository;
 
 		//TODO Implement Put Method
-		//TODO Implement Delete Method
 
 
 		public IngredientsController(IVacsoraRepository repository) {
@@ -88,6 +87,24 @@ namespace VeletlenVacsora.Web.Controllers {
 			}
 		}
 
+		[HttpDelete("{ID}")]
 
+		public async Task<ActionResult> DeleteIngredientByID(int ID) {
+			try {
+				var toDelete = await _repository.GetIngredientByIDAsync(ID);
+				if (toDelete != null) {
+					_repository.Delete(toDelete);
+					await _repository.SaveChangesAsync();
+
+					return StatusCode(StatusCodes.Status200OK, $"Ingredient ID={ID} succesfully Deleted");
+
+				} else {
+					return StatusCode(StatusCodes.Status404NotFound, $"Ingredient with ID={ID} does Not Exists");
+				}
+			} catch (Exception ex) {
+
+				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
+			}
+		}
 	}
 }
