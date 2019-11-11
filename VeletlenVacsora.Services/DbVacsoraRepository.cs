@@ -122,11 +122,15 @@ namespace VeletlenVacsora.Services {
 		public void Delete<T>(T obj) where T : class {
 			_dbContext.Remove(obj);
 		}
+		public void Update<T>(T obj) where T : class {
+			_dbContext.Update(obj);
+		}
 
 		public async Task<bool> SaveChangesAsync() {
 			return (await _dbContext.SaveChangesAsync()) > 0;
 
 		}
+
 
 
 		#endregion

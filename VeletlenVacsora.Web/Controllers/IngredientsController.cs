@@ -57,17 +57,10 @@ namespace VeletlenVacsora.Web.Controllers {
 				return BadRequest();
 			}
 			try {
-				//Check if Type category exist, create if not
-				var type = await _repository.GetCategoryByNameAsync(model.Type);
-				if (type == null) {
-					_repository.Add(new Category { Name = model.Type, Type = CategoryType.Ingredient });
-				}
-
-				var package = await _repository.GetCategoryByNameAsync(model.Package);
-				if (package == null) {
-					_repository.Add(new Category { Name = model.Package, Type = CategoryType.Package });
-				}
-
+				
+				var type = await EnsureCategoryExists(model.Type, CategoryType.Ingredient);
+				var package = await EnsureCategoryExists(model.Package, CategoryType.Package);
+				
 				var ingredient = new Ingredient() {
 					Name = model.Name,
 					Price = model.Price,
@@ -88,7 +81,6 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		[HttpDelete("{ID}")]
-
 		public async Task<ActionResult> DeleteIngredientByID(int ID) {
 			try {
 				var toDelete = await _repository.GetIngredientByIDAsync(ID);
@@ -105,6 +97,44 @@ namespace VeletlenVacsora.Web.Controllers {
 
 				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}
+		}
+
+		[HttpPut("{ID}")]
+		public async Task<ActionResult<IngredientModel>> UpdateIngredientAsync(int ID ,IngredientModel model) {
+			try {
+				if (!ModelState.IsValid) {
+					return BadRequest();
+				}
+
+				var ingredient = await _repository.GetIngredientByIDAsync(ID);
+
+				var type = await EnsureCategoryExists(model.Type, CategoryType.Ingredient);
+				var package = await EnsureCategoryExists(model.Package, CategoryType.Package);
+
+				ingredient.IngredientType = type;
+				ingredient.PackageType = package;
+				ingredient.Name = model.Name;
+				ingredient.Price = model.Price;
+
+				_repository.Update(ingredient);
+				if (await _repository.SaveChangesAsync()) {
+					return StatusCode(StatusCodes.Status200OK, model);
+				}
+			} catch (Exception ex) {
+
+				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
+			}
+			return BadRequest();
+		}
+
+		private async Task<Category> EnsureCategoryExists(string categoryName,CategoryType categoryType) {
+			Category Answer = null;
+			var type = await _repository.GetCategoryByNameAsync(categoryName);
+			if (type == null) {
+				Answer = new Category { Name = categoryName, Type = categoryType };
+				_repository.Add(Answer);
+			}
+			return Answer;
 		}
 	}
 }

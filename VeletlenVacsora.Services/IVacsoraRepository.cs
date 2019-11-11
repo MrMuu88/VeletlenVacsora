@@ -23,6 +23,8 @@ namespace VeletlenVacsora.Services {
 
 		void Add<T>(T obj) where T : class;
 		void Delete<T>(T obj) where T : class;
+		void Update<T>(T obj) where T : class;
+
 		Task<bool> SaveChangesAsync();
 	}
 }
