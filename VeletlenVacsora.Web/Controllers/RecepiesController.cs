@@ -22,11 +22,11 @@ namespace VeletlenVacsora.Web.Controllers {
 
 
 		[HttpGet]
-		public async Task<ActionResult<ICollection<RecepieModel>>> GetRecepies(string type = "") {
+		public async Task<ActionResult<ICollection<RecepieModel>>> GetRecepies(string Category = "") {
 			try {
 				var results = new List<RecepieModel>();
-				if (!string.IsNullOrWhiteSpace(type)) {
-					var raw = await _repository.GetRecepiesByTypeAsync(type);
+				if (!string.IsNullOrWhiteSpace(Category)) {
+					var raw = await _repository.GetRecepiesByTypeAsync(Category);
 
 					foreach (var r in raw) {
 						results.Add(new RecepieModel(r));
