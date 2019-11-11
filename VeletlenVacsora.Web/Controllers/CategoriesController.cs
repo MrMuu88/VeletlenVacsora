@@ -11,10 +11,8 @@ namespace VeletlenVacsora.Web.Controllers {
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CategoriesController : ControllerBase {
-
-		//TODO Implement Put Method
-		//TODO Implement Delete Method
-
+		//NOTE Delete & Put method on category is not required, insted create a function API to cleanup unsued categories
+		 
 		private IVacsoraRepository _repository;
 
 		public CategoriesController(IVacsoraRepository repository) {
