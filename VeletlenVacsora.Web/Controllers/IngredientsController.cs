@@ -128,13 +128,12 @@ namespace VeletlenVacsora.Web.Controllers {
 		}
 
 		private async Task<Category> EnsureCategoryExists(string categoryName,CategoryType categoryType) {
-			Category Answer = null;
-			var type = await _repository.GetCategoryByNameAsync(categoryName);
+				var type = await _repository.GetCategoryByNameAsync(categoryName);
 			if (type == null) {
-				Answer = new Category { Name = categoryName, Type = categoryType };
-				_repository.Add(Answer);
+				type = new Category { Name = categoryName, Type = categoryType };
+				_repository.Add(type);
 			}
-			return Answer;
+			return type;
 		}
 	}
 }
