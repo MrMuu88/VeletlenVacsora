@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Data\VeletlenVacsora.Data.csproj" />
-    <ProjectReference Include="..\VeletlenVacsora.Services\VeletlenVacsora.Services.csproj" />
   </ItemGroup>
 
 </Project>

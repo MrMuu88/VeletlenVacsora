@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2018
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeletlenVacsora.Data", "Data\VeletlenVacsora.Data.csproj", "{CB53584E-C776-407A-81C0-F73C4957B64C}"
 EndProject
@@ -46,8 +46,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		VacsoraWeb.Service = VacsoraWeb.Service
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VeletlenVacsora.Services", "VeletlenVacsora.Services\VeletlenVacsora.Services.csproj", "{066E9D5F-1742-4791-BECF-F575AC642DB1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,10 +60,6 @@ Global
 		{29C5E662-9CCD-4644-A7CD-75680203B37B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29C5E662-9CCD-4644-A7CD-75680203B37B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29C5E662-9CCD-4644-A7CD-75680203B37B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{066E9D5F-1742-4791-BECF-F575AC642DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{066E9D5F-1742-4791-BECF-F575AC642DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{066E9D5F-1742-4791-BECF-F575AC642DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{066E9D5F-1742-4791-BECF-F575AC642DB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

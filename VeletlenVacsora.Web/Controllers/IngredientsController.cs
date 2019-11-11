@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VeletlenVacsora.Data;
-using VeletlenVacsora.Services;
+using VeletlenVacsora.Web.Services;
 using VeletlenVacsora.Web.Models;
 
 namespace VeletlenVacsora.Web.Controllers {
@@ -127,7 +127,7 @@ namespace VeletlenVacsora.Web.Controllers {
 				var type = await _repository.GetCategoryByNameAsync(categoryName);
 			if (type == null) {
 				type = new Category { Name = categoryName, Type = categoryType };
-				_repository.Add(type);
+				await _repository.Add(type);
 			}
 			return type;
 		}

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VeletlenVacsora.Data;
-using VeletlenVacsora.Services;
+using VeletlenVacsora.Web.Services;
 using VeletlenVacsora.Web.Models;
 
 namespace VeletlenVacsora.Web.Controllers {
