@@ -15,10 +15,16 @@ namespace VeletlenVacsora.Web.Controllers {
 		 
 		private IVacsoraRepository _repository;
 
+		#region Ctors #############################################################################
+
 		public CategoriesController(IVacsoraRepository repository) {
 			_repository = repository;
 		}
 
+		#endregion
+
+		#region GETs ##############################################################################
+		
 		[HttpGet]
 		public async Task<ActionResult<ICollection<CategoryModel>>> GetCategories(string type = "") {
 			try {
@@ -57,6 +63,10 @@ namespace VeletlenVacsora.Web.Controllers {
 			}
 		}
 
+		#endregion
+
+		#region POSTs #############################################################################
+
 		[HttpPost]
 		public async Task<ActionResult<CategoryModel>> PostNew(CategoryModel model) {
 			try {
@@ -79,9 +89,15 @@ namespace VeletlenVacsora.Web.Controllers {
 			}
 		}
 
+		#endregion
+
+		#region DELETEs ###########################################################################
+		
 		[HttpDelete("Cleanunused")]
 		public async Task<ActionResult> CleanUpUnsued() {
 			return StatusCode(StatusCodes.Status501NotImplemented);
 		}
+
+		#endregion
 	}
 }

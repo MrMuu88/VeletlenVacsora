@@ -15,10 +15,15 @@ namespace VeletlenVacsora.Web.Controllers {
 
 		//TODO Implement Put Method
 
+		#region Ctors #############################################################################
 
 		public IngredientsController(IVacsoraRepository repository) {
 			_repository = repository;
 		}
+
+		#endregion
+
+		#region GETs ##############################################################################
 
 		[HttpGet]
 		public async Task<ActionResult<ICollection<IngredientModel>>> GetIngredientsAsync(string type = "", string package = "") {
@@ -50,6 +55,10 @@ namespace VeletlenVacsora.Web.Controllers {
 			}
 		}
 
+		#endregion
+
+		#region POSTs #############################################################################
+
 		[HttpPost]
 		public async Task<ActionResult<IngredientModel>> PostNewIngredient(IngredientModel model) {
 
@@ -78,6 +87,10 @@ namespace VeletlenVacsora.Web.Controllers {
 			}
 		}
 
+		#endregion
+
+		#region DELETEs ###########################################################################
+
 		[HttpDelete("{ID}")]
 		public async Task<ActionResult> DeleteIngredientByID(int ID) {
 			try {
@@ -95,6 +108,10 @@ namespace VeletlenVacsora.Web.Controllers {
 			}
 			return BadRequest();
 		}
+
+		#endregion
+
+		#region PUTs ##############################################################################
 
 		[HttpPut("{ID}")]
 		public async Task<ActionResult<IngredientModel>> UpdateIngredientAsync(int ID ,IngredientModel model) {
@@ -123,6 +140,10 @@ namespace VeletlenVacsora.Web.Controllers {
 			return BadRequest();
 		}
 
+		#endregion
+
+		#region Misc ##############################################################################
+
 		private async Task<Category> EnsureCategoryExists(string categoryName,CategoryType categoryType) {
 				var type = await _repository.GetCategoryByNameAsync(categoryName);
 			if (type == null) {
@@ -131,5 +152,7 @@ namespace VeletlenVacsora.Web.Controllers {
 			}
 			return type;
 		}
+
+		#endregion
 	}
 }

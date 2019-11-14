@@ -16,10 +16,15 @@ namespace VeletlenVacsora.Web.Controllers {
 		//TODO Implement Put Method
 		//TODO Implement Delete Method
 
+		#region Ctors #############################################################################
+
 		public RecepiesController(IVacsoraRepository repository) {
 			_repository = repository;
 		}
 
+		#endregion
+
+		#region GETs ##############################################################################
 
 		[HttpGet]
 		public async Task<ActionResult<ICollection<RecepieModel>>> GetRecepies(string Category = "") {
@@ -44,9 +49,6 @@ namespace VeletlenVacsora.Web.Controllers {
 			}
 		}
 
-
-
-
 		[HttpGet("{ID}")]
 		public async Task<ActionResult<RecepieModel>> GetRecepieByID(int ID) {
 			try {
@@ -58,5 +60,7 @@ namespace VeletlenVacsora.Web.Controllers {
 				return StatusCode(StatusCodes.Status500InternalServerError, $"Server Failure: {ex.GetType().Name}\n{ex.Message}");
 			}
 		}
+
+		#endregion
 	}
 }
