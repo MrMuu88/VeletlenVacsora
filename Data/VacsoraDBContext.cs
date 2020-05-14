@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using VeletlenVacsora.Data.Configurations;
 using VeletlenVacsora.Data.Models;
 
 namespace VeletlenVacsora.Data {
@@ -21,11 +22,9 @@ namespace VeletlenVacsora.Data {
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
-			modelBuilder.Entity<Recepie>().Property(r => r.Name).IsRequired().HasMaxLength(50);
-
-			modelBuilder.Entity<Ingredient>().Property(i => i.Name).IsRequired().HasMaxLength(50);
-
-			modelBuilder.Entity<Category>().Property(c => c.Name).IsRequired().HasMaxLength(25);
+			modelBuilder.ApplyConfiguration(new RecepieConfiguration());
+			modelBuilder.ApplyConfiguration(new IngredientConfiguration());
+			modelBuilder.ApplyConfiguration(new CategoryConfiguration());
 
 			modelBuilder.Entity<RecepieIngredient>()
 				.HasKey(t => new { t.RecepieID, t.IngredientID });
