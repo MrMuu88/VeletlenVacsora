@@ -5,14 +5,14 @@ using VeletlenVacsora.Data.Models;
 namespace VeletlenVacsora.Data {
 
 
-	public class VacsoraDBContext : DbContext {
+	public class VacsoraDbContext : DbContext {
 
 		public DbSet<Recepie> Recepies { get; set; }
 		public DbSet<Ingredient> Ingredients { get; set; }
 
 		public DbSet<Category> Categories { get; set; }
 
-		public VacsoraDBContext(DbContextOptions options):base(options) {}
+		public VacsoraDbContext(DbContextOptions options):base(options) {}
 
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {

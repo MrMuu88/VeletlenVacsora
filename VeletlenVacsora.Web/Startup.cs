@@ -20,7 +20,7 @@ namespace VeletlenVacsora.Web
 			services.AddControllers();
 			services.AddSpaStaticFiles(configuration => configuration.RootPath="VeletlenVacsoraApp/dist");
 
-			services.AddDbContext<VacsoraDBContext>(options => options.UseSqlite(Configuration.GetConnectionString("VacsoraDB")));
+			services.AddDbContext<VacsoraDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("VacsoraDB")));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
