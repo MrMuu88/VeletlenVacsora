@@ -9,6 +9,7 @@ namespace VeletlenVacsora.Data.Models {
 
 
 		public Recepie(string name):base(name) { }
+		public Recepie() { }
 
 	}//clss
 }//ns

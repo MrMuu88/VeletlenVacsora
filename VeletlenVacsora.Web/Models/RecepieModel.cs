@@ -14,7 +14,7 @@ namespace VeletlenVacsora.Web.Models {
 		public RecepieModel() { }
 
 		public RecepieModel(Recepie rec) {
-			ID = rec.ID;
+			ID = rec.Id;
 			Name = rec.Name;
 			Category = rec.Category.Name;
 

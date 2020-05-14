@@ -3,6 +3,7 @@
 		public CategoryType Type { get; set; }
 
 		public Category(string name) : base(name) { }
+		public Category() { }
 
 	}
 

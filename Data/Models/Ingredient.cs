@@ -12,6 +12,7 @@ namespace VeletlenVacsora.Data.Models {
 		public ICollection<RecepieIngredient> Recepies { get; set; }
 
 		public Ingredient(string name):base(name) { }
+		public Ingredient() { }
 
 	}//clss
 

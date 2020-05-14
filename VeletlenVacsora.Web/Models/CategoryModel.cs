@@ -13,7 +13,8 @@ namespace VeletlenVacsora.Web.Models {
 		public CategoryModel() { }
 
 		public CategoryModel(Category category) {
-			ID = category.ID;
+			
+			ID = category.Id;
 			Name = category.Name;
 			Type = category.Type.ToString();
 		}

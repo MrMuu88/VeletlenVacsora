@@ -20,7 +20,7 @@ namespace VeletlenVacsora.Web.Models {
 		public IngredientModel() { }
 
 		public IngredientModel(Ingredient i) {
-			ID = i.ID;
+			ID = i.Id;
 			Name = i.Name;
 			Type = i.IngredientType.Name;
 			Package = i.PackageType.Name;

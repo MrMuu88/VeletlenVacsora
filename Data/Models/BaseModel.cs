@@ -9,5 +9,6 @@
 		public BaseModel(string name) {
 			Name = name;
 		}
+		public BaseModel() { }
 	}
 }
