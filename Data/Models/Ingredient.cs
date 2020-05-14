@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace VeletlenVacsora.Data.Models {
-	public class Ingredient {
-		public int ID { get; set; }
-		public string Name { get; set; }
+	public class Ingredient :BaseModel{
 
 		public Category IngredientType { get; set; }
 
@@ -13,7 +11,7 @@ namespace VeletlenVacsora.Data.Models {
 
 		public ICollection<RecepieIngredient> Recepies { get; set; }
 
-		public Ingredient() { }
+		public Ingredient(string name):base(name) { }
 
 	}//clss
 

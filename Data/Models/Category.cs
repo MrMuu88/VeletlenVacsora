@@ -1,11 +1,8 @@
 ﻿namespace VeletlenVacsora.Data.Models {
-	public class Category {
-
-		public virtual int ID { get; set; }
-		public string Name { get; set; }
+	public class Category :BaseModel{
 		public CategoryType Type { get; set; }
 
-		public Category() { }
+		public Category(string name) : base(name) { }
 
 	}
 
