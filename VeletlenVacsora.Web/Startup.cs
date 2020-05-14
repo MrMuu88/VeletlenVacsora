@@ -2,13 +2,12 @@
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using VeletlenVacsora.Web.Services;
 using VeletlenVacsora.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 using Microsoft.Extensions.Configuration;
 
-namespace VeletlenVacsora.Web {
+namespace VeletlenVacsora.Web
+{
 	public class Startup {
 		public IConfiguration Configuration { get; }
 
