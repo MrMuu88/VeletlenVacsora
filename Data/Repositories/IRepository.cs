@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VeletlenVacsora.Data.Repositories
 {
-	interface IRepository<T> where T : class
+	public interface IRepository<T> where T : class
 	{
 		//TODO Add Methods for Inlcudes
 		Task<ICollection<T>> GetAllAsync();

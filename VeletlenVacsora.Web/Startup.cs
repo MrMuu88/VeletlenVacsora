@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using VeletlenVacsora.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using VeletlenVacsora.Data.Models;
+using VeletlenVacsora.Data.Repositories;
 
 namespace VeletlenVacsora.Web
 {
@@ -21,6 +23,10 @@ namespace VeletlenVacsora.Web
 			services.AddSpaStaticFiles(configuration => configuration.RootPath="VeletlenVacsoraApp/dist");
 
 			services.AddDbContext<VacsoraDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("VacsoraDB")));
+
+			services.AddScoped<IRepository<Recepie>,BaseModelRepository<Recepie>>();
+			services.AddScoped<IRepository<Ingredient>,BaseModelRepository<Ingredient>>();
+			services.AddScoped<IRepository<Category>,BaseModelRepository<Category>>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,7 +10,7 @@ namespace VeletlenVacsora.Data.Repositories
 {
 	//TODO ExceptionHandling
 	//TODO Logging
-	class BaseModelRepository<T> : IRepository<T> where T : BaseModel
+	public class BaseModelRepository<T> : IRepository<T> where T : BaseModel
 	{
 		public VacsoraDbContext DbContext { get; internal set; }
 		public BaseModelRepository(VacsoraDbContext dbContext)
