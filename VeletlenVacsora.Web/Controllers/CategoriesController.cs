@@ -13,12 +13,12 @@ namespace VeletlenVacsora.Web.Controllers {
 	public class CategoriesController : ControllerBase {
 		//NOTE Delete & Put method on category is not required, insted create a function API to cleanup unsued categories
 		 
-		private IVacsoraRepository _repository;
+		public IVacsoraRepository Repository { get; set; }
 
 		#region Ctors #############################################################################
 
 		public CategoriesController(IVacsoraRepository repository) {
-			_repository = repository;
+			Repository = repository;
 		}
 
 		#endregion
@@ -31,9 +31,9 @@ namespace VeletlenVacsora.Web.Controllers {
 				var results = new List<CategoryModel>();
 				List<Category> raw;
 				if (!string.IsNullOrWhiteSpace(type)) {
-					raw = (List<Category>)await _repository.GetCategoryByTypeAsync(type);
+					raw = (List<Category>)await Repository.GetCategoryByTypeAsync(type);
 				} else {
-					raw = (List<Category>)await _repository.GetAllCategoriesAsync();
+					raw = (List<Category>)await Repository.GetAllCategoriesAsync();
 				}
 				foreach (var c in raw) {
 					results.Add(new CategoryModel(c));
@@ -51,7 +51,7 @@ namespace VeletlenVacsora.Web.Controllers {
 		[HttpGet("{ID}")]
 		public async Task<ActionResult<CategoryModel>> GetCategoryByID(int ID) {
 			try {
-				var c = await _repository.GetCategoryByIDAsync(ID);
+				var c = await Repository.GetCategoryByIDAsync(ID);
 				if (c != null) {
 					return Ok(new CategoryModel(c));
 				} else {
@@ -76,7 +76,7 @@ namespace VeletlenVacsora.Web.Controllers {
 					CategoryType catType;
 					if (Enum.TryParse(model.Type, true, out catType)) {
 						var newcat = new Category { Name = model.Name, Type = catType };
-						await _repository.Add(newcat);
+						await Repository.Add(newcat);
 						return Created("", new CategoryModel(newcat));
 					}
 

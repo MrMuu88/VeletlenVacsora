@@ -18,6 +18,7 @@ namespace VeletlenVacsora.Web.Services {
 
 		#region Ctors #############################################################################
 		public DbVacsoraRepository(string constr = "Data Source=..\\Vacsora.db;", DBType dBType = DBType.SqLite) {
+			//TODO correct
 			_dbContext = new VacsoraDBContext(constr, dBType);
 		}
 		#endregion
