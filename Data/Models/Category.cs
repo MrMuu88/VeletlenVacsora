@@ -7,5 +7,5 @@
 
 	}
 
-	public enum CategoryType { Ingredient, Package, Recepie }
+	
 }
