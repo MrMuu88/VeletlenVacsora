@@ -19,5 +19,6 @@ namespace VeletlenVacsora.Data.Repositories
 		Task<bool> UpdateAsync(T entity);
 		Task<bool> CommitAsync();
 		Task<bool> RevertAsync();
+		Task<bool> Exist(int id);
 	}
 }

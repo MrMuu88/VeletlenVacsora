@@ -177,5 +177,10 @@ namespace VeletlenVacsora.Data.Repositories
 				}
 			});
 		}
+
+		public async Task<bool> Exist(int id)
+		{
+			return await DbContext.Set<T>().AnyAsync(t => t.Id == id);
+		}
 	}
 }
