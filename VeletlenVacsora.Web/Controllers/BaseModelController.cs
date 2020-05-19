@@ -8,7 +8,7 @@ using VeletlenVacsora.Data.Repositories;
 
 namespace VeletlenVacsora.Web.Controllers
 {
-	public class BaseModelController<T>:ControllerBase where T:BaseModel
+	public class BaseModelController<T> : ControllerBase where T : BaseModel
 	{
 		internal IRepository<T> Repository { get; set; }
 		public BaseModelController(IRepository<T> repo)
@@ -30,9 +30,9 @@ namespace VeletlenVacsora.Web.Controllers
 				return StatusCode(StatusCodes.Status500InternalServerError,errorobj);
 			}
 		}
-
-		[HttpGet("{Id}")]
-		public virtual async Task<ActionResult<T>> GetById([FromRoute]int id)
+		
+		[HttpGet("{id}")]
+		public virtual async Task<ActionResult<T>> GetById(int id)
 		{
 			try
 			{
@@ -46,7 +46,7 @@ namespace VeletlenVacsora.Web.Controllers
 			}
 		}
 
-		[HttpGet]
+		[HttpGet("count")]
 		public async Task<ActionResult<int>> Count()
 		{
 			try
@@ -57,7 +57,7 @@ namespace VeletlenVacsora.Web.Controllers
 			{
 
 				var errorobj = new { Error = ex.GetType().Name, ex.Message };
-				return StatusCode(StatusCodes.Status500InternalServerError,errorobj);
+				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
 			}
 		}
 
@@ -68,27 +68,11 @@ namespace VeletlenVacsora.Web.Controllers
 			{
 				await Repository.AddAsync(model);
 				await Repository.CommitAsync();
-				return Created(new Uri($"{Request.Path}/{model.Id}"),model);
+				return Created(new Uri($"{Request.Path}/{model.Id}"), model);
 			}
 			catch (Exception ex)
 			{
 				await Repository.RevertAsync();
-				var errorobj = new { Error = ex.GetType().Name, ex.Message };
-				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
-			}
-		}
-
-		[HttpPost]
-		public async Task<ActionResult> AddRange([FromBody]IEnumerable<T> models)
-		{
-			try
-			{
-				await Repository.AddRangeAsync(models);
-				await Repository.CommitAsync();
-				return Created(new Uri($"{Request.Path}"), models);
-			}
-			catch (Exception ex)
-			{
 				var errorobj = new { Error = ex.GetType().Name, ex.Message };
 				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
 			}
@@ -113,12 +97,19 @@ namespace VeletlenVacsora.Web.Controllers
 		}
 
 
-		[HttpPut]
-		public async Task<ActionResult> Update([FromBody]T model)
+		[HttpPut("{id}")]
+		public async Task<ActionResult> Update(int id,[FromBody]T model)
 		{
 			try
 			{
-				await Repository.UpdateAsync(model);
+				if (await Repository.Exist(id))
+				{
+					model.Id = id;
+					await Repository.UpdateAsync(model);
+				}
+				else {
+					await Repository.AddAsync(model);
+				}
 				await Repository.CommitAsync();
 				return Ok(model);
 			}

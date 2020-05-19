@@ -9,8 +9,9 @@ namespace VeletlenVacsora.Web {
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
-				.UseKestrel()
-				.UseUrls("http://0.0.0.0:1234")
+				.UseIIS()
+				//.UseKestrel()
+				//.UseUrls("http://0.0.0.0:1234")
 				.UseStartup<Startup>();
 	}
 }

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using VeletlenVacsora.Data.Models;
 using VeletlenVacsora.Data.Repositories;
+using Microsoft.OpenApi.Models;
 
 namespace VeletlenVacsora.Web
 {
@@ -20,6 +21,11 @@ namespace VeletlenVacsora.Web
 		public void ConfigureServices(IServiceCollection services) {
 
 			services.AddControllers();
+
+			services.AddSwaggerGen(c =>
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Véletlen Vacsora Api", Version = "v1" })
+			);
+
 			services.AddSpaStaticFiles(configuration => configuration.RootPath="VeletlenVacsoraApp/dist");
 
 			services.AddDbContext<VacsoraDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("VacsoraDB")));
@@ -39,6 +45,11 @@ namespace VeletlenVacsora.Web
 				app.UseSpaStaticFiles();
 			}
 
+			app.UseSwagger(a => a.RouteTemplate = "/api/docs/{documentName}.json");
+
+			app.UseSwaggerUI(c =>{
+				c.SwaggerEndpoint("/api/docs/v1.json", "Véletlen Vacsora Api v1");
+			});
 			app.UseRouting();
 
 			app.UseEndpoints(endpoints=>
