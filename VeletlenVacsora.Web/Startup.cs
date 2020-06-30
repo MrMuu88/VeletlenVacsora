@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using VeletlenVacsora.Data.Models;
 using VeletlenVacsora.Data.Repositories;
 using Microsoft.OpenApi.Models;
+using VeletlenVacsora.Web.Configurations;
 
 namespace VeletlenVacsora.Web
 {
@@ -22,9 +23,10 @@ namespace VeletlenVacsora.Web
 
 			services.AddControllers();
 
-			services.AddSwaggerGen(c =>
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Véletlen Vacsora Api", Version = "v1" })
-			);
+			services.AddSwaggerGen(c => {
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Véletlen Vacsora Api", Version = "v1" });
+				c.SchemaFilter<EnumSchemaFilter>();
+			});
 
 			services.AddSpaStaticFiles(configuration => configuration.RootPath="VeletlenVacsoraApp/dist");
 
