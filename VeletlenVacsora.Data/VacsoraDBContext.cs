@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using VeletlenVacsora.Data.Configurations;
 using VeletlenVacsora.Data.Models;
 
-namespace VeletlenVacsora.Data {
+namespace VeletlenVacsora.Data
+{
 
 
 	public class VacsoraDbContext : DbContext {
@@ -15,10 +15,6 @@ namespace VeletlenVacsora.Data {
 
 		public VacsoraDbContext(DbContextOptions options):base(options) {}
 
-
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-			
-		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 

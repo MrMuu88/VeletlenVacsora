@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VeletlenVacsora.Data.Models;
 using VeletlenVacsora.Data.Repositories;
@@ -20,6 +21,7 @@ namespace VeletlenVacsora.Api.Controllers
 		{
 			this.logger = logger;
 			Repository = repo;
+			Mapper = mapper;
 		}
 
 		/// <summary>
@@ -39,6 +41,7 @@ namespace VeletlenVacsora.Api.Controllers
 			}
 			catch (Exception ex)
 			{
+				logger.LogError(ex,$"An execption occured in {nameof(TMap)}Controller.{nameof(GetAll)} method");
 				var errorobj = new { Error = ex.GetType().Name, ex.Message };
 				return StatusCode(StatusCodes.Status500InternalServerError,errorobj);
 			}
@@ -55,6 +58,7 @@ namespace VeletlenVacsora.Api.Controllers
 			}
 			catch (Exception ex)
 			{
+				logger.LogError(ex, $"An execption occured in {nameof(TMap)}Controller.{nameof(GetById)} method",id);
 				var errorobj = new { Error = ex.GetType().Name, ex.Message };
 				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
 			}
@@ -69,7 +73,7 @@ namespace VeletlenVacsora.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-
+				logger.LogError(ex, $"An execption occured in {nameof(TMap)}Controller.{nameof(Count)} method");
 				var errorobj = new { Error = ex.GetType().Name, ex.Message };
 				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
 			}
@@ -87,6 +91,7 @@ namespace VeletlenVacsora.Api.Controllers
 			}
 			catch (Exception ex)
 			{
+				logger.LogError(ex, $"An execption occured in {nameof(TMap)}Controller.{nameof(Add)} method", model);
 				await Repository.RevertAsync();
 				var errorobj = new { Error = ex.GetType().Name, ex.Message };
 				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
@@ -106,6 +111,7 @@ namespace VeletlenVacsora.Api.Controllers
 			catch (Exception ex)
 			{
 				await Repository.RevertAsync();
+				logger.LogError(ex, $"An execption occured in {nameof(TMap)}Controller.{nameof(Delete)} method",id);
 				var errorobj = new { Error = ex.GetType().Name, ex.Message };
 				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
 			}
@@ -131,6 +137,7 @@ namespace VeletlenVacsora.Api.Controllers
 			}
 			catch (Exception ex)
 			{
+				logger.LogError(ex, $"An execption occured in {nameof(TMap)}Controller.{nameof(Update)} method",id,model);
 				var errorobj = new { Error = ex.GetType().Name, ex.Message };
 				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
 			}

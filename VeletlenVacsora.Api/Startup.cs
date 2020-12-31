@@ -11,6 +11,7 @@ using VeletlenVacsora.Data.Models;
 using AutoMapper;
 using VeletlenVacsora.Api.MapperProfiles;
 using Serilog;
+using Microsoft.Extensions.Logging;
 
 namespace VeletlenVacsora.Api
 {
@@ -33,7 +34,9 @@ namespace VeletlenVacsora.Api
 
 			services.AddAutoMapper(typeof(MapingProfile));
 
-			services.AddDbContext<VacsoraDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("VacsoraDB")));
+			services.AddDbContext<VacsoraDbContext>(options => {
+				options.UseSqlite(Configuration.GetConnectionString("VacsoraDB"));
+			});
 
 			services.AddScoped<IRepository<RecepieModel>,BaseModelRepository<RecepieModel>>();
 			services.AddScoped<IRepository<IngredientModel>,BaseModelRepository<IngredientModel>>();
@@ -45,7 +48,6 @@ namespace VeletlenVacsora.Api
 			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
 			}
-			
 			app.UseSerilogRequestLogging();
 
 			app.UseSwagger(a => a.RouteTemplate = "/api/docs/{documentName}.json");
