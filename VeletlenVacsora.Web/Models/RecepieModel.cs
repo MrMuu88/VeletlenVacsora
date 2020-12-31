@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using VeletlenVacsora.Data.Models;
 
-namespace VeletlenVacsora.Web.Models {
+namespace VeletlenVacsora.Api.Models {
 	public class RecepieModel {
 		public int ID { get; set; } = 0;
 		public string Name { get; set; } = "";

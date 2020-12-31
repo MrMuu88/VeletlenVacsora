@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using VeletlenVacsora.Data.Models;
 
-namespace VeletlenVacsora.Web.Services
+namespace VeletlenVacsora.Api.Services
 {
 	public interface IMenuGenerator
 	{

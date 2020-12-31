@@ -1,6 +1,6 @@
 ﻿using VeletlenVacsora.Data.Models;
 
-namespace VeletlenVacsora.Web.Models {
+namespace VeletlenVacsora.Api.Models {
 	public class RecepieIngredientModel {
 		public string Name { get; set; } = "";
 		public string Type { get; set; } = "";

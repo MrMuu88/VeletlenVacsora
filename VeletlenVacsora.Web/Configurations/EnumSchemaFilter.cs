@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace VeletlenVacsora.Web.Configurations
+namespace VeletlenVacsora.Api.Configurations
 {
 	public class EnumSchemaFilter : ISchemaFilter
 	{

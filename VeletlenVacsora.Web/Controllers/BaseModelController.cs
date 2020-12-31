@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using VeletlenVacsora.Data.Models;
 using VeletlenVacsora.Data.Repositories;
 
-namespace VeletlenVacsora.Web.Controllers
+namespace VeletlenVacsora.Api.Controllers
 {
 	public class BaseModelController<T> : ControllerBase where T : BaseModel
 	{

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using VeletlenVacsora.Data;
 using VeletlenVacsora.Data.Models;
 
-namespace VeletlenVacsora.Web.Services {
+namespace VeletlenVacsora.Api.Services {
 	public interface IVacsoraRepository {
 
 		Task<ICollection<Recepie>> GetAllRecepiesAsync();

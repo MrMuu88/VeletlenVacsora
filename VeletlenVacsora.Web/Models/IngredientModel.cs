@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using VeletlenVacsora.Data.Models;
 
-namespace VeletlenVacsora.Web.Models {
+namespace VeletlenVacsora.Api.Models {
 	public class IngredientModel {
 
 		public int ID { get; set; } = 0;

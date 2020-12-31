@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VeletlenVacsora.Data.Models;
 
-namespace VeletlenVacsora.Web.Services
+namespace VeletlenVacsora.Api.Services
 {
 	public class RandomMenuGenerator : IMenuGenerator
 	{

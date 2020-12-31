@@ -2,7 +2,7 @@
 using VeletlenVacsora.Data.Models;
 using VeletlenVacsora.Data.Repositories;
 
-namespace VeletlenVacsora.Web.Controllers
+namespace VeletlenVacsora.Api.Controllers
 {
 	[ApiController]
 	[Route("Api/[Controller]")]

@@ -8,9 +8,9 @@ using Microsoft.Extensions.Configuration;
 using VeletlenVacsora.Data.Models;
 using VeletlenVacsora.Data.Repositories;
 using Microsoft.OpenApi.Models;
-using VeletlenVacsora.Web.Configurations;
+using VeletlenVacsora.Api.Configurations;
 
-namespace VeletlenVacsora.Web
+namespace VeletlenVacsora.Api
 {
 	public class Startup {
 		public IConfiguration Configuration { get; }
