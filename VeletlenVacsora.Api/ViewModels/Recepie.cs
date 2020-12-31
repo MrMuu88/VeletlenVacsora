@@ -4,8 +4,9 @@ namespace VeletlenVacsora.Api.ViewModels
 {
 	public class Recepie
 	{
+		public string Name { get; set; }
 
-		public Category Category { get; set; }
+		public string Category { get; set; }
 
 		public ICollection<RecepieIngredient> Ingredients { get; set; }
 		public Recepie() { }
