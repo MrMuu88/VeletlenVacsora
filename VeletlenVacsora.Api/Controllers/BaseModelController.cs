@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,11 @@ using VeletlenVacsora.Data.Repositories;
 
 namespace VeletlenVacsora.Api.Controllers
 {
-	public class BaseModelController<T> : ControllerBase where T : BaseModel
+	public class BaseModelController<TEntity,TMap> : ControllerBase where TEntity : BaseModel
 	{
-		internal IRepository<T> Repository { get; set; }
-		public BaseModelController(IRepository<T> repo)
+		internal IMapper Mapper { get; set; }
+		internal IRepository<TEntity> Repository { get; set; }
+		public BaseModelController(IRepository<TEntity> repo, IMapper mapper)
 		{
 			Repository = repo;
 		}
@@ -22,13 +24,14 @@ namespace VeletlenVacsora.Api.Controllers
 		/// <returns></returns>
 		[HttpGet]
 		[ProducesResponseType(200)]
-		[ProducesResponseType(401)]
-		public virtual async Task<ActionResult<IEnumerable<T>>> GetAll()
+		public virtual async Task<ActionResult<IEnumerable<TMap>>> GetAll()
 		{
 			try
 			{
 				var entities = await Repository.GetAllAsync();
-				return Ok(entities);
+				var mapped = Mapper.Map<IEnumerable<TMap>>(entities);
+				
+				return Ok(mapped);
 			}
 			catch (Exception ex)
 			{
@@ -38,12 +41,13 @@ namespace VeletlenVacsora.Api.Controllers
 		}
 		
 		[HttpGet("{id}")]
-		public virtual async Task<ActionResult<T>> GetById(int id)
+		public virtual async Task<ActionResult<TMap>> GetById(int id)
 		{
 			try
 			{
-				var entitie = await Repository.GetAsync(id);
-				return Ok(entitie);
+				var entity = await Repository.GetAsync(id);
+				var mapped = Mapper.Map<TMap>(entity);
+				return Ok(mapped);
 			}
 			catch (Exception ex)
 			{
@@ -68,13 +72,14 @@ namespace VeletlenVacsora.Api.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Add([FromBody]T model)
+		public async Task<ActionResult> Add([FromBody] TMap model)
 		{
 			try
 			{
-				await Repository.AddAsync(model);
+				var entity = Mapper.Map<TEntity>(model);
+				await Repository.AddAsync(entity);
 				await Repository.CommitAsync();
-				return Created(new Uri($"{Request.Path}/{model.Id}"), model);
+				return Created(new Uri($"{Request.Path}/{entity.Id}"), entity);
 			}
 			catch (Exception ex)
 			{
@@ -104,20 +109,21 @@ namespace VeletlenVacsora.Api.Controllers
 
 
 		[HttpPut("{id}")]
-		public async Task<ActionResult> Update(int id,[FromBody]T model)
+		public async Task<ActionResult> Update(int id,[FromBody] TMap model)
 		{
 			try
 			{
+				var entity = Mapper.Map<TEntity>(model);
 				if (await Repository.Exist(id))
 				{
-					model.Id = id;
-					await Repository.UpdateAsync(model);
+					entity.Id = id;
+					await Repository.UpdateAsync(entity);
 				}
 				else {
-					await Repository.AddAsync(model);
+					await Repository.AddAsync(entity);
 				}
 				await Repository.CommitAsync();
-				return Ok(model);
+				return Ok(new Uri($"{Request.Path}/{entity.Id}"));
 			}
 			catch (Exception ex)
 			{

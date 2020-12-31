@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using VeletlenVacsora.Api.ViewModels;
 using VeletlenVacsora.Data.Models;
 using VeletlenVacsora.Data.Repositories;
 
@@ -6,9 +8,9 @@ namespace VeletlenVacsora.Api.Controllers
 {
 	[ApiController]
 	[Route("Api/[Controller]")]
-	public class IngredientsController : BaseModelController<Ingredient>
+	public class IngredientsController : BaseModelController<IngredientModel,Ingredient>
 	{
-		public IngredientsController(IRepository<Ingredient> repo) : base(repo)
+		public IngredientsController(IRepository<IngredientModel> repo, IMapper mapper) : base(repo,mapper)
 		{
 		}
 	}
