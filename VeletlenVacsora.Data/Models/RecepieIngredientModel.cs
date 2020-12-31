@@ -1,9 +1,9 @@
 ﻿namespace VeletlenVacsora.Data.Models {
 	public class RecepieIngredientModel {
 
-		public int RecepieID { get; set; }
+		public int RecepieId { get; set; }
 
-		public int IngredientID { get; set; }
+		public int IngredientId { get; set; }
 
 		public RecepieModel Recepie { get; set; }
 
