@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,10 +12,13 @@ namespace VeletlenVacsora.Api.Controllers
 {
 	public class BaseModelController<TEntity,TMap> : ControllerBase where TEntity : BaseModel
 	{
+		protected readonly ILogger<BaseModelController<TEntity, TMap>> logger;
+
 		internal IMapper Mapper { get; set; }
 		internal IRepository<TEntity> Repository { get; set; }
-		public BaseModelController(IRepository<TEntity> repo, IMapper mapper)
+		public BaseModelController(ILogger<BaseModelController<TEntity, TMap>> logger ,IRepository<TEntity> repo, IMapper mapper)
 		{
+			this.logger = logger;
 			Repository = repo;
 		}
 
