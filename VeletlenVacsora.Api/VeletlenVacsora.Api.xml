@@ -48,12 +48,5 @@
             <param name="model"> the entity to be created</param>
             <returns></returns>
         </member>
-        <member name="M:VeletlenVacsora.Api.Services.IMenuGenerator.GetMenu(System.Int32)">
-            <summary>
-            does some stuff
-            </summary>
-            <param name="days"></param>
-            <returns></returns>
-        </member>
     </members>
 </doc>
