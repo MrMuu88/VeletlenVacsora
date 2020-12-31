@@ -8,7 +8,7 @@ using VeletlenVacsora.Data.Repositories;
 namespace VeletlenVacsora.Api.Controllers
 {
 	[ApiController]
-	[Route("Api/[Controller]")]
+	[Route("Api/[Controller]/[Action]")]
 	public class IngredientsController : BaseModelController<IngredientModel,Ingredient>
 	{
 		public IngredientsController(ILogger<IngredientsController> logger,IRepository<IngredientModel> repo, IMapper mapper) : base(logger,repo,mapper)

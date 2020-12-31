@@ -28,7 +28,7 @@ namespace VeletlenVacsora.Api.Controllers
 		/// If no Ids are provided, returns all entries.
 		/// if not all Ids are found in the DB, returns http 206 (PartialContent)
 		/// </summary>
-		[HttpPost("GetMany")]
+		[HttpPost]
 		[ProducesResponseType(200)]
 		[ProducesResponseType(206)]
 		[ProducesResponseType(404)]
@@ -56,7 +56,7 @@ namespace VeletlenVacsora.Api.Controllers
 		/// <summary>
 		/// Returns a List of all entity Ids from the Database
 		/// </summary>
-		[HttpGet("List")]
+		[HttpGet]
 		[ProducesResponseType(200)]
 		[ProducesResponseType(500)]
 
@@ -104,7 +104,7 @@ namespace VeletlenVacsora.Api.Controllers
 		/// <summary>
 		/// Returns an int indication how many Entites are stored in the database
 		/// </summary>
-		[HttpGet("count")]
+		[HttpGet]
 		[ProducesResponseType(typeof(int),200)]
 		[ProducesResponseType(500)]
 		public async Task<ActionResult<int>> Count()
@@ -129,7 +129,7 @@ namespace VeletlenVacsora.Api.Controllers
 		[HttpPost]
 		[ProducesResponseType(201)]
 		[ProducesResponseType(500)]
-		public async Task<ActionResult> Add([FromBody] TMap model)
+		public async Task<ActionResult> Create([FromBody] TMap model)
 		{
 			try
 			{
@@ -140,7 +140,7 @@ namespace VeletlenVacsora.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-				logger.LogError(ex, $"An execption occured in {nameof(TMap)}Controller.{nameof(Add)} method", model);
+				logger.LogError(ex, $"An execption occured in {nameof(TMap)}Controller.{nameof(Create)} method", model);
 				await Repository.RevertAsync();
 				var errorobj = new { Error = ex.GetType().Name, ex.Message };
 				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
