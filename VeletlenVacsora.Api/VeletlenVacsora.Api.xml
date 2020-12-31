@@ -48,5 +48,10 @@
             <param name="model"> the entity to be created</param>
             <returns></returns>
         </member>
+        <member name="M:VeletlenVacsora.Api.Controllers.RecepiesController.GetRandom">
+            <summary>
+            Returns a Recepie based on Weightened random selection
+            </summary>
+        </member>
     </members>
 </doc>
