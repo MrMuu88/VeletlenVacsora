@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
+using VeletlenVacsora.Data.Exceptions;
 using VeletlenVacsora.Data.Models;
 
 namespace VeletlenVacsora.Data.Repositories
 {
-	//TODO ExceptionHandling
-	//TODO Logging
+
 	public class BaseModelRepository<T> : IRepository<T> where T : BaseModel
 	{
 		public VacsoraDbContext DbContext { get; internal set; }
@@ -18,59 +19,68 @@ namespace VeletlenVacsora.Data.Repositories
 			DbContext = dbContext;
 		}
 
-		public async Task<bool> AddAsync(T entity)
+		public async Task AddAsync(T entity)
 		{
 			try
 			{
 				await DbContext.Set<T>().AddAsync(entity);
-				return true;
 			}
-			catch
+			catch (Exception ex)
 			{
-				return false;
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
 			}
 		}
 
-		public async Task<bool> AddRangeAsync(IEnumerable<T> entities)
+		public async Task AddRangeAsync(IEnumerable<T> entities)
 		{
 			try
 			{
 				await DbContext.Set<T>().AddRangeAsync(entities);
-				return true;
 			}
-			catch
+			catch (Exception ex)
 			{
-				return false;
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
 			}
 		}
 
-		public Task<bool> DeleteAsync(T entity)
-		{
-			//Remove is not async Command in EF but it's keeps consistent to call this method in an async way as well
-			return Task.Run(() =>
-			{
-				try
-				{
-					DbContext.Set<T>().Remove(entity);
-					return true;
-				}
-				catch
-				{
-					return false;
-				}
-			});
-		}
-
-		public async Task<ICollection<T>> GetAllAsync()
+		public async Task<IEnumerable<int>> ListAsync()
 		{
 			try
 			{
-				return await DbContext.Set<T>().ToListAsync();
+				return await DbContext.Set<T>().Select(e => e.Id).ToArrayAsync();
 			}
-			catch
+			catch (Exception ex)
 			{
-				//returnning empty list on fail instead of null
-				return new List<T>();
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
+			}
+		}
+
+		public Task DeleteAsync(T entity)
+		{
+			//Remove is not async Command in EF but it's keeps consistent to call this method in an async way as well
+			try
+			{
+				DbContext.Set<T>().Remove(entity);
+				return Task.CompletedTask;
+			}
+			catch (Exception ex)
+			{
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
+			}
+		}
+
+		public async Task<ICollection<T>> GetManyAsync(IEnumerable<int> ids = null)
+		{
+			try
+			{
+				if (ids != null)
+					return await DbContext.Set<T>().Where(e => ids.Contains(e.Id)).ToListAsync();
+				else
+					return await DbContext.Set<T>().ToListAsync();
+			}
+			catch (Exception ex)
+			{
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
 			}
 		}
 
@@ -80,28 +90,26 @@ namespace VeletlenVacsora.Data.Repositories
 			{
 				return await DbContext.Set<T>().FirstAsync(t => t.Id == id);
 			}
-			catch
+			catch (Exception ex)
 			{
-				return null;
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
 			}
 		}
 
-		public Task<bool> UpdateAsync(T entity)
+		public Task UpdateAsync(T entity)
 		{
 			//Update is not async Command in EF but it's keeps consistent to call this method in an async way as well
-			return Task.Run(() =>
-				{
-					try
-					{
-						DbContext.Set<T>().Update(entity);
-						return true;
-					}
-					catch
-					{
-						return false;
-					}
-				}
-			);
+			try
+			{
+				DbContext.Set<T>().Update(entity);
+
+				return Task.CompletedTask;
+			}
+			catch (Exception ex)
+			{
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
+			}
+
 		}
 
 		public async Task<ICollection<T>> FindAsync(Expression<Func<T, bool>> predicate)
@@ -111,13 +119,13 @@ namespace VeletlenVacsora.Data.Repositories
 				IQueryable<T> query = DbContext.Set<T>();
 				return await query.Where(predicate).ToListAsync();
 			}
-			catch
+			catch (Exception ex)
 			{
-				return new List<T>();
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
 			}
 		}
 
-		public async Task<int?> CountAsync(Expression<Func<T, bool>> predicate = null)
+		public async Task<int> CountAsync(Expression<Func<T, bool>> predicate = null)
 		{
 			try
 			{
@@ -126,61 +134,64 @@ namespace VeletlenVacsora.Data.Repositories
 					query = query.Where(predicate);
 				return await query.CountAsync();
 			}
-			catch
+			catch (Exception ex)
 			{
-				return null;
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
 			}
 		}
 
-		public async Task<bool> CommitAsync()
+		public async Task CommitAsync()
 		{
 			try
 			{
 				await DbContext.SaveChangesAsync();
-				return true;
 			}
-			catch
+			catch (Exception ex)
 			{
-
-				throw;
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
 			}
 		}
 
-		public Task<bool> RevertAsync()
+		public Task RevertAsync()
 		{
-			return Task.Run(() =>
+			try
 			{
-				try
+				var changed = DbContext.ChangeTracker.Entries<T>().Where(x => x.State != EntityState.Unchanged).ToList();
+				foreach (var entry in changed)
 				{
-					var changed = DbContext.ChangeTracker.Entries<T>().Where(x => x.State != EntityState.Unchanged).ToList();
-					foreach (var entry in changed)
+					switch (entry.State)
 					{
-						switch (entry.State)
-						{
-							case EntityState.Modified:
-								entry.CurrentValues.SetValues(entry.OriginalValues);
-								entry.State = EntityState.Unchanged;
-								break;
-							case EntityState.Added:
-								entry.State = EntityState.Detached;
-								break;
-							case EntityState.Deleted:
-								entry.State = EntityState.Unchanged;
-								break;
-						}
+						case EntityState.Modified:
+							entry.CurrentValues.SetValues(entry.OriginalValues);
+							entry.State = EntityState.Unchanged;
+							break;
+						case EntityState.Added:
+							entry.State = EntityState.Detached;
+							break;
+						case EntityState.Deleted:
+							entry.State = EntityState.Unchanged;
+							break;
 					}
-					return true;
 				}
-				catch
-				{
-					return false;
-				}
-			});
+				return Task.CompletedTask;
+			}
+			catch (Exception ex)
+			{
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
+			}
+
 		}
 
 		public async Task<bool> Exist(int id)
 		{
-			return await DbContext.Set<T>().AnyAsync(t => t.Id == id);
+			try
+			{
+				return await DbContext.Set<T>().AnyAsync(t => t.Id == id);
+			}
+			catch (Exception ex)
+			{
+				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
+			}
 		}
 	}
 }
