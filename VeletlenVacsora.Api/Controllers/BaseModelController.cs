@@ -24,28 +24,58 @@ namespace VeletlenVacsora.Api.Controllers
 		}
 
 		/// <summary>
-		/// This method return all entities from the Database
+		/// This method returns a list of entities from the Database, according to the requested Ids.
+		/// If no Ids are provided, returns all entries.
+		/// if not all Ids are found in the DB, returns http 206 (PartialContent)
 		/// </summary>
-		[HttpGet]
+		[HttpPost("GetMany")]
 		[ProducesResponseType(200)]
+		[ProducesResponseType(206)]
+		[ProducesResponseType(404)]
 		[ProducesResponseType(500)]
-		public virtual async Task<ActionResult<IEnumerable<TMap>>> GetAll()
+		public virtual async Task<ActionResult<IEnumerable<TMap>>> GetMany(IEnumerable<int> ids = null)
 		{
 			try
 			{
-				var entities = await Repository.GetAllAsync();
+				var entities = await Repository.GetManyAsync(ids);
 				var mapped = Mapper.Map<IEnumerable<TMap>>(entities);
-				
-				return Ok(mapped);
+
+				if (ids != null && ids.Count() != entities.Count)
+					return StatusCode(206, mapped);
+				else
+					return Ok(mapped);
 			}
 			catch (Exception ex)
 			{
-				logger.LogError(ex,$"An execption occured in {nameof(TMap)}Controller.{nameof(GetAll)} method");
+				logger.LogError(ex,$"An execption occured in {nameof(TMap)}Controller.{nameof(GetMany)} method");
 				var errorobj = new { Error = ex.GetType().Name, ex.Message };
 				return StatusCode(StatusCodes.Status500InternalServerError,errorobj);
 			}
 		}
-		
+
+		/// <summary>
+		/// Returns a List of all entity Ids from the Database
+		/// </summary>
+		[HttpGet("List")]
+		[ProducesResponseType(200)]
+		[ProducesResponseType(500)]
+
+		public async Task<ActionResult<IEnumerable<int>>> List()
+		{
+			try
+			{
+				var ids = await Repository.ListAsync();
+				return Ok(ids);
+			}
+			catch (Exception ex)
+			{
+				logger.LogError(ex, $"An execption occured in {nameof(TMap)}Controller.{nameof(GetMany)} method");
+				var errorobj = new { Error = ex.GetType().Name, ex.Message };
+				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
+			}
+		}
+
+
 		/// <summary>
 		/// Returns the entity with the given Id from the database
 		/// </summary>
