@@ -43,10 +43,6 @@ namespace VeletlenVacsora.Web
 			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
 			}
-			app.UseStaticFiles();
-			if (!env.IsDevelopment()) {
-				app.UseSpaStaticFiles();
-			}
 
 			app.UseSwagger(a => a.RouteTemplate = "/api/docs/{documentName}.json");
 
@@ -61,17 +57,7 @@ namespace VeletlenVacsora.Web
 				}
 			);
 
-			app.UseSpa(spa =>
-			{
-				// To learn more about options for serving an Angular SPA from ASP.NET Core,
-				// see https://go.microsoft.com/fwlink/?linkid=864501
-				spa.Options.SourcePath = "VeletlenVacsoraApp";
-
-				if (env.IsDevelopment())
-				{
-					spa.UseAngularCliServer(npmScript: "start");
-				}
-			});
+			
 		}
 	}
 }
