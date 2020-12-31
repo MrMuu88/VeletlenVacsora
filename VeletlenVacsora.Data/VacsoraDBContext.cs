@@ -22,8 +22,6 @@ namespace VeletlenVacsora.Data
 			modelBuilder.ApplyConfiguration(new IngredientConfiguration());
 			modelBuilder.ApplyConfiguration(new CategoryConfiguration());
 
-			modelBuilder.Entity<RecepieIngredientModel>()
-				.HasKey(t => new { t.RecepieID, t.IngredientID });
 		}
 
 	}//clss
