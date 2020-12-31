@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Serilog;
 
 namespace VeletlenVacsora.Api {
 	public class Program {
@@ -10,8 +11,7 @@ namespace VeletlenVacsora.Api {
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
 				.UseIIS()
-				//.UseKestrel()
-				//.UseUrls("http://0.0.0.0:1234")
+				.UseSerilog((context,Config)=>Config.ReadFrom.Configuration(context.Configuration,"Serilog"))
 				.UseStartup<Startup>();
 	}
 }

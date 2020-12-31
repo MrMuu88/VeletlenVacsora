@@ -10,6 +10,7 @@ using VeletlenVacsora.Api.Configurations;
 using VeletlenVacsora.Data.Models;
 using AutoMapper;
 using VeletlenVacsora.Api.MapperProfiles;
+using Serilog;
 
 namespace VeletlenVacsora.Api
 {
@@ -44,6 +45,8 @@ namespace VeletlenVacsora.Api
 			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
 			}
+			
+			app.UseSerilogRequestLogging();
 
 			app.UseSwagger(a => a.RouteTemplate = "/api/docs/{documentName}.json");
 
