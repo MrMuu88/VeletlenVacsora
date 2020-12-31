@@ -10,7 +10,7 @@ namespace VeletlenVacsora.Data.Configurations
 		{
 			base.Configure(builder);
 			builder.ToTable("Recepies");
-			builder.Property(r => r.Weight).HasDefaultValue(0);
+			builder.Property(r => r.Weight).HasDefaultValue(1);
 		}
 	}
 }

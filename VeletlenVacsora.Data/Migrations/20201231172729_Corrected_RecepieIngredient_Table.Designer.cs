@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeletlenVacsora.Data;
 
 namespace VeletlenVacsora.Data.Migrations
 {
     [DbContext(typeof(VacsoraDbContext))]
-    partial class VacsoraDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201231172729_Corrected_RecepieIngredient_Table")]
+    partial class Corrected_RecepieIngredient_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,7 +101,7 @@ namespace VeletlenVacsora.Data.Migrations
                     b.Property<int>("Weight")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
-                        .HasDefaultValue(1);
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 

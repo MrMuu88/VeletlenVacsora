@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using VeletlenVacsora.Data.Configurations;
 using VeletlenVacsora.Data.Models;
 
@@ -17,11 +18,10 @@ namespace VeletlenVacsora.Data
 
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
-
 			modelBuilder.ApplyConfiguration(new RecepieConfiguration());
 			modelBuilder.ApplyConfiguration(new IngredientConfiguration());
 			modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-
+			modelBuilder.ApplyConfiguration(new RecepieIngredientConfiguration());
 		}
 
 	}//clss
