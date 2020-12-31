@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using VeletlenVacsora.Data.Models;
+using VeletlenVacsora.Api.ViewModels;
 
 namespace VeletlenVacsora.Api.Services
 {
