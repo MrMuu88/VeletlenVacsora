@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data\VeletlenVacsora.Data.csproj" />
+    <ProjectReference Include="..\VeletlenVacsora.Data\VeletlenVacsora.Data.csproj" />
   </ItemGroup>
 
 </Project>
