@@ -28,8 +28,6 @@ namespace VeletlenVacsora.Api
 				c.IncludeXmlComments(@".\VeletlenVacsora.Api.xml");
 			});
 
-			services.AddSpaStaticFiles(configuration => configuration.RootPath="VeletlenVacsoraApp/dist");
-
 			services.AddDbContext<VacsoraDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("VacsoraDB")));
 
 			services.AddScoped<IRepository<Recepie>,BaseModelRepository<Recepie>>();
