@@ -8,10 +8,10 @@ namespace VeletlenVacsora.Data {
 
 	public class VacsoraDbContext : DbContext {
 
-		public DbSet<Recepie> Recepies { get; set; }
-		public DbSet<Ingredient> Ingredients { get; set; }
+		public DbSet<RecepieModel> Recepies { get; set; }
+		public DbSet<IngredientModel> Ingredients { get; set; }
 
-		public DbSet<Category> Categories { get; set; }
+		public DbSet<CategoryModel> Categories { get; set; }
 
 		public VacsoraDbContext(DbContextOptions options):base(options) {}
 
@@ -26,7 +26,7 @@ namespace VeletlenVacsora.Data {
 			modelBuilder.ApplyConfiguration(new IngredientConfiguration());
 			modelBuilder.ApplyConfiguration(new CategoryConfiguration());
 
-			modelBuilder.Entity<RecepieIngredient>()
+			modelBuilder.Entity<RecepieIngredientModel>()
 				.HasKey(t => new { t.RecepieID, t.IngredientID });
 		}
 

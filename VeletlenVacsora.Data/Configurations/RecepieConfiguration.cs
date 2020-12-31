@@ -1,13 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using VeletlenVacsora.Data.Models;
 
 namespace VeletlenVacsora.Data.Configurations
 {
-	class RecepieConfiguration:BaseModelConfiguration<Recepie>
+	class RecepieConfiguration:BaseModelConfiguration<RecepieModel>
 	{
-		public override void Configure(EntityTypeBuilder<Recepie> builder)
+		public override void Configure(EntityTypeBuilder<RecepieModel> builder)
 		{
 			base.Configure(builder);
+			builder.ToTable("Recepies");
 		}
 	}
 }
