@@ -4,7 +4,7 @@
         <name>VeletlenVacsora.Api</name>
     </assembly>
     <members>
-        <member name="M:VeletlenVacsora.Api.Controllers.BaseModelController`1.GetAll">
+        <member name="M:VeletlenVacsora.Api.Controllers.BaseModelController`2.GetAll">
             <summary>
             This method return all entities
             </summary>

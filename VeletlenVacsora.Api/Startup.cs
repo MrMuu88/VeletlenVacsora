@@ -4,10 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using VeletlenVacsora.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using VeletlenVacsora.Data.Models;
 using VeletlenVacsora.Data.Repositories;
 using Microsoft.OpenApi.Models;
 using VeletlenVacsora.Api.Configurations;
+using VeletlenVacsora.Data.Models;
+using AutoMapper;
+using VeletlenVacsora.Api.MapperProfiles;
 
 namespace VeletlenVacsora.Api
 {
@@ -28,11 +30,13 @@ namespace VeletlenVacsora.Api
 				c.IncludeXmlComments(@".\VeletlenVacsora.Api.xml");
 			});
 
+			services.AddAutoMapper(typeof(MapingProfile));
+
 			services.AddDbContext<VacsoraDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("VacsoraDB")));
 
-			services.AddScoped<IRepository<Recepie>,BaseModelRepository<Recepie>>();
-			services.AddScoped<IRepository<Ingredient>,BaseModelRepository<Ingredient>>();
-			services.AddScoped<IRepository<Category>,BaseModelRepository<Category>>();
+			services.AddScoped<IRepository<RecepieModel>,BaseModelRepository<RecepieModel>>();
+			services.AddScoped<IRepository<IngredientModel>,BaseModelRepository<IngredientModel>>();
+			services.AddScoped<IRepository<CategoryModel>,BaseModelRepository<CategoryModel>>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
