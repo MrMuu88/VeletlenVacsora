@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VeletlenVacsora.Web</name>
+    </assembly>
+    <members>
+        <member name="M:VeletlenVacsora.Web.Controllers.BaseModelController`1.GetAll">
+            <summary>
+            This method return all entities
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VeletlenVacsora.Web.Services.IMenuGenerator.GetMenu(System.Int32)">
+            <summary>
+            does some stuff
+            </summary>
+            <param name="days"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -26,6 +26,7 @@ namespace VeletlenVacsora.Web
 			services.AddSwaggerGen(c => {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Véletlen Vacsora Api", Version = "v1" });
 				c.SchemaFilter<EnumSchemaFilter>();
+				c.IncludeXmlComments(@"C:\Users\tsimon\source\own\VeletlenVacsora\VeletlenVacsora.Web.xml");
 			});
 
 			services.AddSpaStaticFiles(configuration => configuration.RootPath="VeletlenVacsoraApp/dist");

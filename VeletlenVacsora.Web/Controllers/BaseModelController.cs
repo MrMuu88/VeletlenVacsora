@@ -16,7 +16,13 @@ namespace VeletlenVacsora.Web.Controllers
 			Repository = repo;
 		}
 
+		/// <summary>
+		/// This method return all entities
+		/// </summary>
+		/// <returns></returns>
 		[HttpGet]
+		[ProducesResponseType(200)]
+		[ProducesResponseType(401)]
 		public virtual async Task<ActionResult<IEnumerable<T>>> GetAll()
 		{
 			try
