@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>VeletlenVacsora.Web</name>
+        <name>VeletlenVacsora.Api</name>
     </assembly>
     <members>
-        <member name="M:VeletlenVacsora.Web.Controllers.BaseModelController`1.GetAll">
+        <member name="M:VeletlenVacsora.Api.Controllers.BaseModelController`1.GetAll">
             <summary>
             This method return all entities
             </summary>
             <returns></returns>
         </member>
-        <member name="M:VeletlenVacsora.Web.Services.IMenuGenerator.GetMenu(System.Int32)">
+        <member name="M:VeletlenVacsora.Api.Services.IMenuGenerator.GetMenu(System.Int32)">
             <summary>
             does some stuff
             </summary>
