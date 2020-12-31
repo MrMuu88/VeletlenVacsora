@@ -6,8 +6,39 @@
     <members>
         <member name="M:VeletlenVacsora.Api.Controllers.BaseModelController`2.GetAll">
             <summary>
-            This method return all entities
+            This method return all entities from the Database
             </summary>
+        </member>
+        <member name="M:VeletlenVacsora.Api.Controllers.BaseModelController`2.GetById(System.Int32)">
+            <summary>
+            Returns the entity with the given Id from the database
+            </summary>
+            <param name="id">the database Id</param>
+        </member>
+        <member name="M:VeletlenVacsora.Api.Controllers.BaseModelController`2.Count">
+            <summary>
+            Returns an int indication how many Entites are stored in the database
+            </summary>
+        </member>
+        <member name="M:VeletlenVacsora.Api.Controllers.BaseModelController`2.Add(`1)">
+            <summary>
+            Creates a new Entity in the Database from the provided body
+            </summary>
+            <param name="model"> the entity to be created</param>
+            <returns></returns>
+        </member>
+        <member name="M:VeletlenVacsora.Api.Controllers.BaseModelController`2.Delete(System.Int32)">
+            <summary>
+            Deletes the entity with the Given Id from The Database
+            </summary>
+            <param name="id">the Id of the entity to Delete</param>
+        </member>
+        <member name="M:VeletlenVacsora.Api.Controllers.BaseModelController`2.Update(System.Int32,`1)">
+            <summary>
+            Upserts the Entity in the Database with the given Id
+            </summary>
+            <param name="id">the id of the Entity to be upserted</param>
+            <param name="model"> the entity to be created</param>
             <returns></returns>
         </member>
         <member name="M:VeletlenVacsora.Api.Services.IMenuGenerator.GetMenu(System.Int32)">

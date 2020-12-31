@@ -11,10 +11,9 @@ using VeletlenVacsora.Data.Repositories;
 
 namespace VeletlenVacsora.Api.Controllers
 {
-	public class BaseModelController<TEntity,TMap> : ControllerBase where TEntity : BaseModel
+	public class BaseModelController<TEntity,TMap> : ControllerBase where TEntity : BaseModel where TMap:class
 	{
 		protected readonly ILogger<BaseModelController<TEntity, TMap>> logger;
-
 		internal IMapper Mapper { get; set; }
 		internal IRepository<TEntity> Repository { get; set; }
 		public BaseModelController(ILogger<BaseModelController<TEntity, TMap>> logger ,IRepository<TEntity> repo, IMapper mapper)
@@ -25,11 +24,11 @@ namespace VeletlenVacsora.Api.Controllers
 		}
 
 		/// <summary>
-		/// This method return all entities
+		/// This method return all entities from the Database
 		/// </summary>
-		/// <returns></returns>
 		[HttpGet]
 		[ProducesResponseType(200)]
+		[ProducesResponseType(500)]
 		public virtual async Task<ActionResult<IEnumerable<TMap>>> GetAll()
 		{
 			try
@@ -47,12 +46,21 @@ namespace VeletlenVacsora.Api.Controllers
 			}
 		}
 		
+		/// <summary>
+		/// Returns the entity with the given Id from the database
+		/// </summary>
+		/// <param name="id">the database Id</param>
 		[HttpGet("{id}")]
+		[ProducesResponseType(200)]
+		[ProducesResponseType(404)]
+		[ProducesResponseType(500)]
 		public virtual async Task<ActionResult<TMap>> GetById(int id)
 		{
 			try
 			{
 				var entity = await Repository.GetAsync(id);
+				if (entity == null)
+					return NotFound();
 				var mapped = Mapper.Map<TMap>(entity);
 				return Ok(mapped);
 			}
@@ -63,8 +71,12 @@ namespace VeletlenVacsora.Api.Controllers
 				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
 			}
 		}
-
+		/// <summary>
+		/// Returns an int indication how many Entites are stored in the database
+		/// </summary>
 		[HttpGet("count")]
+		[ProducesResponseType(typeof(int),200)]
+		[ProducesResponseType(500)]
 		public async Task<ActionResult<int>> Count()
 		{
 			try
@@ -79,7 +91,14 @@ namespace VeletlenVacsora.Api.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Creates a new Entity in the Database from the provided body
+		/// </summary>
+		/// <param name="model"> the entity to be created</param>
+		/// <returns></returns>
 		[HttpPost]
+		[ProducesResponseType(201)]
+		[ProducesResponseType(500)]
 		public async Task<ActionResult> Add([FromBody] TMap model)
 		{
 			try
@@ -98,12 +117,21 @@ namespace VeletlenVacsora.Api.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Deletes the entity with the Given Id from The Database
+		/// </summary>
+		/// <param name="id">the Id of the entity to Delete</param>
 		[HttpDelete("{id}")]
+		[ProducesResponseType(200)]
+		[ProducesResponseType(404)]
+		[ProducesResponseType(500)]
 		public async Task<ActionResult> Delete([FromRoute]int id)
 		{
 			try
 			{
 				var entity = await Repository.GetAsync(id);
+				if (entity == null)
+					return NotFound();
 				await Repository.DeleteAsync(entity);
 				await Repository.CommitAsync();
 				return Ok(entity);
@@ -117,8 +145,16 @@ namespace VeletlenVacsora.Api.Controllers
 			}
 		}
 
-
+		/// <summary>
+		/// Upserts the Entity in the Database with the given Id
+		/// </summary>
+		/// <param name="id">the id of the Entity to be upserted</param>
+		/// <param name="model"> the entity to be created</param>
+		/// <returns></returns>
 		[HttpPut("{id}")]
+		[ProducesResponseType(200)]
+		[ProducesResponseType(201)]
+		[ProducesResponseType(500)]
 		public async Task<ActionResult> Update(int id,[FromBody] TMap model)
 		{
 			try
