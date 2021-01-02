@@ -40,9 +40,9 @@ namespace VeletlenVacsora.Api
 				options.UseSqlite(Configuration.GetConnectionString("VacsoraDB"));
 			});
 
-			services.AddScoped<IRepository<RecepieModel>,BaseModelRepository<RecepieModel>>();
-			services.AddScoped<IRepository<IngredientModel>,BaseModelRepository<IngredientModel>>();
-			services.AddScoped<IRepository<CategoryModel>,BaseModelRepository<CategoryModel>>();
+			services.AddScoped<IRepository<RecepieModel>,DefaultRepository<RecepieModel>>();
+			services.AddScoped<IRepository<IngredientModel>,DefaultRepository<IngredientModel>>();
+			services.AddScoped<IRepository<CategoryModel>,DefaultRepository<CategoryModel>>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

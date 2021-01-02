@@ -11,13 +11,13 @@ using VeletlenVacsora.Data.Models;
 namespace VeletlenVacsora.Data.Repositories
 {
 
-	public class BaseModelRepository<T> : IRepository<T> where T : BaseModel
+	public class DefaultRepository<T> : IRepository<T> where T : BaseModel
 	{
 		internal VacsoraDbContext DbContext { get;  }
 
 		VacsoraDbContext IRepository<T>.DbContext => DbContext;
 
-		public BaseModelRepository(VacsoraDbContext dbContext)
+		public DefaultRepository(VacsoraDbContext dbContext)
 		{
 			DbContext = dbContext;
 		}
