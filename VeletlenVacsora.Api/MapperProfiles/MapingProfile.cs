@@ -20,6 +20,8 @@ namespace VeletlenVacsora.Api.MapperProfiles
 
 			CreateMap<RecepieIngredientModel,RecepieIngredient>()
 				.ForMember(ri=>ri.Ingredient,rim=>rim.MapFrom(rim=> rim.Ingredient.Name))
+				.ForMember(ri=>ri.PackageType,rim=>rim.MapFrom(rim=> rim.Ingredient.PackageType.Name))
+				.ForMember(ri=>ri.IngredientType,rim=>rim.MapFrom(rim=> rim.Ingredient.IngredientType.Name))
 				.ReverseMap();
 		}
 	}

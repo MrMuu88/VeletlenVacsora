@@ -10,7 +10,9 @@ namespace VeletlenVacsora.Data.Repositories
 
 		protected override IQueryable<RecepieModel> ApplyIncludes(IQueryable<RecepieModel> query)
 		{
-			return query.Include(r => r.Category).Include(r => r.Ingredients).ThenInclude(ri => ri.Ingredient); 
+			return query.Include(r => r.Category)
+				.Include(r => r.Ingredients).ThenInclude(ri => ri.Ingredient).ThenInclude(i => i.IngredientType)
+				.Include(r => r.Ingredients).ThenInclude(ri => ri.Ingredient).ThenInclude(i => i.PackageType);
 		}
 	}
 }

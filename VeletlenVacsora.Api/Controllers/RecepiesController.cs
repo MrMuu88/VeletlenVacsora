@@ -31,7 +31,8 @@ namespace VeletlenVacsora.Api.Controllers
 			try
 			{
 				var recepie = await Repository.GetRandomAsync();
-				return Ok(recepie);
+				var vm = Mapper.Map<Recepie>(recepie);
+				return Ok(vm);
 
 			}
 			catch (Exception ex)

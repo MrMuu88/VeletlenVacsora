@@ -40,8 +40,8 @@ namespace VeletlenVacsora.Api
 				options.UseSqlite(Configuration.GetConnectionString("VacsoraDB"));
 			});
 
-			services.AddScoped<IRepository<RecepieModel>,DefaultRepository<RecepieModel>>();
-			services.AddScoped<IRepository<IngredientModel>,DefaultRepository<IngredientModel>>();
+			services.AddScoped<IRepository<RecepieModel>,RecepiesRepository>();
+			services.AddScoped<IRepository<IngredientModel>,IngredientsRepository>();
 			services.AddScoped<IRepository<CategoryModel>,DefaultRepository<CategoryModel>>();
 		}
 
