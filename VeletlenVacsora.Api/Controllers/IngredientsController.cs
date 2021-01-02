@@ -9,7 +9,7 @@ namespace VeletlenVacsora.Api.Controllers
 {
 	[ApiController]
 	[Route("Api/[Controller]/[Action]")]
-	public class IngredientsController : BaseModelController<IngredientModel,Ingredient>
+	public class IngredientsController : DefaultCRUDController<IngredientModel,Ingredient>
 	{
 		public IngredientsController(ILogger<IngredientsController> logger,IRepository<IngredientModel> repo, IMapper mapper) : base(logger,repo,mapper)
 		{

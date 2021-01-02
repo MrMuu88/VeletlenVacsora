@@ -11,12 +11,12 @@ using VeletlenVacsora.Data.Repositories;
 
 namespace VeletlenVacsora.Api.Controllers
 {
-	public class BaseModelController<TEntity,TMap> : ControllerBase where TEntity : BaseModel where TMap:class
+	public class DefaultCRUDController<TEntity,TMap> : ControllerBase where TEntity : BaseModel where TMap:class
 	{
-		protected readonly ILogger<BaseModelController<TEntity, TMap>> logger;
+		protected readonly ILogger<DefaultCRUDController<TEntity, TMap>> logger;
 		internal IMapper Mapper { get; set; }
 		internal IRepository<TEntity> Repository { get; set; }
-		public BaseModelController(ILogger<BaseModelController<TEntity, TMap>> logger ,IRepository<TEntity> repo, IMapper mapper)
+		public DefaultCRUDController(ILogger<DefaultCRUDController<TEntity, TMap>> logger ,IRepository<TEntity> repo, IMapper mapper)
 		{
 			this.logger = logger;
 			Repository = repo;

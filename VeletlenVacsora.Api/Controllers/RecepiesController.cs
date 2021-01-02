@@ -14,7 +14,7 @@ namespace VeletlenVacsora.Api.Controllers
 {
 	[ApiController]
 	[Route("Api/[Controller]/[Action]")]
-	public class RecepiesController : BaseModelController<RecepieModel,Recepie>
+	public class RecepiesController : DefaultCRUDController<RecepieModel,Recepie>
 	{
 		public RecepiesController(ILogger<RecepiesController> logger,IRepository<RecepieModel> repo, IMapper mapper) : base(logger,repo, mapper)
 		{
