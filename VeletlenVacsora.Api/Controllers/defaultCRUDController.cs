@@ -142,7 +142,7 @@ namespace VeletlenVacsora.Api.Controllers
 				var entity = Mapper.Map<TEntity>(model);
 				await Repository.AddAsync(entity);
 				await Repository.CommitAsync();
-				return Created(new Uri($"{Request.Path}/{entity.Id}"), entity);
+				return Created(this.Url.Action(nameof(GetById),new { id = entity.Id}),model);
 			}
 			catch (Exception ex)
 			{
