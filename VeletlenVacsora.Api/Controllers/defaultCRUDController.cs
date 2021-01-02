@@ -16,6 +16,7 @@ namespace VeletlenVacsora.Api.Controllers
 		protected readonly ILogger<DefaultCRUDController<TEntity, TMap>> logger;
 		internal IMapper Mapper { get; set; }
 		internal IRepository<TEntity> Repository { get; set; }
+
 		public DefaultCRUDController(ILogger<DefaultCRUDController<TEntity, TMap>> logger ,IRepository<TEntity> repo, IMapper mapper)
 		{
 			this.logger = logger;
@@ -66,7 +67,7 @@ namespace VeletlenVacsora.Api.Controllers
 		[ProducesResponseType(200)]
 		[ProducesResponseType(500)]
 
-		public async Task<ActionResult<IEnumerable<int>>> List()
+		public virtual async Task<ActionResult<IEnumerable<int>>> List()
 		{
 			try
 			{
@@ -113,7 +114,7 @@ namespace VeletlenVacsora.Api.Controllers
 		[HttpGet]
 		[ProducesResponseType(typeof(int),200)]
 		[ProducesResponseType(500)]
-		public async Task<ActionResult<int>> Count()
+		public virtual async Task<ActionResult<int>> Count()
 		{
 			try
 			{
@@ -135,13 +136,14 @@ namespace VeletlenVacsora.Api.Controllers
 		[HttpPost]
 		[ProducesResponseType(201)]
 		[ProducesResponseType(500)]
-		public async Task<ActionResult> Create([FromBody] TMap model)
+		public virtual async Task<ActionResult> Create([FromBody] TMap model)
 		{
 			try
 			{
 				var entity = Mapper.Map<TEntity>(model);
 				await Repository.AddAsync(entity);
 				await Repository.CommitAsync();
+				model = Mapper.Map<TMap>(entity);
 				return Created(this.Url.Action(nameof(GetById),new { id = entity.Id}),model);
 			}
 			catch (Exception ex)
@@ -161,7 +163,7 @@ namespace VeletlenVacsora.Api.Controllers
 		[ProducesResponseType(200)]
 		[ProducesResponseType(404)]
 		[ProducesResponseType(500)]
-		public async Task<ActionResult> Delete([FromRoute]int id)
+		public virtual async Task<ActionResult> Delete([FromRoute]int id)
 		{
 			try
 			{
@@ -191,7 +193,7 @@ namespace VeletlenVacsora.Api.Controllers
 		[ProducesResponseType(200)]
 		[ProducesResponseType(201)]
 		[ProducesResponseType(500)]
-		public async Task<ActionResult> Update(int id,[FromBody] TMap model)
+		public virtual async Task<ActionResult> Update(int id,[FromBody] TMap model)
 		{
 			try
 			{
