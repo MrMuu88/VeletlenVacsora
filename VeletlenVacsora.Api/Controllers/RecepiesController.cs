@@ -16,9 +16,12 @@ namespace VeletlenVacsora.Api.Controllers
 	[Route("Api/[Controller]/[Action]")]
 	public class RecepiesController : DefaultCRUDController<RecepieModel,Recepie>
 	{
-		public RecepiesController(ILogger<RecepiesController> logger,IRepository<RecepieModel> repo, IMapper mapper) : base(logger,repo, mapper)
+		public IRepository<CategoryModel> CategoryRepository { get; }
+		public RecepiesController(ILogger<RecepiesController> logger,IRepository<RecepieModel> repo,IRepository<CategoryModel> categoryRepository, IMapper mapper) : base(logger,repo, mapper)
 		{
+			CategoryRepository = categoryRepository;
 		}
+
 
 		/// <summary>
 		/// Returns a Recepie based on Weightened random selection
@@ -39,6 +42,27 @@ namespace VeletlenVacsora.Api.Controllers
 			{
 				var methodInfo = MethodBase.GetCurrentMethod();
 				logger.LogError(ex, $"An Exception occured in {methodInfo.DeclaringType.Name}.{methodInfo.Name}");
+				var errorobj = new { Error = ex.GetType().Name, ex.Message };
+				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
+			}
+		}
+
+		public override async  Task<ActionResult> Create([FromBody] Recepie model)
+		{
+			try
+			{
+				var entity = Mapper.Map<RecepieModel>(model);
+				entity.Category = await CategoryRepository.UpsertByNameAsync(model.Category,CategoryType.Recepie);
+				await Repository.AddAsync(entity);
+				await Repository.CommitAsync();
+				model = Mapper.Map<Recepie>(entity);
+				return Created(this.Url.Action(nameof(GetById), new { id = entity.Id }), model);
+			}
+			catch (Exception ex)
+			{
+				var methodInfo = MethodBase.GetCurrentMethod();
+				logger.LogError(ex, $"An Exception occured in {methodInfo.DeclaringType.Name}.{methodInfo.Name}");
+				await Repository.RevertAsync();
 				var errorobj = new { Error = ex.GetType().Name, ex.Message };
 				return StatusCode(StatusCodes.Status500InternalServerError, errorobj);
 			}
