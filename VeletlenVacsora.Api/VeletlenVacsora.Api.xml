@@ -48,6 +48,13 @@
             <param name="model"> the entity to be created</param>
             <returns></returns>
         </member>
+        <member name="M:VeletlenVacsora.Api.Controllers.MenuController.SetCurrentMenu(System.Int32[])">
+            <summary>
+            Set An Entire Menu by recepieId list. the order of the menu wil be the order of the Ids.
+            </summary>
+            <param name="recepieIds"></param>
+            <returns></returns>
+        </member>
         <member name="M:VeletlenVacsora.Api.Controllers.RecepiesController.GetRandom">
             <summary>
             Returns a Recepie based on Weightened random selection
