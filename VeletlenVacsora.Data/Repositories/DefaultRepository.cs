@@ -94,7 +94,7 @@ namespace VeletlenVacsora.Data.Repositories
 			try
 			{
 				var query = ApplyIncludes(DbContext.Set<T>());
-				return await query.FirstAsync(t => t.Id == id);
+				return await query.FirstOrDefaultAsync(t => t.Id == id);
 			}
 			catch (Exception ex)
 			{
