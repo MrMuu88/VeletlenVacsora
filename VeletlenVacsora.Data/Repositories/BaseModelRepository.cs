@@ -13,7 +13,10 @@ namespace VeletlenVacsora.Data.Repositories
 
 	public class BaseModelRepository<T> : IRepository<T> where T : BaseModel
 	{
-		public VacsoraDbContext DbContext { get; internal set; }
+		internal VacsoraDbContext DbContext { get;  }
+
+		VacsoraDbContext IRepository<T>.DbContext => DbContext;
+
 		public BaseModelRepository(VacsoraDbContext dbContext)
 		{
 			DbContext = dbContext;

@@ -8,7 +8,7 @@ namespace VeletlenVacsora.Data.Repositories
 {
 	public interface IRepository<T> where T : class
 	{
-		VacsoraDbContext DbContext { get; }
+		internal VacsoraDbContext DbContext { get; }
 
 		//TODO Add Methods for Inlcudes
 		Task<ICollection<T>> GetManyAsync(IEnumerable<int> ids = null);
