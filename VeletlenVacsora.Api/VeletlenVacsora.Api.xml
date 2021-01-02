@@ -48,11 +48,24 @@
             <param name="model"> the entity to be created</param>
             <returns></returns>
         </member>
+        <member name="M:VeletlenVacsora.Api.Controllers.MenuController.GetCurrentMenu">
+             <summary>
+            Returns the currently Set Menu 
+             </summary>
+        </member>
         <member name="M:VeletlenVacsora.Api.Controllers.MenuController.SetCurrentMenu(System.Int32[])">
             <summary>
             Set An Entire Menu by recepieId list. the order of the menu wil be the order of the Ids.
             </summary>
-            <param name="recepieIds"></param>
+            <param name="recepieIds">the List of recepieIds</param>
+            <returns></returns>
+        </member>
+        <member name="M:VeletlenVacsora.Api.Controllers.MenuController.SetRecepieOnMenu(System.Int32,System.Int32)">
+            <summary>
+            Set a Recepie to the Menu Given order. if another recepi is on that order, it will be overwriten
+            </summary>
+            <param name="order">the menuorder to set to</param>
+            <param name="recepieId">the recepie Id</param>
             <returns></returns>
         </member>
         <member name="M:VeletlenVacsora.Api.Controllers.RecepiesController.GetRandom">

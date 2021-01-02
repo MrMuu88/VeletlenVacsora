@@ -11,6 +11,8 @@
 
 		public double Amount { get; set; }
 
+		public bool IsOnShopingList { get; set; }
+
 
 		public RecepieIngredientModel() {
 
