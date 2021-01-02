@@ -7,7 +7,7 @@ namespace VeletlenVacsora.Api.ViewModels
 		public int id { get; set; }
 		public string Name { get; set; }
 		public string Category { get; set; }
-		public bool IsOnMenu { get; set; }
+		public int? OnMenu { get; set; }
 		public ICollection<RecepieIngredient> Ingredients { get; set; }
 		public Recepie() { }
 
