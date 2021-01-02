@@ -19,7 +19,7 @@ namespace VeletlenVacsora.Data.Extensions
 				if (repo.DbContext.Database.IsSqlite()) { 
 					//NOTE Doing this query with Linq, would cause the Whole table to be Queryied. this way, only a single entity will be returned
 
-					var recepie = await repo.DbContext.Recepies.FromSqlRaw("SELECT * FROM Recepies ORDER BY (Recepies.Weight * RANDOM()) LIMIT 1").FirstOrDefaultAsync();
+					var recepie = await repo.DbContext.Recepies.FromSqlRaw("SELECT * FROM Recepies ORDER BY (Recepies.Weight * RANDOM()) LIMIT 1").Include(r=> r.Category).Include(r=>r.Ingredients).ThenInclude(r=> r.Ingredient).FirstOrDefaultAsync();
 					return recepie;
 				}
 				return null;

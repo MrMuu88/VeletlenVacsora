@@ -76,10 +76,12 @@ namespace VeletlenVacsora.Data.Repositories
 		{
 			try
 			{
+				var query = ApplyIncludes(DbContext.Set<T>());
+
 				if (ids != null)
-					return await DbContext.Set<T>().Where(e => ids.Contains(e.Id)).ToListAsync();
+					return await query.Where(e => ids.Contains(e.Id)).ToListAsync();
 				else
-					return await DbContext.Set<T>().ToListAsync();
+					return await query.ToListAsync();
 			}
 			catch (Exception ex)
 			{
@@ -91,7 +93,8 @@ namespace VeletlenVacsora.Data.Repositories
 		{
 			try
 			{
-				return await DbContext.Set<T>().FirstAsync(t => t.Id == id);
+				var query = ApplyIncludes(DbContext.Set<T>());
+				return await query.FirstAsync(t => t.Id == id);
 			}
 			catch (Exception ex)
 			{
@@ -119,7 +122,7 @@ namespace VeletlenVacsora.Data.Repositories
 		{
 			try
 			{
-				IQueryable<T> query = DbContext.Set<T>();
+				var query = ApplyIncludes(DbContext.Set<T>());
 				return await query.Where(predicate).ToListAsync();
 			}
 			catch (Exception ex)
@@ -195,6 +198,10 @@ namespace VeletlenVacsora.Data.Repositories
 			{
 				throw new RepositoryException($"An exception occured when Executing {MethodBase.GetCurrentMethod().Name}", ex);
 			}
+		}
+
+		protected virtual IQueryable<T> ApplyIncludes(IQueryable<T> query) {
+			return query;
 		}
 	}
 }
