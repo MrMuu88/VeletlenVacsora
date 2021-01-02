@@ -12,6 +12,7 @@ using AutoMapper;
 using VeletlenVacsora.Api.MapperProfiles;
 using Serilog;
 using Microsoft.Extensions.Logging;
+using VeletlenVacsora.Api.Services;
 
 namespace VeletlenVacsora.Api
 {
@@ -25,6 +26,7 @@ namespace VeletlenVacsora.Api
 		public void ConfigureServices(IServiceCollection services) {
 
 			services.AddControllers();
+			services.AddHostedService<WeightManagerService>();
 
 			services.AddSwaggerGen(c => {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Véletlen Vacsora Api", Version = "v1" });
