@@ -33,14 +33,20 @@ namespace VeletlenVacsora.Api.Controllers
 		[ProducesResponseType(206)]
 		[ProducesResponseType(404)]
 		[ProducesResponseType(500)]
-		public virtual async Task<ActionResult<IEnumerable<TMap>>> GetMany(IEnumerable<int> ids = null)
+		public virtual async Task<ActionResult<IEnumerable<TMap>>> GetMany(IEnumerable<int> ids)
 		{
 			try
 			{
-				var entities = await Repository.GetManyAsync(ids);
+				ICollection<TEntity> entities;
+
+				if (ids.Count() == 0)
+					entities = await Repository.GetManyAsync();
+				else
+					entities = await Repository.GetManyAsync(ids);
+
 				var mapped = Mapper.Map<IEnumerable<TMap>>(entities);
 
-				if (ids != null && ids.Count() != entities.Count)
+				if (ids.Count() > 0 && ids.Count() != entities.Count)
 					return StatusCode(206, mapped);
 				else
 					return Ok(mapped);
