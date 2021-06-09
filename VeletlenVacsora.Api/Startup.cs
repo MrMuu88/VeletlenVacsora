@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using VeletlenVacsora.Data;
 using Microsoft.EntityFrameworkCore;
+using VeletlenVacsora.Api.Middlewares;
 
 namespace VeletlenVacsora.Api
 {
@@ -40,6 +41,8 @@ namespace VeletlenVacsora.Api
 				app.UseSwagger();
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VeletlenVacsora.Api v1"));
 			}
+
+			app.UseMiddleware<ExceptionMiddleware>();
 
 			app.UseRouting();
 
