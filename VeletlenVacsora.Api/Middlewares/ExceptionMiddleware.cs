@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
+using VeletlenVacsora.Api.ViewModels;
 
 namespace VeletlenVacsora.Api.Middlewares
 {
@@ -22,14 +23,8 @@ namespace VeletlenVacsora.Api.Middlewares
             {
                 httpContext.Response.ContentType = "application/json";
                 httpContext.Response.StatusCode = 500;
-                await httpContext.Response.WriteAsJsonAsync(new
-                {
-                    Exception = ex.GetType().Name,
-                    ThrownFrom = ex.Source,
-                    Message = ex.Message,
-                });
+                await httpContext.Response.WriteAsJsonAsync(new ExceptionResponse(ex));
             }
         }
-       
     }
 }
