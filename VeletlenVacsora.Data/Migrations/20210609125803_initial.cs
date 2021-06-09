@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VeletlenVacsora.Data.Migrations
 {
-    public partial class Initialize : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,7 @@ namespace VeletlenVacsora.Data.Migrations
                 name: "Recepies",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     Weight = table.Column<int>(type: "INTEGER", nullable: false),
@@ -19,7 +19,7 @@ namespace VeletlenVacsora.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Recepies", x => x.id);
+                    table.PrimaryKey("PK_Recepies", x => x.Id);
                 });
         }
 

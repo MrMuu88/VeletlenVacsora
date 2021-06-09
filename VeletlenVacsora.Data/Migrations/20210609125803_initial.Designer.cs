@@ -9,8 +9,8 @@ using VeletlenVacsora.Data;
 namespace VeletlenVacsora.Data.Migrations
 {
     [DbContext(typeof(VacsoraDbContext))]
-    [Migration("20210609111846_Initialize")]
-    partial class Initialize
+    [Migration("20210609125803_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,7 +20,7 @@ namespace VeletlenVacsora.Data.Migrations
 
             modelBuilder.Entity("VeletlenVacsora.Data.Models.Recepie", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -33,7 +33,7 @@ namespace VeletlenVacsora.Data.Migrations
                     b.Property<int>("Weight")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Recepies");
                 });

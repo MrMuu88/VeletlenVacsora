@@ -18,7 +18,7 @@ namespace VeletlenVacsora.Data.Migrations
 
             modelBuilder.Entity("VeletlenVacsora.Data.Models.Recepie", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -31,7 +31,7 @@ namespace VeletlenVacsora.Data.Migrations
                     b.Property<int>("Weight")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Recepies");
                 });

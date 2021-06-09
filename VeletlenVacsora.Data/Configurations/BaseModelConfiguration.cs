@@ -8,7 +8,7 @@ namespace VeletlenVacsora.Data.Configurations
 	{
 		public virtual void Configure(EntityTypeBuilder<T> builder)
 		{
-			builder.HasKey(bm => bm.id);
+			builder.HasKey(bm => bm.Id);
 		}
 	}
 }
