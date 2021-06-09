@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VeletlenVacsora.Api.ViewModels;
 using VeletlenVacsora.Data;
+using VeletlenVacsora.Data.Models;
 
 namespace VeletlenVacsora.Api.Controllers
 {
@@ -13,54 +17,102 @@ namespace VeletlenVacsora.Api.Controllers
 	public class RecepiesController : ControllerBase
 	{
 		public VacsoraDbContext DbContext { get; }
-		public RecepiesController(VacsoraDbContext dbContext)
+		public IMapper Mapper { get; }
+
+		public RecepiesController(VacsoraDbContext dbContext, IMapper mapper)
 		{
 			DbContext = dbContext;
+			Mapper = mapper;
 		}
 
 
 		[HttpPost]
+		[ProducesResponseType(statusCode: 201, type: typeof(RecepieResponse))]
 		public async Task<ActionResult> Create([FromBody] RecepieRequest model)
 		{
-			//TODO Implement
-			throw new NotImplementedException();
+			var entity = Mapper.Map<Recepie>(model);
+			await DbContext.AddAsync(entity);
+			await DbContext.SaveChangesAsync();
+
+			var response = Mapper.Map<RecepieResponse>(entity);
+			return CreatedAtAction(nameof(Create), response);
 		}
 
 		[HttpGet("List")]
+		[ProducesResponseType(statusCode: 200, type: typeof(int[]))]
 		public async Task<ActionResult<IEnumerable<int>>> List()
 		{
-			//TODO Implement
-			throw new NotImplementedException();
+			var ids = await DbContext.Recepies.Select(r => r.id).ToArrayAsync();
+			return Ok(ids);
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<IEnumerable<int>>> Get(int id)
+		[ProducesResponseType(statusCode: 404)]
+		[ProducesResponseType(statusCode: 200, type: typeof(RecepieResponse))]
+		public async Task<ActionResult<RecepieResponse>> Get(int id)
 		{
-			//TODO Implement
-			throw new NotImplementedException();
+			var entity = await DbContext.Recepies.FirstOrDefaultAsync(r => r.id == id);
+
+			if (entity == null) return NotFound();
+
+			var response = Mapper.Map<RecepieResponse>(entity);
+			return Ok(response);
 		}
 
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<int>>> GetMany([FromQuery]string Ids)
+		[ProducesResponseType(statusCode: 400)]
+		[ProducesResponseType(statusCode: 200, type: typeof(RecepieResponse))]
+		public async Task<ActionResult<IEnumerable<RecepieResponse>>> GetMany([FromQuery] string ids)
 		{
-			//TODO Implement
-			throw new NotImplementedException();
+			int[] idArray;
+			
+			try 
+			{
+				idArray = ids.Split(',').Select(id => int.Parse(id)).ToArray();
+			}
+			catch {
+				return BadRequest();
+			}
+
+			var entity = await DbContext.Recepies.Where(r => idArray.Contains(r.id)).ToListAsync();
+
+			var response = Mapper.Map<List<RecepieResponse>>(entity);
+			return Ok(response);
+
 		}
 
-		[HttpPut]
-		public async Task<ActionResult> Update([FromBody] RecepieRequest model)
+		[HttpPut("{id}")]
+		[ProducesResponseType(statusCode: 404)]
+		[ProducesResponseType(statusCode: 200, type: typeof(RecepieResponse))]
+		public async Task<ActionResult> Update([FromRoute]int id,[FromBody] RecepieRequest model)
 		{
-			//TODO Implement
-			throw new NotImplementedException();
+			var entity = await DbContext.Recepies.FirstOrDefaultAsync(r => r.id == id);
+
+			if (entity == null) return NotFound();
+
+			entity = Mapper.Map(model, entity);
+
+			DbContext.Update(entity);
+			await DbContext.SaveChangesAsync();
+
+			var response = Mapper.Map<RecepieResponse>(entity);
+
+			return Ok(response);
 		}
 
 
 		[HttpDelete("{id}")]
+		[ProducesResponseType(statusCode: 404)]
 		public async Task<ActionResult> Delete(int id)
 		{
-			//TODO Implement
-			throw new NotImplementedException();
+			var entity = await DbContext.Recepies.FirstOrDefaultAsync(r => r.id == id);
+			
+			if (entity == null) return NotFound();
+
+			DbContext.Remove(entity);
+			await DbContext.SaveChangesAsync();
+			return Ok();
 		}
 
 
