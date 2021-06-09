@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using VeletlenVacsora.Data;
 using Microsoft.EntityFrameworkCore;
 using VeletlenVacsora.Api.Middlewares;
+using VeletlenVacsora.Api.MappingProfiles;
 
 namespace VeletlenVacsora.Api
 {
@@ -30,6 +31,7 @@ namespace VeletlenVacsora.Api
 			});
 
 			services.AddDbContext<VacsoraDbContext>(o => o.UseSqlite(Configuration.GetConnectionString("VacsoraDB")));
+			services.AddAutoMapper(typeof(RecepiesMapping));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

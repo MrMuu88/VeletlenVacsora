@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace VeletlenVacsora.Api.ViewModels
 {
 	public class RecepieRequest
 	{
+		public string Name { get; set; }
+		public int Weight { get; set; }
+		public DateTime? LastOnMenu { get; set; }
 	}
 }

@@ -42,7 +42,7 @@ namespace VeletlenVacsora.Api.Controllers
 		[ProducesResponseType(statusCode: 200, type: typeof(int[]))]
 		public async Task<ActionResult<IEnumerable<int>>> List()
 		{
-			var ids = await DbContext.Recepies.Select(r => r.id).ToArrayAsync();
+			var ids = await DbContext.Recepies.Select(r => r.Id).ToArrayAsync();
 			return Ok(ids);
 		}
 
@@ -51,7 +51,7 @@ namespace VeletlenVacsora.Api.Controllers
 		[ProducesResponseType(statusCode: 200, type: typeof(RecepieResponse))]
 		public async Task<ActionResult<RecepieResponse>> Get(int id)
 		{
-			var entity = await DbContext.Recepies.FirstOrDefaultAsync(r => r.id == id);
+			var entity = await DbContext.Recepies.FirstOrDefaultAsync(r => r.Id == id);
 
 			if (entity == null) return NotFound();
 
@@ -75,7 +75,7 @@ namespace VeletlenVacsora.Api.Controllers
 				return BadRequest();
 			}
 
-			var entity = await DbContext.Recepies.Where(r => idArray.Contains(r.id)).ToListAsync();
+			var entity = await DbContext.Recepies.Where(r => idArray.Contains(r.Id)).ToListAsync();
 
 			var response = Mapper.Map<List<RecepieResponse>>(entity);
 			return Ok(response);
@@ -87,7 +87,7 @@ namespace VeletlenVacsora.Api.Controllers
 		[ProducesResponseType(statusCode: 200, type: typeof(RecepieResponse))]
 		public async Task<ActionResult> Update([FromRoute]int id,[FromBody] RecepieRequest model)
 		{
-			var entity = await DbContext.Recepies.FirstOrDefaultAsync(r => r.id == id);
+			var entity = await DbContext.Recepies.FirstOrDefaultAsync(r => r.Id == id);
 
 			if (entity == null) return NotFound();
 
@@ -106,7 +106,7 @@ namespace VeletlenVacsora.Api.Controllers
 		[ProducesResponseType(statusCode: 404)]
 		public async Task<ActionResult> Delete(int id)
 		{
-			var entity = await DbContext.Recepies.FirstOrDefaultAsync(r => r.id == id);
+			var entity = await DbContext.Recepies.FirstOrDefaultAsync(r => r.Id == id);
 			
 			if (entity == null) return NotFound();
 
