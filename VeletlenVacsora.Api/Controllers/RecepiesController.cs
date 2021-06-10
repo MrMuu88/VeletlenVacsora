@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VeletlenVacsora.Api.Helpers;
 using VeletlenVacsora.Api.ViewModels;
 using VeletlenVacsora.Data;
 using VeletlenVacsora.Data.Models;
@@ -56,6 +57,24 @@ namespace VeletlenVacsora.Api.Controllers
 			if (entity == null) return NotFound();
 
 			var response = Mapper.Map<RecepieResponse>(entity);
+			return Ok(response);
+		}
+
+		[HttpGet("Random")]
+		[ProducesResponseType(statusCode: 404)]
+		[ProducesResponseType(statusCode: 200, type: typeof(RecepieResponse))]
+		public async Task<ActionResult<RecepieResponse>> GetRandom()
+		{
+			var dice = new Random();
+			var weights = await DbContext.Recepies.Select(r =>new Weightting(r.Id, r.Weight)).ToArrayAsync();
+
+			weights.All(e => { e.Weight = e.Weight * dice.NextDouble(); return true; });
+			var randid = weights.OrderByDescending(e => e.Weight).Select(e => e.Id).First();
+
+			var entity = await DbContext.Recepies.FirstAsync(r => r.Id == randid);
+			
+			var response = Mapper.Map<RecepieResponse>(entity);
+
 			return Ok(response);
 		}
 
@@ -114,7 +133,6 @@ namespace VeletlenVacsora.Api.Controllers
 			await DbContext.SaveChangesAsync();
 			return Ok();
 		}
-
 
 	}
 }
